@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class SceneLoader : MonoBehaviour
 {
     public void LoadSceneByName(string sceneName)
     {
@@ -14,7 +14,7 @@ public class SceneManager : MonoBehaviour
         {
             Debug.LogError("Scene " + sceneName + " not found.");
         }
-    }
+    }   
 
     // Check if the scene is available in the build settings
     private bool SceneIsValid(string sceneName)
