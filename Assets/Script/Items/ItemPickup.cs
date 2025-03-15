@@ -8,7 +8,6 @@ public class ItemPickup : MonoBehaviour
 
     public void Collect()
     {
-        // Handle item collection logic, like adding it to inventory
         Debug.Log("Item Collected: " + itemType);
 
         switch (itemType)

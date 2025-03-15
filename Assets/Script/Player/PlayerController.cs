@@ -1,18 +1,21 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float walkSpeed = 3f;
-    public float sprintSpeed = 6f;
-    public float gravity = -9.81f;
+    [SerializeField] private float walkSpeed = 3f;
+    [SerializeField] private float sprintSpeed = 6f;
+    [SerializeField] private float gravity = -9.81f;
 
     [Header("Pickup Settings")]
-    private float pickupRange = 1f;
+    [SerializeField] private float pickupRange = 2f;
+    [SerializeField] private float pickupAngle = 30f;
 
     [Header("References")]
     private CharacterController characterController;
     private Vector3 velocity;
+
 
     private void Awake()
     {
@@ -26,11 +29,34 @@ public class PlayerController : MonoBehaviour
         HandleItemCollection();
     }
 
+
+    // Visualize Raycast Area for Collecting Item
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, pickupRange);
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null) return;
+
+        Vector3 origin = mainCamera.transform.position;
+        Vector3 forward = mainCamera.transform.forward;
+
+        Gizmos.color = Color.blue;
+
+        float maxDistance = pickupRange;
+        float angleStep = 15f;
+
+        for (float horizontalAngle = -pickupAngle; horizontalAngle <= pickupAngle; horizontalAngle += angleStep)
+        {
+            for (float verticalAngle = -pickupAngle; verticalAngle <= pickupAngle; verticalAngle += angleStep)
+            {
+                Quaternion rotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
+                Vector3 rayDirection = rotation * forward;
+                Gizmos.DrawRay(origin, rayDirection * maxDistance);
+            }
+        }
+
+        Gizmos.DrawWireSphere(origin, maxDistance);
     }
+
 
     private void HandleMovement()
     {
@@ -47,19 +73,46 @@ public class PlayerController : MonoBehaviour
     {
         if (InputManager.Instance.IsItemCollectPressed())
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, pickupRange);
-
-            foreach (Collider hit in hitColliders)
+            Camera mainCamera = Camera.main;
+            if (mainCamera == null)
             {
-                ItemPickup item = hit.GetComponent<ItemPickup>();
-                if (item != null)
+                Debug.LogWarning("Main camera not found!");
+                return;
+            }
+
+            Vector3 origin = mainCamera.transform.position;
+            Vector3 forward = mainCamera.transform.forward;
+            float maxDistance = pickupRange;
+            float angleStep = 10f;
+
+            List<ItemPickup> detectedItems = new List<ItemPickup>();
+
+            for (float horizontalAngle = -pickupAngle; horizontalAngle <= pickupAngle; horizontalAngle += angleStep)
+            {
+                for (float verticalAngle = -pickupAngle; verticalAngle <= pickupAngle; verticalAngle += angleStep)
                 {
-                    Debug.Log("Item within range: " + item.gameObject.name);
-                    item.Collect();
+                    Quaternion rotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
+                    Vector3 rayDirection = rotation * forward;
+
+                    if (Physics.Raycast(origin, rayDirection, out RaycastHit hit, maxDistance))
+                    {
+                        ItemPickup item = hit.collider.GetComponent<ItemPickup>();
+                        if (item != null && !detectedItems.Contains(item))
+                        {
+                            detectedItems.Add(item);
+                        }
+                    }
                 }
+            }
+
+            foreach (ItemPickup item in detectedItems)
+            {
+                Debug.Log("Item collected: " + item.gameObject.name);
+                item.Collect();
             }
         }
     }
+
 
     private void ApplyGravity()
     {

@@ -6,7 +6,7 @@ public class ItemManager : MonoBehaviour
 
     private bool hasCamera = false;
     private bool hasVacuum = false;
-    // private int coinCount = 0;
+    private int coinCount = 0;
 
     private void Awake()
     {
