@@ -9,6 +9,16 @@ public class InventorySlotUI : MonoBehaviour
     public Button itemButton;
     public Image backgroundImage;
 
+    private void Start()
+    {
+        itemButton.onClick.AddListener(OnItemClick);
+    }
+
+    private void OnItemClick()
+    {
+        InventoryUIManager.Instance.SelectItem(this);
+    }
+
     public void SetItem(Sprite itemSprite, string name)
     {
         itemImage.sprite = itemSprite;
