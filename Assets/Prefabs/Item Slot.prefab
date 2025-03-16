@@ -347,10 +347,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43bddb6888ba8402185994171536ed2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemButton: {fileID: 8588131000620509082}
   itemImage: {fileID: 5427351122815061232}
   itemName: {fileID: 1162710848017952341}
-  slotBackgroundImage: {fileID: 8436334949791539039}
+  itemButton: {fileID: 8588131000620509082}
+  backgroundImage: {fileID: 8436334949791539039}
 --- !u!1 &7600862430368182962
 GameObject:
   m_ObjectHideFlags: 0
