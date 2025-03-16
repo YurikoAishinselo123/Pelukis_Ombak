@@ -36,8 +36,13 @@ public class InputManager : MonoBehaviour
     {
         return playerInput.actions["CollectItem"].WasPressedThisFrame();
     }
-    // public bool isInventoryOpen()
-    // {
-    //     return playerInput.actions("Open Inventory")
-    // }
+
+    public int GetSelectedItemByKey()
+    {
+        if (Keyboard.current.digit1Key.wasPressedThisFrame) return 0;
+        if (Keyboard.current.digit2Key.wasPressedThisFrame) return 1;
+        if (Keyboard.current.digit3Key.wasPressedThisFrame) return 2;
+        if (Keyboard.current.digit4Key.wasPressedThisFrame) return 3;
+        return -1;
+    }
 }

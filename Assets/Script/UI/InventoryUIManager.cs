@@ -1,57 +1,93 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
-using TMPro; // Import TextMeshPro
 
 public class InventoryUIManager : MonoBehaviour
 {
     public static InventoryUIManager Instance;
-
-    [System.Serializable]
-    public class InventorySlot
-    {
-        public GameObject slotObject;
-        public Image itemImage;
-        public TMP_Text itemName;
-    }
-
-    public List<InventorySlot> inventorySlots = new List<InventorySlot>();
+    public InventorySlotUI slotPrefab;
+    public Transform inventoryPanel;
+    public int slotCount = 4;
     public Sprite defaultSprite;
+
+    private List<InventorySlotUI> inventorySlots = new List<InventorySlotUI>();
+    private InventorySlotUI selectedItem;
 
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
         else
+        {
             Destroy(gameObject);
+            return;
+        }
 
+        GenerateInventorySlots();
         ClearInventoryUI();
+    }
 
+    private void GenerateInventorySlots()
+    {
+        for (int i = 0; i < slotCount; i++)
+        {
+            InventorySlotUI newSlot = Instantiate(slotPrefab, inventoryPanel);
+            inventorySlots.Add(newSlot);
+        }
     }
 
     public void AddItemToInventory(Sprite itemSprite, string itemName)
     {
-        // Cari slot kosong pertama
-        foreach (InventorySlot slot in inventorySlots)
+        ResetSlotBackgroundColors();
+
+        foreach (InventorySlotUI slot in inventorySlots)
         {
             if (slot.itemImage.sprite == defaultSprite)
             {
-                slot.itemImage.sprite = itemSprite;
-                slot.itemName.text = itemName;
-                slot.slotObject.SetActive(true);
+                slot.SetItem(itemSprite, itemName);
+                slot.itemButton.gameObject.SetActive(true);
                 return;
             }
         }
-
-        Debug.Log("Inventory penuh! Tidak bisa menambahkan item baru.");
+        Debug.Log("Inventory is full! Can't add more items.");
     }
 
     public void ClearInventoryUI()
     {
-        foreach (InventorySlot slot in inventorySlots)
+        foreach (InventorySlotUI slot in inventorySlots)
         {
-            slot.itemImage.sprite = defaultSprite;
-            slot.itemName.text = "";
+            slot.ClearSlot(defaultSprite);
+        }
+    }
+
+    private void Update()
+    {
+        int selectedIndex = InputManager.Instance.GetSelectedItemByKey();
+        if (selectedIndex >= 0 && selectedIndex < inventorySlots.Count)
+        {
+            SelectItem(inventorySlots[selectedIndex]);
+        }
+    }
+
+    public void SelectItem(InventorySlotUI slot)
+    {
+        if (selectedItem == slot)
+            return;
+
+        ResetSlotBackgroundColors();
+        selectedItem = slot;
+
+        slot.SetBackgroundColor(new Color(0.5f, 0.5f, 0.5f, 1f));
+
+        Debug.Log("Item Selected: " + slot.itemName.text);
+    }
+
+    private void ResetSlotBackgroundColors()
+    {
+        foreach (InventorySlotUI slot in inventorySlots)
+        {
+            slot.SetBackgroundColor(Color.white);
         }
     }
 }
