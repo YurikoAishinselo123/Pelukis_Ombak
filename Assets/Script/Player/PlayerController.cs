@@ -107,7 +107,6 @@ public class PlayerController : MonoBehaviour
 
             foreach (ItemPickup item in detectedItems)
             {
-                Debug.Log("Item collected: " + item.gameObject.name);
                 item.Collect();
             }
         }
