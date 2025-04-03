@@ -12,6 +12,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float pickupRange = 2f;
     [SerializeField] private float pickupAngle = 30f;
 
+    [Header("Camera Settings")]
+    [SerializeField] private float lookSensitivity = 2f;
+    [SerializeField] private Transform cameraTransform;
+    private float verticalRotation = 0f;
+
+    [Header("Jump Settings")]
+    [SerializeField] private float jumpHeight = 2f;
+    [SerializeField] private float jumpForce = 5f;
+    private bool isGrounded;
+
     [Header("References")]
     private CharacterController characterController;
     private Vector3 velocity;
@@ -25,6 +35,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleMovement();
+        HandleLook();
+        HandleJump();
         // ApplyGravity();
         HandleItemCollection();
     }
@@ -69,6 +81,29 @@ public class PlayerController : MonoBehaviour
         characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
     }
 
+    private void HandleJump()
+    {
+        if (isGrounded && InputManager.Instance.GetJumpInput())
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+    }
+
+    private void HandleLook()
+    {
+        Vector2 lookInput = InputManager.Instance.GetLookInput();
+        float mouseX = lookInput.x * lookSensitivity;
+        float mouseY = lookInput.y * lookSensitivity;
+
+        // Rotasi horizontal (Putar player kiri/kanan)
+        transform.Rotate(Vector3.up * mouseX);
+
+        // Rotasi vertikal (Kamera atas/bawah)
+        verticalRotation -= mouseY;
+        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f); // Batas atas/bawah
+        cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+    }
+
     private void HandleItemCollection()
     {
         if (InputManager.Instance.IsItemCollectPressed())
@@ -111,6 +146,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
 
 
     private void ApplyGravity()
