@@ -237,6 +237,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e141efe965db24ae5ab049acbb893485, type: 3}
+--- !u!4 &698167923 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2636888782341580388, guid: e141efe965db24ae5ab049acbb893485, type: 3}
+  m_PrefabInstance: {fileID: 484007752}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &827900738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2327811319923797259, guid: 3e59098101683457f91fedadd299858c, type: 3}
@@ -659,6 +664,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2391364377272739947, guid: 3e59098101683457f91fedadd299858c, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 698167923}
     - target: {fileID: 8398473861806624741, guid: 3e59098101683457f91fedadd299858c, type: 3}
       propertyPath: m_Name
       value: Character

@@ -27,6 +27,16 @@ public class InputManager : MonoBehaviour
         return playerInput.actions["Move"].ReadValue<Vector2>();
     }
 
+    public Vector2 GetLookInput()
+    {
+        return playerInput.actions["Look"].ReadValue<Vector2>();
+    }
+
+    public bool GetJumpInput()
+    {
+        return playerInput.actions["Jump"].WasPressedThisFrame();
+    }
+
     public bool IsSprinting()
     {
         return playerInput.actions["Sprint"].IsPressed();
@@ -36,6 +46,7 @@ public class InputManager : MonoBehaviour
     {
         return playerInput.actions["CollectItem"].WasPressedThisFrame();
     }
+
 
     public int GetSelectedItemByKey()
     {
