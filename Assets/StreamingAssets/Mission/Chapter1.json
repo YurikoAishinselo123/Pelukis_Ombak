@@ -1,0 +1,26 @@
+{
+  "chapterId": 1,
+  "chapterTitle": "Clean the Coast",
+  "chapterDescription": "Begin your journey by cleaning up the coastline and helping sea creatures nearby.",
+  "missions": [
+    {
+      "id": 1,
+      "title": "Collect Rubbish",
+      "description": "Help clean the ocean by collecting 8 pieces of rubbish.",
+      "qty": 8
+    },
+    {
+      "id": 2,
+      "title": "Save Fish",
+      "description": "Rescue trapped or endangered fish in the area.",
+      "qty": null
+    },
+    {
+      "id": 3,
+      "title": "Documentation",
+      "description": "Take a photo of the sea after completing the rubbish collection.",
+      "qty": null,
+      "condition": "afterMissionId:1"
+    }
+  ]
+}
