@@ -92,16 +92,15 @@ public class PlayerController : MonoBehaviour
     private void HandleLook()
     {
         Vector2 lookInput = InputManager.Instance.GetLookInput();
-        float mouseX = lookInput.x * lookSensitivity;
-        float mouseY = lookInput.y * lookSensitivity;
+        float mouseX = lookInput.x * lookSensitivity * Time.deltaTime;
+        float mouseY = lookInput.y * lookSensitivity * Time.deltaTime;
 
-        // Rotasi horizontal (Putar player kiri/kanan)
-        transform.Rotate(Vector3.up * mouseX);
-
-        // Rotasi vertikal (Kamera atas/bawah)
         verticalRotation -= mouseY;
-        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f); // Batas atas/bawah
+        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
+
+
         cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+        transform.Rotate(Vector3.up * mouseX);
     }
 
     private void HandleItemCollection()
