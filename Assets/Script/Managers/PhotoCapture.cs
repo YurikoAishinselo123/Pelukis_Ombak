@@ -7,11 +7,14 @@ public class PhotoCapture : MonoBehaviour
 {
     [Header("Photo Taker")]
     [SerializeField] private Image photoDisplayArea;
-    [SerializeField] private GameObject photoFrame;
+    [SerializeField] private GameObject showPhoto;
 
     [Header("Flash Effect")]
     [SerializeField] private GameObject cameraFlash;
     [SerializeField] private float flashTime = 0.3f;
+
+    [SerializeField] private GameObject mainCamera;
+
 
     private Texture2D screenCapture;
     private bool viewingPhoto;
@@ -22,6 +25,7 @@ public class PhotoCapture : MonoBehaviour
     {
         screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         photoPath = Path.Combine(Application.persistentDataPath, "photo.png");
+        showPhoto.SetActive(false);
     }
 
     void Update()
@@ -34,6 +38,7 @@ public class PhotoCapture : MonoBehaviour
             }
             else
             {
+                Debug.Log("tes");
                 RemovePhoto();
             }
         }
@@ -87,7 +92,7 @@ public class PhotoCapture : MonoBehaviour
     {
         Sprite photoSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
         photoDisplayArea.sprite = photoSprite;
-        photoFrame.SetActive(true);
+        showPhoto.SetActive(true);
         viewingPhoto = true;
     }
 
@@ -101,6 +106,7 @@ public class PhotoCapture : MonoBehaviour
     void RemovePhoto()
     {
         viewingPhoto = false;
-        photoFrame.SetActive(false);
+        showPhoto.SetActive(false);
+        mainCamera.SetActive(true);
     }
 }
