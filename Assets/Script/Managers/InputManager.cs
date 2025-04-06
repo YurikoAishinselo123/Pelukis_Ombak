@@ -47,6 +47,11 @@ public class InputManager : MonoBehaviour
         return playerInput.actions["CollectItem"].WasPressedThisFrame();
     }
 
+    public bool GetCapturePhotoInput()
+    {
+        return playerInput.actions["CapturePhoto"].WasPressedThisFrame();
+    }
+
 
     public int GetSelectedItemByKey()
     {
