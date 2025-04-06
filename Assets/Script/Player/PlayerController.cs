@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float pickupAngle = 30f;
 
     [Header("Camera Settings")]
-    [SerializeField] private float lookSensitivity = 2f;
+    private float lookSensitivity = 100f;
     [SerializeField] private Transform cameraTransform;
     private float verticalRotation = 0f;
 
