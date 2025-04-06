@@ -3,23 +3,39 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    public void LoadSceneByName(string sceneName)
+    public static SceneLoader Instance;
+
+    private void Awake()
     {
-        if (SceneIsValid(sceneName))
+        if (Instance == null)
         {
-            Debug.Log("Loading scene: " + sceneName);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+            Instance = this;
         }
         else
         {
-            Debug.LogError("Scene " + sceneName + " not found.");
+            Destroy(gameObject);
         }
-    }   
+    }
 
-    // Check if the scene is available in the build settings
-    private bool SceneIsValid(string sceneName)
+    public void LoadScene(string sceneName)
     {
-        int sceneIndex = SceneUtility.GetBuildIndexByScenePath("Assets/Scenes/" + sceneName + ".unity");
-        return sceneIndex >= 0;
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void LoadMainMenu() => LoadScene("MainMenu");
+    public void LoadLoadingScreen() => LoadScene("Office1");
+    public void LoadSelectLevel() => LoadScene("Office2");
+    public void LoadHowToPlay() => LoadScene("Office3");
+    public void LoadGameplay() => LoadScene("Shallow Sea");
+
+
+    public void ReloadCurrentScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
