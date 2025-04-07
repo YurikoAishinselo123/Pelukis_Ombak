@@ -77,7 +77,7 @@ public class PhotoCapture : MonoBehaviour
         if (File.Exists(photoPath))
         {
             byte[] bytes = File.ReadAllBytes(photoPath);
-            Texture2D loadedTex = new Texture2D(2, 2); // size will be overwritten by LoadImage
+            Texture2D loadedTex = new Texture2D(2, 2);
             loadedTex.LoadImage(bytes);
 
             ShowPhoto(loadedTex);
