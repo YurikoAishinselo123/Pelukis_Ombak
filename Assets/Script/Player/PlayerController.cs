@@ -16,11 +16,18 @@ public class PlayerController : MonoBehaviour
     private float lookSensitivity = 100f;
     [SerializeField] private Transform cameraTransform;
     private float verticalRotation = 0f;
+    private float horizontalRotation = 0f;
+
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float jumpForce = 5f;
     private bool isGrounded;
+
+    [Header("Diving Settings")]
+    public bool isDiving = true;
+    [SerializeField] private float divingSpeed = 3f;
+    [SerializeField] private bool isSwimming = false;
 
     [Header("References")]
     private CharacterController characterController;
@@ -34,7 +41,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
+        // HandleMovement();
+        HandleDivingMovement();
         HandleLook();
         HandleJump();
         // ApplyGravity();
@@ -69,6 +77,22 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(origin, maxDistance);
     }
 
+    public class CameraGizmoDrawer : MonoBehaviour
+    {
+        public Camera dragCamera; // Tarik kamera drag kamu ke sini lewat Inspector
+
+        private void OnDrawGizmos()
+        {
+            if (dragCamera == null) return;
+
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawRay(dragCamera.transform.position, dragCamera.transform.forward * 5f);
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(dragCamera.transform.position + dragCamera.transform.forward * 3f, 0.5f);
+        }
+    }
+
 
     private void HandleMovement()
     {
@@ -80,6 +104,28 @@ public class PlayerController : MonoBehaviour
 
         characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
     }
+
+    private void HandleDivingMovement()
+    {
+        Vector2 moveInput = InputManager.Instance.GetMoveInput(); // biasanya WASD
+        float horizontal = moveInput.x;
+        float vertical = Mathf.Max(0f, moveInput.y);
+
+        Vector3 move = transform.forward * vertical + transform.right * horizontal;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            move += Vector3.up;
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            move += Vector3.down;
+        }
+
+        characterController.Move(move * divingSpeed * Time.deltaTime);
+    }
+
 
     private void HandleJump()
     {
@@ -95,13 +141,22 @@ public class PlayerController : MonoBehaviour
         float mouseX = lookInput.x * lookSensitivity * Time.deltaTime;
         float mouseY = lookInput.y * lookSensitivity * Time.deltaTime;
 
+        horizontalRotation += mouseX;
         verticalRotation -= mouseY;
-        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
+        verticalRotation = Mathf.Clamp(verticalRotation, -80f, 80f);
 
-
-        cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-        transform.Rotate(Vector3.up * mouseX);
+        if (isDiving)
+        {
+            cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+            transform.rotation = Quaternion.Euler(0, horizontalRotation, 0);
+        }
+        else
+        {
+            cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+            transform.rotation = Quaternion.Euler(0, horizontalRotation, 0);
+        }
     }
+
 
     private void HandleItemCollection()
     {
