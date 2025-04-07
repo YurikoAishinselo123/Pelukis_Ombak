@@ -152,7 +152,7 @@ MonoBehaviour:
   flockSize: 80
   spawnBounds: {x: 20, y: 10, z: 20}
   _minSpeed: 3
-  _maxSpeed: 5.07
+  _maxSpeed: 10
   _cohesionWeight: 1
   _avoidanceWeight: 1
   _alignmentWeight: 1
