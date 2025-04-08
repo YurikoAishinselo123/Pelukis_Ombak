@@ -10,6 +10,7 @@ public class SceneLoader : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -23,10 +24,10 @@ public class SceneLoader : MonoBehaviour
     }
 
     public void LoadMainMenu() => LoadScene("MainMenu");
-    public void LoadLoadingScreen() => LoadScene("Office1");
-    public void LoadSelectLevel() => LoadScene("Office2");
-    public void LoadHowToPlay() => LoadScene("Office3");
-    public void LoadGameplay() => LoadScene("Shallow Sea");
+    public void LoadOffice1() => LoadScene("Office1");
+    public void LoadOffice2() => LoadScene("Office2");
+    public void LoadOffice3() => LoadScene("Office3");
+    public void LoadOcean() => LoadScene("OceanEnvirontment");
 
 
     public void ReloadCurrentScene()

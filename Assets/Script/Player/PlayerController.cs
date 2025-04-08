@@ -36,9 +36,6 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     private Vector3 velocity;
 
-    private float stepTimer;
-
-
 
     private void Awake()
     {
