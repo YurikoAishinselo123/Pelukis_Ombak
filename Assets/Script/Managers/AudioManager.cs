@@ -46,7 +46,6 @@ public class AudioManager : MonoBehaviour
         {
             backsoundSource.clip = sound.clip;
             backsoundSource.Play();
-            Debug.Log("tes not found");
         }
     }
 
