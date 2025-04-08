@@ -22,35 +22,12 @@ public class InputManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
     }
 
-    public Vector2 GetMoveInput()
-    {
-        return playerInput.actions["Move"].ReadValue<Vector2>();
-    }
-
-    public Vector2 GetLookInput()
-    {
-        return playerInput.actions["Look"].ReadValue<Vector2>();
-    }
-
-    public bool GetJumpInput()
-    {
-        return playerInput.actions["Jump"].WasPressedThisFrame();
-    }
-
-    public bool IsSprinting()
-    {
-        return playerInput.actions["Sprint"].IsPressed();
-    }
-
-    public bool IsItemCollectPressed()
-    {
-        return playerInput.actions["CollectItem"].WasPressedThisFrame();
-    }
-
-    public bool GetCapturePhotoInput()
-    {
-        return playerInput.actions["CapturePhoto"].WasPressedThisFrame();
-    }
+    public Vector2 MoveInput => playerInput.actions["Move"].ReadValue<Vector2>();
+    public Vector2 LookInput => playerInput.actions["Look"].ReadValue<Vector2>();
+    public bool JumpPressed => playerInput.actions["Jump"].WasPressedThisFrame();
+    public bool IsSprinting => playerInput.actions["Sprint"].IsPressed();
+    public bool IsItemCollectPressed => playerInput.actions["CollectItem"].WasPressedThisFrame();
+    public bool GetCapturePhotoInput => playerInput.actions["CapturePhoto"].WasPressedThisFrame();
 
 
     public int GetSelectedItemByKey()

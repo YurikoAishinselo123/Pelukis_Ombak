@@ -18,20 +18,26 @@ public class PlayerController : MonoBehaviour
     private float verticalRotation = 0f;
     private float horizontalRotation = 0f;
 
-
     [Header("Jump Settings")]
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float jumpForce = 5f;
-    private bool isGrounded;
 
     [Header("Diving Settings")]
-    public bool isDiving = true;
+    [SerializeField] public bool isDiving;
     [SerializeField] private float divingSpeed = 3f;
     [SerializeField] private bool isSwimming = false;
+
+    [Header("Sounds Settings")]
+    private float stepDistance = 0.2f;
+    private float distanceMoved = 0f;
+    private Vector3 lastPosition;
 
     [Header("References")]
     private CharacterController characterController;
     private Vector3 velocity;
+
+    private float stepTimer;
+
 
 
     private void Awake()
@@ -41,12 +47,19 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // HandleMovement();
-        HandleDivingMovement();
+        // HandleDivingMovement();
         HandleLook();
+        HandleMovement();
+        ApplyGravity();
         HandleJump();
-        // ApplyGravity();
         HandleItemCollection();
+
+        // Debug.Log("tes " + characterController.isGrounded);
+    }
+
+    private void Start()
+    {
+        lastPosition = transform.position;
     }
 
 
@@ -93,21 +106,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void HandleMovement()
     {
-        Vector2 moveInput = InputManager.Instance.GetMoveInput();
-        bool isSprinting = InputManager.Instance.IsSprinting();
+        Vector2 moveInput = InputManager.Instance.MoveInput;
+        bool isSprinting = InputManager.Instance.IsSprinting;
 
         Vector3 moveDirection = transform.right * moveInput.x + transform.forward * moveInput.y;
         float currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
 
         characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
+
+        // Hitung distance moved
+        if (characterController.isGrounded && moveInput.magnitude > 0.1f)
+        {
+            float distanceThisFrame = Vector3.Distance(transform.position, lastPosition);
+            distanceMoved += distanceThisFrame;
+
+            if (distanceMoved >= stepDistance)
+            {
+                AudioManager.Instance.PlayClikUI(); // atau PlayWalk();
+                distanceMoved = 0f;
+            }
+        }
+
+        lastPosition = transform.position;
     }
 
     private void HandleDivingMovement()
     {
-        Vector2 moveInput = InputManager.Instance.GetMoveInput(); // biasanya WASD
+        Vector2 moveInput = InputManager.Instance.MoveInput;
         float horizontal = moveInput.x;
         float vertical = Mathf.Max(0f, moveInput.y);
 
@@ -129,15 +156,20 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
-        if (isGrounded && InputManager.Instance.GetJumpInput())
+        if (InputManager.Instance.JumpPressed)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            Debug.Log("Jump : " + characterController.isGrounded);
+            if (characterController.isGrounded)
+            {
+                AudioManager.Instance.PlayClikUI();
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
         }
     }
 
     private void HandleLook()
     {
-        Vector2 lookInput = InputManager.Instance.GetLookInput();
+        Vector2 lookInput = InputManager.Instance.LookInput;
         float mouseX = lookInput.x * lookSensitivity * Time.deltaTime;
         float mouseY = lookInput.y * lookSensitivity * Time.deltaTime;
 
@@ -160,7 +192,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleItemCollection()
     {
-        if (InputManager.Instance.IsItemCollectPressed())
+        if (InputManager.Instance.IsItemCollectPressed)
         {
             Camera mainCamera = Camera.main;
             if (mainCamera == null)
