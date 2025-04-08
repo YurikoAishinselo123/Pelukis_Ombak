@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private float horizontalRotation = 0f;
 
     [Header("Jump Settings")]
-    [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float jumpForce = 5f;
 
     [Header("Diving Settings")]
@@ -47,7 +46,7 @@ public class PlayerController : MonoBehaviour
         // HandleDivingMovement();
         HandleLook();
         HandleMovement();
-        ApplyGravity();
+        // ApplyGravity();
         HandleJump();
         HandleItemCollection();
 
@@ -121,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
             if (distanceMoved >= stepDistance)
             {
-                AudioManager.Instance.PlayClikUI(); // atau PlayWalk();
+                // AudioManager.Instance.PlayClikUI(); 
                 distanceMoved = 0f;
             }
         }
@@ -158,8 +157,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Jump : " + characterController.isGrounded);
             if (characterController.isGrounded)
             {
-                AudioManager.Instance.PlayClikUI();
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                // AudioManager.Instance.PlayClikUI();
+                velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
             }
         }
     }
