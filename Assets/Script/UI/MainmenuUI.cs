@@ -10,9 +10,13 @@ public class MainmenuUI : MonoBehaviour
 
     void Awake()
     {
-        AudioManager.Instance.PlayMainThemeBacksound();
         startButton.onClick.AddListener(StartGame);
         quitButton.onClick.AddListener(QuitGame);
+    }
+
+    void Start()
+    {
+        AudioManager.Instance.PlayMainThemeBacksound();
     }
 
     public void StartGame()

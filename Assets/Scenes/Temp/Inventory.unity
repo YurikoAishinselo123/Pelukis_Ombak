@@ -255,9 +255,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2289643527007015827, guid: 5c811f5cde5fd42b29c52be47adf1a1d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6977111212909681674, guid: 5c811f5cde5fd42b29c52be47adf1a1d, type: 3}
       propertyPath: m_Name
       value: Item Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977111212909681674, guid: 5c811f5cde5fd42b29c52be47adf1a1d, type: 3}
+      propertyPath: m_TagString
+      value: Ocean
       objectReference: {fileID: 0}
     - target: {fileID: 8532729742885258386, guid: 5c811f5cde5fd42b29c52be47adf1a1d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -304,6 +312,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c811f5cde5fd42b29c52be47adf1a1d, type: 3}
+--- !u!1 &1180967676 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8398473861806624741, guid: 3e59098101683457f91fedadd299858c, type: 3}
+  m_PrefabInstance: {fileID: 1746605934}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1180967678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180967676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27768417dec18414b9817e7e53bb1fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1333818983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -675,7 +700,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8398473861806624741, guid: 3e59098101683457f91fedadd299858c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1180967678}
   m_SourcePrefab: {fileID: 100100000, guid: 3e59098101683457f91fedadd299858c, type: 3}
 --- !u!1 &1812076019
 GameObject:

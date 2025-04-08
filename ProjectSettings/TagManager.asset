@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Office1
+  - Office2
+  - Office3
+  - Ocean
   layers:
   - Default
   - TransparentFX

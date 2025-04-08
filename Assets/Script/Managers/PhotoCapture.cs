@@ -1,21 +1,9 @@
 using System.Collections;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PhotoCapture : MonoBehaviour
 {
-    [Header("Photo Taker")]
-    [SerializeField] private Image photoDisplayArea;
-    [SerializeField] private GameObject showPhoto;
-
-    [Header("Flash Effect")]
-    [SerializeField] private GameObject cameraFlash;
-    [SerializeField] private float flashTime = 0.3f;
-
-    [SerializeField] private GameObject mainCamera;
-
-
     private Texture2D screenCapture;
     private bool viewingPhoto;
 
@@ -25,7 +13,7 @@ public class PhotoCapture : MonoBehaviour
     {
         screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         photoPath = Path.Combine(Application.persistentDataPath, "photo.png");
-        showPhoto.SetActive(false);
+        PhotoCaptureUI.Instance.HidePhoto();
     }
 
     void Update()
@@ -33,43 +21,33 @@ public class PhotoCapture : MonoBehaviour
         if (InputManager.Instance.GetCapturePhotoInput)
         {
             if (!viewingPhoto)
-            {
                 StartCoroutine(CapturePhoto());
-            }
             else
-            {
-                Debug.Log("tes");
                 RemovePhoto();
-            }
         }
-        // Temp Input
-        if (Input.GetKeyDown(KeyCode.H))
+
+        if (Input.GetKeyDown(KeyCode.H) && !viewingPhoto)
         {
-            if (!viewingPhoto)
-            {
-                // Debug.Log("tse");
-                LoadAndShowSavedPhoto();
-            }
+            LoadAndShowSavedPhoto();
         }
     }
 
     IEnumerator CapturePhoto()
     {
+
         viewingPhoto = true;
+        PhotoCaptureUI.Instance.SetCameraFrameActive(false);
         yield return new WaitForEndOfFrame();
 
-        Rect regionToRead = new Rect(0, 0, Screen.width, Screen.height);
-        screenCapture.ReadPixels(regionToRead, 0, 0);
+        Rect region = new Rect(0, 0, Screen.width, Screen.height);
+        screenCapture.ReadPixels(region, 0, 0);
         screenCapture.Apply();
 
-        // Save as PNG
-        byte[] bytes = screenCapture.EncodeToPNG();
-        File.WriteAllBytes(photoPath, bytes);
+        File.WriteAllBytes(photoPath, screenCapture.EncodeToPNG());
         Debug.Log($"Photo saved to: {photoPath}");
 
-        // Show
-        ShowPhoto(screenCapture);
-        StartCoroutine(CameraFlashEffect());
+        yield return StartCoroutine(PhotoCaptureUI.Instance.FlashEffect());
+        PhotoCaptureUI.Instance.DisplayPhoto(screenCapture);
     }
 
     void LoadAndShowSavedPhoto()
@@ -80,7 +58,8 @@ public class PhotoCapture : MonoBehaviour
             Texture2D loadedTex = new Texture2D(2, 2);
             loadedTex.LoadImage(bytes);
 
-            ShowPhoto(loadedTex);
+            PhotoCaptureUI.Instance.DisplayPhoto(loadedTex);
+            viewingPhoto = true;
         }
         else
         {
@@ -88,25 +67,9 @@ public class PhotoCapture : MonoBehaviour
         }
     }
 
-    void ShowPhoto(Texture2D texture)
-    {
-        Sprite photoSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
-        photoDisplayArea.sprite = photoSprite;
-        showPhoto.SetActive(true);
-        viewingPhoto = true;
-    }
-
-    IEnumerator CameraFlashEffect()
-    {
-        cameraFlash.SetActive(true);
-        yield return new WaitForSeconds(flashTime);
-        cameraFlash.SetActive(false);
-    }
-
     void RemovePhoto()
     {
+        PhotoCaptureUI.Instance.HidePhoto(); ;
         viewingPhoto = false;
-        showPhoto.SetActive(false);
-        mainCamera.SetActive(true);
     }
 }
