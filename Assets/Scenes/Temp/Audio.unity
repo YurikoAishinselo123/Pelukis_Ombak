@@ -586,23 +586,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32acca1df373046ea8158c756cb1be31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backsounds:
-  - name: Main Theme
-    clip: {fileID: 8300000, guid: eaef6877f317d469f82b4599bf2160d6, type: 3}
-  - name: Exploration
-    clip: {fileID: 8300000, guid: 9b0feb838042646e38a213c91adc6ce4, type: 3}
-  sfxSounds:
-  - name: Click UI
-    clip: {fileID: 8300000, guid: ca42ff6ae690e49ebb15411807126aad, type: 3}
-  - name: Ocean Ambient
-    clip: {fileID: 8300000, guid: ba50a8316830841a08b3f79cc6f6336e, type: 3}
-  - name: Walking
-    clip: {fileID: 8300000, guid: f0f2abd889d544c5491d6baf942e06b0, type: 3}
-  - name: Diving
-    clip: {fileID: 8300000, guid: 0171ed159e55942989327ba2218623f3, type: 3}
-  - name: Run
-    clip: {fileID: 8300000, guid: 2f08a3bb1e4b44b2c99fa0044b08c395, type: 3}
-  backsoundSource: {fileID: 1420373644}
+  backsounds: []
+  sfxSounds: []
+  backsoundSource: {fileID: 0}
   sfxSource: {fileID: 174043513}
 --- !u!4 &1516534215
 Transform:
