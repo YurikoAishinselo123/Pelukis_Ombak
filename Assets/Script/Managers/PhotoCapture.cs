@@ -30,7 +30,7 @@ public class PhotoCapture : MonoBehaviour
 
     void Update()
     {
-        if (InputManager.Instance.GetCapturePhotoInput())
+        if (InputManager.Instance.GetCapturePhotoInput)
         {
             if (!viewingPhoto)
             {
