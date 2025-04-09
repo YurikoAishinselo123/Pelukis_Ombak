@@ -46,11 +46,9 @@ public class PlayerController : MonoBehaviour
         // HandleDivingMovement();
         HandleLook();
         HandleMovement();
-        // ApplyGravity();
+        ApplyGravity();
         HandleJump();
         HandleItemCollection();
-
-        // Debug.Log("tes " + characterController.isGrounded);
     }
 
     private void Start()
@@ -88,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
     public class CameraGizmoDrawer : MonoBehaviour
     {
-        public Camera dragCamera; // Tarik kamera drag kamu ke sini lewat Inspector
+        public Camera dragCamera;
 
         private void OnDrawGizmos()
         {

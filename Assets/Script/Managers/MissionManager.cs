@@ -42,6 +42,5 @@ public class MissionManager : MonoBehaviour
             Debug.LogError($"Mission JSON not found at path: {path}");
         }
     }
-
 }
 

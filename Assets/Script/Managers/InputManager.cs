@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -26,16 +26,25 @@ public class InputManager : MonoBehaviour
     public Vector2 LookInput => playerInput.actions["Look"].ReadValue<Vector2>();
     public bool JumpPressed => playerInput.actions["Jump"].WasPressedThisFrame();
     public bool IsSprinting => playerInput.actions["Sprint"].IsPressed();
+    public bool Interact => playerInput.actions["Interact"].IsPressed();
+    public bool Action => playerInput.actions["Action"].WasPressedThisFrame();
     public bool IsItemCollectPressed => playerInput.actions["CollectItem"].WasPressedThisFrame();
     public bool GetCapturePhotoInput => playerInput.actions["CapturePhoto"].WasPressedThisFrame();
 
 
     public int GetSelectedItemByKey()
     {
-        if (Keyboard.current.digit1Key.wasPressedThisFrame) return 0;
-        if (Keyboard.current.digit2Key.wasPressedThisFrame) return 1;
-        if (Keyboard.current.digit3Key.wasPressedThisFrame) return 2;
-        if (Keyboard.current.digit4Key.wasPressedThisFrame) return 3;
+        // if (Keyboard.current.digit1Key.wasPressedThisFrame) return 0;
+        // if (Keyboard.current.digit2Key.wasPressedThisFrame) return 1;
+        // if (Keyboard.current.digit3Key.wasPressedThisFrame) return 2;
+        // if (Keyboard.current.digit4Key.wasPressedThisFrame) return 3;
+        // return -1;
+
+        //Temp
+        if (Keyboard.current.digit1Key.wasPressedThisFrame) return 1;
+        if (Keyboard.current.digit2Key.wasPressedThisFrame) return 2;
+        if (Keyboard.current.digit3Key.wasPressedThisFrame) return 3;
+        if (Keyboard.current.digit4Key.wasPressedThisFrame) return 4;
         return -1;
     }
 }
