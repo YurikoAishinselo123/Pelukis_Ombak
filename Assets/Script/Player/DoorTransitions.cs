@@ -2,27 +2,61 @@ using UnityEngine;
 
 public class DoorTransition : MonoBehaviour
 {
+    private string currentDoorTag = null;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Office1"))
+        if (IsDoorTag(other.tag))
         {
-            Debug.Log("office1");
-            SceneLoader.Instance.LoadOffice1();
+            currentDoorTag = other.tag;
+            PhotoCaptureUI.Instance.ShowDetectDoor();
         }
-        else if (other.CompareTag("Office2"))
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (IsDoorTag(other.tag))
         {
-            Debug.Log("office2");
-            SceneLoader.Instance.LoadOffice2();
+            if (other.tag == currentDoorTag)
+            {
+                currentDoorTag = null;
+                PhotoCaptureUI.Instance.HideDetectDoor();
+            }
         }
-        else if (other.CompareTag("Office3"))
+    }
+
+    private void Update()
+    {
+        HandleDoorInteraction();
+    }
+
+    private void HandleDoorInteraction()
+    {
+        if (currentDoorTag != null && InputManager.Instance.Interact)
         {
-            Debug.Log("office3");
-            SceneLoader.Instance.LoadOffice3();
+            switch (currentDoorTag)
+            {
+                case "Office1":
+                    SceneLoader.Instance.LoadOffice1();
+                    break;
+                case "Office2":
+                    SceneLoader.Instance.LoadOffice2();
+                    break;
+                case "Office3":
+                    SceneLoader.Instance.LoadOffice3();
+                    break;
+                case "Ocean":
+                    SceneLoader.Instance.LoadOcean();
+                    break;
+            }
+
+            currentDoorTag = null;
+            PhotoCaptureUI.Instance.HideDetectDoor();
         }
-        else if (other.CompareTag("Ocean"))
-        {
-            Debug.Log("Ocean");
-            SceneLoader.Instance.LoadOcean();
-        }
+    }
+
+    private bool IsDoorTag(string tag)
+    {
+        return tag == "Office1" || tag == "Office2" || tag == "Office3" || tag == "Ocean";
     }
 }

@@ -12,12 +12,32 @@ public class VacuumManager : MonoBehaviour
     public float absorbDistance = 0.5f;
     public LayerMask garbageLayerMask;
 
+    [SerializeField] private GameObject vacuumObject;
+    [SerializeField] private Vector3 inactiveRotation = new Vector3(-25f, -7.8f, 2f);
+    [SerializeField] private Vector3 activeRotation = new Vector3(-10f, 0f, 2f);
+
     private List<Transform> grabbedObjects = new List<Transform>();
+
+
 
     private void Update()
     {
-        ScanForGarbage();
-        PullObjects();
+        ActiveVacuum();
+    }
+
+    private void ActiveVacuum()
+    {
+        if (InputManager.Instance.Action)
+        {
+            Debug.Log("tes");
+            vacuumObject.transform.localRotation = Quaternion.Euler(activeRotation);
+            ScanForGarbage();
+            PullObjects();
+        }
+        else
+        {
+            vacuumObject.transform.localRotation = Quaternion.Euler(inactiveRotation);
+        }
     }
 
     private void ScanForGarbage()

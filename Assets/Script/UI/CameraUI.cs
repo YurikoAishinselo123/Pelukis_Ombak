@@ -13,6 +13,11 @@ public class PhotoCaptureUI : MonoBehaviour
     [SerializeField] private GameObject cameraFrame;
     [SerializeField] private float flashTime = 0.3f;
 
+    [Header("Temp Settings")]
+    [SerializeField] private GameObject CameraObject;
+    [SerializeField] private GameObject VacuumObject;
+    [SerializeField] private GameObject detectDoorCanvas;
+
     void Awake()
     {
         if (Instance == null)
@@ -25,8 +30,20 @@ public class PhotoCaptureUI : MonoBehaviour
         }
     }
 
+    // Temp
+    void Update()
+    {
+        CheckSelectedItem();
+    }
+
     void Start()
     {
+        //Temp
+        CameraObject.SetActive(false);
+        VacuumObject.SetActive(false);
+        detectDoorCanvas.SetActive(false);
+
+
         cameraFrame.SetActive(true);
         showPhoto.SetActive(false);
         cameraFlash.SetActive(false);
@@ -57,5 +74,32 @@ public class PhotoCaptureUI : MonoBehaviour
         cameraFlash.SetActive(true);
         yield return new WaitForSeconds(flashTime);
         cameraFlash.SetActive(false);
+    }
+
+    // Temp Script
+    public void CheckSelectedItem()
+    {
+        int selectedIndex = InputManager.Instance.GetSelectedItemByKey();
+        if (selectedIndex == 1)
+        {
+            VacuumObject.SetActive(true);
+            CameraObject.SetActive(false);
+        }
+        if (selectedIndex == 2)
+        {
+            CameraObject.SetActive(true);
+            VacuumObject.SetActive(false);
+        }
+    }
+
+    // Temp script
+    public void ShowDetectDoor()
+    {
+        detectDoorCanvas.SetActive(true);
+    }
+
+    public void HideDetectDoor()
+    {
+        detectDoorCanvas.SetActive(false);
     }
 }
