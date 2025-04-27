@@ -22,9 +22,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
 
     [Header("Diving Settings")]
-    [SerializeField] public bool isDiving;
+    [SerializeField] public bool isDiving = false;
     [SerializeField] private float divingSpeed = 3f;
-    [SerializeField] private bool isSwimming = false;
 
     [Header("Sounds Settings")]
     private float stepDistance = 0.2f;
@@ -34,19 +33,37 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     private CharacterController characterController;
     private Vector3 velocity;
+    public static PlayerController Instance;
 
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         characterController = GetComponent<CharacterController>();
     }
 
     private void Update()
     {
-        // HandleDivingMovement();
         HandleLook();
-        HandleMovement();
-        ApplyGravity();
+
+        if (isDiving)
+        {
+            HandleDivingMovement();
+        }
+        else
+        {
+            ApplyGravity();
+            HandleMovement();
+        }
+
         HandleJump();
         HandleItemCollection();
     }
@@ -147,10 +164,19 @@ public class PlayerController : MonoBehaviour
         characterController.Move(move * divingSpeed * Time.deltaTime);
     }
 
+    public void OceanEnvirontment()
+    {
+        isDiving = true;
+    }
+
+    public void OfficeEnvirontment()
+    {
+        isDiving = false;
+    }
 
     private void HandleJump()
     {
-        if (InputManager.Instance.JumpPressed)
+        if (InputManager.Instance.JumpPressed && !isDiving)
         {
             Debug.Log("Jump : " + characterController.isGrounded);
             if (characterController.isGrounded)
