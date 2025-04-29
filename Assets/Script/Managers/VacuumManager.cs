@@ -5,20 +5,17 @@ public class VacuumManager : MonoBehaviour
 {
     [Header("Vacuum Settings")]
     public Transform vacuumPoint;
-    public float rayLength = 5f;
-    public int rayCount = 10;
-    public float raySpreadAngle = 10f;
-    public float absorbSpeed = 5f;
-    public float absorbDistance = 0.5f;
+    [SerializeField] private float rayLength = 5f;
+    [SerializeField] private int rayCount = 20;
+    [SerializeField] private float raySpreadAngle = 30f;
+    private float absorbSpeed = 15f;
+    // [SerializeField] private float absorbDistance = 1f;
     public LayerMask garbageLayerMask;
 
     [SerializeField] private GameObject vacuumObject;
-    [SerializeField] private Vector3 inactiveRotation = new Vector3(-25f, -7.8f, 2f);
-    [SerializeField] private Vector3 activeRotation = new Vector3(-10f, 0f, 2f);
-
+    // [SerializeField] private Vector3 inactiveRotation = new Vector3(-25f, -7.8f, 2f);
+    // [SerializeField] private Vector3 activeRotation = new Vector3(-10f, 0f, 2f);
     private List<Transform> grabbedObjects = new List<Transform>();
-
-
 
     private void Update()
     {
@@ -29,14 +26,13 @@ public class VacuumManager : MonoBehaviour
     {
         if (InputManager.Instance.Action)
         {
-            Debug.Log("tes");
-            vacuumObject.transform.localRotation = Quaternion.Euler(activeRotation);
+            // vacuumObject.transform.localRotation = Quaternion.Euler(activeRotation);
             ScanForGarbage();
             PullObjects();
         }
         else
         {
-            vacuumObject.transform.localRotation = Quaternion.Euler(inactiveRotation);
+            // vacuumObject.transform.localRotation = Quaternion.Euler(inactiveRotation);
         }
     }
 
@@ -67,6 +63,7 @@ public class VacuumManager : MonoBehaviour
 
             if (obj == null)
             {
+                Debug.Log("tes");
                 grabbedObjects.RemoveAt(i);
                 continue;
             }
@@ -103,7 +100,7 @@ public class VacuumManager : MonoBehaviour
             Gizmos.DrawRay(vacuumPoint.position, direction * rayLength);
         }
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(vacuumPoint.position, absorbDistance);
+        // Gizmos.color = Color.red;
+        // Gizmos.DrawWireSphere(vacuumPoint.position, absorbDistance);
     }
 }

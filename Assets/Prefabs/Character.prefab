@@ -136,11 +136,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 3
   sprintSpeed: 6
-  gravity: -9.81
   pickupRange: 2
   pickupAngle: 30
   cameraTransform: {fileID: 7880877831754529206}
-  jumpForce: 1
   isDiving: 0
   divingSpeed: 3
 --- !u!114 &60184545082876217
@@ -1014,15 +1012,11 @@ MonoBehaviour:
   vacuumPoint: {fileID: 3065594287266111673}
   rayLength: 5
   rayCount: 20
-  raySpreadAngle: 15
-  absorbSpeed: 5
-  absorbDistance: 1
+  raySpreadAngle: 30
   garbageLayerMask:
     serializedVersion: 2
     m_Bits: 64
   vacuumObject: {fileID: 4639460275581591451}
-  inactiveRotation: {x: -25, y: -7.8, z: 2}
-  activeRotation: {x: -10, y: 0, z: 2}
 --- !u!1 &5553757487821941281
 GameObject:
   m_ObjectHideFlags: 0
