@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 3f;
     [SerializeField] private float sprintSpeed = 6f;
-    [SerializeField] private float gravity = -9.81f;
+    private float gravity = -9.81f;
+    private Vector3 moveDirection;
 
     [Header("Pickup Settings")]
     [SerializeField] private float pickupRange = 2f;
@@ -19,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalRotation = 0f;
 
     [Header("Jump Settings")]
-    [SerializeField] private float jumpForce = 5f;
+    private float jumpForce = 0.5f;
 
     [Header("Diving Settings")]
     [SerializeField] public bool isDiving = false;
@@ -53,7 +54,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleLook();
-
         if (isDiving)
         {
             HandleDivingMovement();
@@ -62,10 +62,10 @@ public class PlayerController : MonoBehaviour
         {
             ApplyGravity();
             HandleMovement();
+            HandleJump();
+            MoveCharacter();
+            // HandleItemCollection();
         }
-
-        HandleJump();
-        HandleItemCollection();
     }
 
     private void Start()
@@ -122,25 +122,15 @@ public class PlayerController : MonoBehaviour
         Vector2 moveInput = InputManager.Instance.MoveInput;
         bool isSprinting = InputManager.Instance.IsSprinting;
 
-        Vector3 moveDirection = transform.right * moveInput.x + transform.forward * moveInput.y;
         float currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
+        moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y) * currentSpeed;
+    }
 
-        characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
-
-        // Hitung distance moved
-        if (characterController.isGrounded && moveInput.magnitude > 0.1f)
-        {
-            float distanceThisFrame = Vector3.Distance(transform.position, lastPosition);
-            distanceMoved += distanceThisFrame;
-
-            if (distanceMoved >= stepDistance)
-            {
-                // AudioManager.Instance.PlayClikUI(); 
-                distanceMoved = 0f;
-            }
-        }
-
-        lastPosition = transform.position;
+    private void MoveCharacter()
+    {
+        Vector3 finalMove = moveDirection;
+        finalMove.y = velocity.y;
+        characterController.Move(finalMove * Time.deltaTime);
     }
 
     private void HandleDivingMovement()
@@ -149,7 +139,7 @@ public class PlayerController : MonoBehaviour
         float horizontal = moveInput.x;
         float vertical = Mathf.Max(0f, moveInput.y);
 
-        Vector3 move = transform.forward * vertical + transform.right * horizontal;
+        Vector3 move = (transform.forward * vertical + transform.right * horizontal).normalized;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
