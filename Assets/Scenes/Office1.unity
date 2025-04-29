@@ -5605,6 +5605,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 3065594287266111673, guid: 72ca9f41ab0d74ca097a1e465434bf65, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9432227
+      objectReference: {fileID: 0}
+    - target: {fileID: 3065594287266111673, guid: 72ca9f41ab0d74ca097a1e465434bf65, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.33216113
+      objectReference: {fileID: 0}
+    - target: {fileID: 3065594287266111673, guid: 72ca9f41ab0d74ca097a1e465434bf65, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 38.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4257636361824486113, guid: 72ca9f41ab0d74ca097a1e465434bf65, type: 3}
+      propertyPath: raySpreadAngle
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4440540255833565761, guid: 72ca9f41ab0d74ca097a1e465434bf65, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
