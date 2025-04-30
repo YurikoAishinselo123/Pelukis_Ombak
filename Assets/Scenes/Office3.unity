@@ -2100,7 +2100,7 @@ GameObject:
   - component: {fileID: 3469287837073846631}
   m_Layer: 0
   m_Name: Pintu_RuanganBoss
-  m_TagString: Untagged
+  m_TagString: Office1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3266,8 +3266,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149572035705}
   m_Mesh: {fileID: 2619086233303812490, guid: c2708054e5683114688f7b9ca2f7ed9a, type: 3}
---- !u!64 &3469287837073846631
-MeshCollider:
+--- !u!65 &3469287837073846631
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3281,13 +3281,12 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2619086233303812490, guid: c2708054e5683114688f7b9ca2f7ed9a, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.011383436, y: 0.0028409318, z: 0.025043555}
+  m_Center: {x: 0, y: -0.000009122943, z: 0.012474526}
 --- !u!33 &3469287837264422782
 MeshFilter:
   m_ObjectHideFlags: 0
