@@ -87,15 +87,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CollectItem",
-                    "type": "Button",
-                    "id": "c20be51a-03a4-4a2f-9d69-d5fe7f989d3d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "CapturePhoto",
                     "type": "Button",
                     "id": "7e083cc6-789d-49fd-8ca5-cea7d0f2b0f5",
@@ -488,17 +479,6 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6014ae99-5607-4ec2-b940-38fdd7b91900",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "CollectItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -6,34 +6,25 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 3f;
     [SerializeField] private float sprintSpeed = 6f;
-    private float gravity = -9.81f;
     private Vector3 moveDirection;
 
-    [Header("Pickup Settings")]
-    [SerializeField] private float pickupRange = 2f;
-    [SerializeField] private float pickupAngle = 30f;
-
     [Header("Camera Settings")]
-    private float lookSensitivity = 100f;
     [SerializeField] private Transform cameraTransform;
+    private float lookSensitivity = 100f;
     private float verticalRotation = 0f;
     private float horizontalRotation = 0f;
 
     [Header("Jump Settings")]
+    private float gravity = -9.81f;
     private float jumpForce = 0.5f;
+    private Vector3 velocity;
 
     [Header("Diving Settings")]
     [SerializeField] public bool isDiving = false;
     [SerializeField] private float divingSpeed = 3f;
 
-    [Header("Sounds Settings")]
-    private float stepDistance = 0.2f;
-    private float distanceMoved = 0f;
-    private Vector3 lastPosition;
-
     [Header("References")]
     private CharacterController characterController;
-    private Vector3 velocity;
     public static PlayerController Instance;
 
 
@@ -60,60 +51,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            ApplyGravity();
+            // ApplyGravity();
             HandleMovement();
             HandleJump();
             MoveCharacter();
-            // HandleItemCollection();
-        }
-    }
-
-    private void Start()
-    {
-        lastPosition = transform.position;
-    }
-
-
-    // Visualize Raycast Area for Collecting Item
-    private void OnDrawGizmos()
-    {
-        Camera mainCamera = Camera.main;
-        if (mainCamera == null) return;
-
-        Vector3 origin = mainCamera.transform.position;
-        Vector3 forward = mainCamera.transform.forward;
-
-        Gizmos.color = Color.blue;
-
-        float maxDistance = pickupRange;
-        float angleStep = 15f;
-
-        for (float horizontalAngle = -pickupAngle; horizontalAngle <= pickupAngle; horizontalAngle += angleStep)
-        {
-            for (float verticalAngle = -pickupAngle; verticalAngle <= pickupAngle; verticalAngle += angleStep)
-            {
-                Quaternion rotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
-                Vector3 rayDirection = rotation * forward;
-                Gizmos.DrawRay(origin, rayDirection * maxDistance);
-            }
-        }
-
-        Gizmos.DrawWireSphere(origin, maxDistance);
-    }
-
-    public class CameraGizmoDrawer : MonoBehaviour
-    {
-        public Camera dragCamera;
-
-        private void OnDrawGizmos()
-        {
-            if (dragCamera == null) return;
-
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawRay(dragCamera.transform.position, dragCamera.transform.forward * 5f);
-
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(dragCamera.transform.position + dragCamera.transform.forward * 3f, 0.5f);
         }
     }
 
@@ -198,52 +139,6 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, horizontalRotation, 0);
         }
     }
-
-
-    private void HandleItemCollection()
-    {
-        if (InputManager.Instance.IsItemCollectPressed)
-        {
-            Camera mainCamera = Camera.main;
-            if (mainCamera == null)
-            {
-                Debug.LogWarning("Main camera not found!");
-                return;
-            }
-
-            Vector3 origin = mainCamera.transform.position;
-            Vector3 forward = mainCamera.transform.forward;
-            float maxDistance = pickupRange;
-            float angleStep = 10f;
-
-            List<ItemPickup> detectedItems = new List<ItemPickup>();
-
-            for (float horizontalAngle = -pickupAngle; horizontalAngle <= pickupAngle; horizontalAngle += angleStep)
-            {
-                for (float verticalAngle = -pickupAngle; verticalAngle <= pickupAngle; verticalAngle += angleStep)
-                {
-                    Quaternion rotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
-                    Vector3 rayDirection = rotation * forward;
-
-                    if (Physics.Raycast(origin, rayDirection, out RaycastHit hit, maxDistance))
-                    {
-                        ItemPickup item = hit.collider.GetComponent<ItemPickup>();
-                        if (item != null && !detectedItems.Contains(item))
-                        {
-                            detectedItems.Add(item);
-                        }
-                    }
-                }
-            }
-
-            foreach (ItemPickup item in detectedItems)
-            {
-                item.Collect();
-            }
-        }
-    }
-
-
 
     private void ApplyGravity()
     {

@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    public enum ItemType { Coin, Oxygen, Camera, Vacuum }
+    public enum ItemType { Coin, Oxygen, Camera, Vacuum, Door }
     public ItemType itemType;
-    public int amount = 1;
-    public Sprite itemIcon;
+    private bool item = false;
+    private int amount = 1;
+    [SerializeField] private Sprite itemIcon;
 
     public void Collect()
     {
         Debug.Log("Item Collected: " + itemType);
-
+        item = true;
         switch (itemType)
         {
             case ItemType.Camera:
@@ -21,11 +22,16 @@ public class ItemPickup : MonoBehaviour
                 ItemManager.Instance.CollectVacuum();
                 InventoryUIManager.Instance.AddItemToInventory(itemIcon, "Vacuum");
                 break;
+            case ItemType.Door:
+                item = false;
+                PhotoCaptureUI.Instance.ShowDetectDoor();
+                break;
                 // case ItemType.Coin:
                 //     ItemManager.Instance.AddCoin(amount);
                 //     break;
         }
 
-        Destroy(gameObject);
+        if (item)
+            Destroy(gameObject);
     }
 }
