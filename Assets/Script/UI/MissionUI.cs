@@ -21,4 +21,6 @@ public class MissionUI : MonoBehaviour
         int max = mission.qty ?? 1;
         progressText.text = $"{progress}/{max}";
     }
+
+
 }

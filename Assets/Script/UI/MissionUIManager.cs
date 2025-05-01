@@ -6,9 +6,25 @@ public class MissionUIManager : MonoBehaviour
     public MissionManager missionManager;
     public GameObject missionPanelPrefab;
     public Transform contentParent;
+    public GameObject MissionUICanvas;
+    public static MissionUIManager Instance;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
+        HideMissionUI();
         if (missionManager == null || missionManager.missionData == null || missionManager.missionData.missions == null)
         {
             Debug.LogWarning("MissionManager or mission data is missing!");
@@ -29,5 +45,15 @@ public class MissionUIManager : MonoBehaviour
                 Debug.LogWarning("MissionUI component not found on the panel prefab!");
             }
         }
+    }
+
+    public void ShowMissionUI()
+    {
+        MissionUICanvas.SetActive(true);
+    }
+
+    public void HideMissionUI()
+    {
+        MissionUICanvas.SetActive(false);
     }
 }
