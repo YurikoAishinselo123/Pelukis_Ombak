@@ -30,6 +30,8 @@ public class InputManager : MonoBehaviour
     public bool Action => playerInput.actions["Action"].WasPressedThisFrame();
     public bool GetCapturePhotoInput => playerInput.actions["CapturePhoto"].WasPressedThisFrame();
     public bool Mission => playerInput.actions["Mission"].WasPressedThisFrame();
+    public bool Back => playerInput.actions["Back"].WasPressedThisFrame();
+
 
 
     public int GetSelectedItemByKey()

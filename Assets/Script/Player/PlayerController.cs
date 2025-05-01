@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleLook();
         HandleMission();
+        HandleBackToMainmenu();
         if (isDiving)
         {
             HandleDivingMovement();
@@ -159,6 +160,14 @@ public class PlayerController : MonoBehaviour
         {
             cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
             transform.rotation = Quaternion.Euler(0, horizontalRotation, 0);
+        }
+    }
+
+    private void HandleBackToMainmenu()
+    {
+        if (InputManager.Instance.Back)
+        {
+            SceneLoader.Instance.LoadMainMenu();
         }
     }
 
