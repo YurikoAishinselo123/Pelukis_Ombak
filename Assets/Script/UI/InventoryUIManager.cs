@@ -64,9 +64,11 @@ public class InventoryUIManager : MonoBehaviour
     private void Update()
     {
         int selectedIndex = InputManager.Instance.GetSelectedItemByKey();
-        if (selectedIndex >= 0 && selectedIndex < inventorySlots.Count)
+
+        if (selectedIndex > 0 && selectedIndex <= inventorySlots.Count)
         {
-            SelectItem(inventorySlots[selectedIndex]);
+            Debug.Log("SelectedIndex");
+            SelectItem(inventorySlots[selectedIndex - 1]); // Subtract 1 here
         }
     }
 

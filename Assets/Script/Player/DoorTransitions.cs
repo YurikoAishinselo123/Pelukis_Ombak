@@ -6,26 +6,26 @@ public class DoorTransition : MonoBehaviour
     private string currentDoorTag = null;
     // [SerializeField] private Camera cam;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (IsDoorTag(other.tag))
-        {
-            currentDoorTag = other.tag;
-            PhotoCaptureUI.Instance.ShowDetectDoor();
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (IsDoorTag(other.tag))
+    //     {
+    //         currentDoorTag = other.tag;
+    //         PhotoCaptureUI.Instance.ShowDetectDoor();
+    //     }
+    // }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (IsDoorTag(other.tag))
-        {
-            if (other.tag == currentDoorTag)
-            {
-                currentDoorTag = null;
-                PhotoCaptureUI.Instance.HideDetectDoor();
-            }
-        }
-    }
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     if (IsDoorTag(other.tag))
+    //     {
+    //         if (other.tag == currentDoorTag)
+    //         {
+    //             currentDoorTag = null;
+    //             PhotoCaptureUI.Instance.HideDetectDoor();
+    //         }
+    //     }
+    // }
 
     private void Update()
     {

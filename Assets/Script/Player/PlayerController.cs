@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleItemCollection()
     {
-        if (InputManager.Instance.IsItemCollectPressed)
+        if (InputManager.Instance.Interact)
         {
             Camera mainCamera = Camera.main;
             if (mainCamera == null)
