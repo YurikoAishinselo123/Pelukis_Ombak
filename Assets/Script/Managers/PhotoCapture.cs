@@ -18,17 +18,21 @@ public class PhotoCapture : MonoBehaviour
 
     void Update()
     {
-        if (InputManager.Instance.GetCapturePhotoInput)
+        if (ItemManager.Instance.HasCamera())
         {
-            if (!viewingPhoto)
-                StartCoroutine(CapturePhoto());
-            else
-                RemovePhoto();
-        }
+            if (InputManager.Instance.GetCapturePhotoInput && PhotoCaptureUI.Instance.CameraActive())
+            {
+                Debug.Log("Capture");
+                if (!viewingPhoto)
+                    StartCoroutine(CapturePhoto());
+                else
+                    RemovePhoto();
+            }
 
-        if (Input.GetKeyDown(KeyCode.H) && !viewingPhoto)
-        {
-            LoadAndShowSavedPhoto();
+            if (Input.GetKeyDown(KeyCode.H) && !viewingPhoto)
+            {
+                LoadAndShowSavedPhoto();
+            }
         }
     }
 

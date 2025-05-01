@@ -17,6 +17,8 @@ public class PhotoCaptureUI : MonoBehaviour
     [SerializeField] private GameObject CameraObject;
     [SerializeField] private GameObject VacuumObject;
     [SerializeField] private GameObject detectDoorCanvas;
+    private int currentSelectedIndex = -1;
+    private bool cameraActive = false;
 
     void Awake()
     {
@@ -77,19 +79,47 @@ public class PhotoCaptureUI : MonoBehaviour
         cameraFlash.SetActive(false);
     }
 
+    public bool CameraActive()
+    {
+        return cameraActive;
+    }
+
     // Temp Script
     public void CheckSelectedItem()
     {
         int selectedIndex = InputManager.Instance.GetSelectedItemByKey();
+
+        if (selectedIndex == currentSelectedIndex)
+        {
+            // Pressed the same key again — toggle OFF
+            if (selectedIndex == 1)
+            {
+                VacuumObject.SetActive(false);
+            }
+            else if (selectedIndex == 2)
+            {
+                CameraObject.SetActive(false);
+                cameraActive = false;
+            }
+
+            currentSelectedIndex = -1; // Reset
+            return;
+        }
+
+        // Turn ON selected item, and turn OFF others
         if (selectedIndex == 1 && ItemManager.Instance.HasVacuum())
         {
             VacuumObject.SetActive(true);
             CameraObject.SetActive(false);
+            currentSelectedIndex = 1;
+            cameraActive = false;
         }
-        if (selectedIndex == 2 && ItemManager.Instance.HasCamera())
+        else if (selectedIndex == 2 && ItemManager.Instance.HasCamera())
         {
             CameraObject.SetActive(true);
             VacuumObject.SetActive(false);
+            currentSelectedIndex = 2;
+            cameraActive = true;
         }
     }
 
