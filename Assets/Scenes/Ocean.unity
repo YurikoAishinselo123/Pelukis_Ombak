@@ -1241,6 +1241,14 @@ PrefabInstance:
       propertyPath: oceanArea
       value: 
       objectReference: {fileID: 1242368815}
+    - target: {fileID: 6808078907291474563, guid: 6e79b5f72e0d349c780a443680a6e696, type: 3}
+      propertyPath: swimSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808078907291474563, guid: 6e79b5f72e0d349c780a443680a6e696, type: 3}
+      propertyPath: turnSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2109,6 +2117,14 @@ PrefabInstance:
       propertyPath: oceanArea
       value: 
       objectReference: {fileID: 1242368815}
+    - target: {fileID: 6808078907291474563, guid: 6e79b5f72e0d349c780a443680a6e696, type: 3}
+      propertyPath: swimSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808078907291474563, guid: 6e79b5f72e0d349c780a443680a6e696, type: 3}
+      propertyPath: idleDuration
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3744,6 +3760,14 @@ PrefabInstance:
       propertyPath: oceanArea
       value: 
       objectReference: {fileID: 1242368815}
+    - target: {fileID: 1334686172024627567, guid: fc1c3102c9f3344b9ae23352a818380f, type: 3}
+      propertyPath: swimSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1334686172024627567, guid: fc1c3102c9f3344b9ae23352a818380f, type: 3}
+      propertyPath: turnSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6277571373938048167, guid: fc1c3102c9f3344b9ae23352a818380f, type: 3}
       propertyPath: m_Name
       value: Angel Fish (2)
@@ -6724,6 +6748,14 @@ PrefabInstance:
       propertyPath: oceanArea
       value: 
       objectReference: {fileID: 1242368815}
+    - target: {fileID: 1334686172024627567, guid: fc1c3102c9f3344b9ae23352a818380f, type: 3}
+      propertyPath: swimSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1334686172024627567, guid: fc1c3102c9f3344b9ae23352a818380f, type: 3}
+      propertyPath: idleDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6277571373938048167, guid: fc1c3102c9f3344b9ae23352a818380f, type: 3}
       propertyPath: m_Name
       value: Angel Fish
@@ -7482,6 +7514,14 @@ PrefabInstance:
       propertyPath: oceanArea
       value: 
       objectReference: {fileID: 1242368815}
+    - target: {fileID: 1334686172024627567, guid: fc1c3102c9f3344b9ae23352a818380f, type: 3}
+      propertyPath: swimSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1334686172024627567, guid: fc1c3102c9f3344b9ae23352a818380f, type: 3}
+      propertyPath: idleDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6277571373938048167, guid: fc1c3102c9f3344b9ae23352a818380f, type: 3}
       propertyPath: m_Name
       value: Angel Fish (1)
@@ -8541,6 +8581,14 @@ PrefabInstance:
       propertyPath: oceanArea
       value: 
       objectReference: {fileID: 1242368815}
+    - target: {fileID: 6808078907291474563, guid: 6e79b5f72e0d349c780a443680a6e696, type: 3}
+      propertyPath: swimSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808078907291474563, guid: 6e79b5f72e0d349c780a443680a6e696, type: 3}
+      propertyPath: turnSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8704,6 +8752,14 @@ PrefabInstance:
       propertyPath: oceanArea
       value: 
       objectReference: {fileID: 1242368815}
+    - target: {fileID: 6808078907291474563, guid: 6e79b5f72e0d349c780a443680a6e696, type: 3}
+      propertyPath: swimSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808078907291474563, guid: 6e79b5f72e0d349c780a443680a6e696, type: 3}
+      propertyPath: idleDuration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
