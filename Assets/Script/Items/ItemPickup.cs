@@ -15,7 +15,6 @@ public class ItemPickup : MonoBehaviour
         switch (itemType)
         {
             case ItemType.Camera:
-                Debug.Log("Detect " + itemType);
                 ItemManager.Instance.CollectCamera();
                 InventoryUIManager.Instance.AddItemToInventory(itemIcon, "Camera");
                 break;
@@ -25,7 +24,6 @@ public class ItemPickup : MonoBehaviour
                 break;
             case ItemType.Door:
                 item = false;
-                Debug.Log("Detect Door" + itemType);
                 PhotoCaptureUI.Instance.ShowDetectDoor();
                 break;
                 // case ItemType.Coin:

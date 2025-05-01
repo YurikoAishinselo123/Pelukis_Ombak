@@ -4,9 +4,9 @@ using UnityEngine;
 public class DetectionManager : MonoBehaviour
 {
     [Header("Detection Settings")]
-    [SerializeField] private float pickupRange = 5f;
-    [SerializeField] private float pickupAngle = 30f;
-    [SerializeField] private float angleStep = 10f;
+    private float pickupRange = 2f;
+    private float pickupAngle = 30f;
+    private float angleStep = 15f;
 
     [Header("References")]
     [SerializeField] private Camera detectionCamera;
@@ -36,7 +36,6 @@ public class DetectionManager : MonoBehaviour
     {
         DetectObject();
 
-        // Only collect or interact if detection succeeded AND player presses the button
         if (InputManager.Instance.Interact)
         {
             if (!interactionTriggered)
@@ -48,7 +47,6 @@ public class DetectionManager : MonoBehaviour
                 }
                 else if (detectedDoorTag != null)
                 {
-                    Debug.Log("Open door: " + detectedDoorTag);
                     DoorManager.Instance.OpenDoor(detectedDoorTag);
                     detectedDoorTag = null;
                 }
@@ -62,10 +60,34 @@ public class DetectionManager : MonoBehaviour
         }
     }
 
-    void DetectObject()
+    private void OnDrawGizmosSelected()
+    {
+        if (detectionCamera == null)
+            return;
+
+        Gizmos.color = Color.yellow;
+
+        Vector3 origin = detectionCamera.transform.position;
+        Vector3 forward = detectionCamera.transform.forward;
+
+        for (float h = -pickupAngle; h <= pickupAngle; h += angleStep)
+        {
+            for (float v = -pickupAngle; v <= pickupAngle; v += angleStep)
+            {
+                Quaternion rotation = Quaternion.Euler(v, h, 0);
+                Vector3 direction = rotation * forward;
+
+                Gizmos.DrawRay(origin, direction * pickupRange);
+            }
+        }
+    }
+
+
+    private void DetectObject()
     {
         detectedItem = null;
         detectedDoorTag = null;
+        bool doorDetected = false; // Track if any door was detected
 
         if (detectionCamera == null)
             return;
@@ -88,16 +110,32 @@ public class DetectionManager : MonoBehaviour
                         if (item.itemType == ItemPickup.ItemType.Door)
                         {
                             detectedDoorTag = hit.collider.tag;
-                            return;
+                            doorDetected = true;
+                            detectedItem = null;
+                            break;
                         }
                         else if (validItemTypes.Contains(item.itemType))
                         {
                             detectedItem = item;
-                            return;
+                            detectedDoorTag = null;
+                            break;
                         }
                     }
                 }
             }
+
+            if (detectedItem != null || doorDetected)
+                break;
+        }
+
+        if (doorDetected)
+        {
+            PhotoCaptureUI.Instance.ShowDetectDoor();
+        }
+        else
+        {
+            PhotoCaptureUI.Instance.HideDetectDoor();
         }
     }
+
 }

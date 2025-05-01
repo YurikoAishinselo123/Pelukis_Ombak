@@ -23,6 +23,7 @@ public class PhotoCaptureUI : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
