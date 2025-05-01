@@ -112,12 +112,20 @@ public class DetectionManager : MonoBehaviour
                             detectedDoorTag = hit.collider.tag;
                             doorDetected = true;
                             detectedItem = null;
+
+                            // Show door UI
+                            PhotoCaptureUI.Instance.ShowDetectDoor();
+                            DetectItemUI.Instance.HideItemUI();
                             break;
                         }
                         else if (validItemTypes.Contains(item.itemType))
                         {
                             detectedItem = item;
                             detectedDoorTag = null;
+
+                            // Show item UI
+                            DetectItemUI.Instance.ShowItemUI(item.itemType.ToString());
+                            PhotoCaptureUI.Instance.HideDetectDoor();
                             break;
                         }
                     }
@@ -128,12 +136,10 @@ public class DetectionManager : MonoBehaviour
                 break;
         }
 
-        if (doorDetected)
+        // Hide both UIs if nothing detected
+        if (detectedItem == null && !doorDetected)
         {
-            PhotoCaptureUI.Instance.ShowDetectDoor();
-        }
-        else
-        {
+            DetectItemUI.Instance.HideItemUI();
             PhotoCaptureUI.Instance.HideDetectDoor();
         }
     }

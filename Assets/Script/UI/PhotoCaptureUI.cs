@@ -81,12 +81,12 @@ public class PhotoCaptureUI : MonoBehaviour
     public void CheckSelectedItem()
     {
         int selectedIndex = InputManager.Instance.GetSelectedItemByKey();
-        if (selectedIndex == 1)
+        if (selectedIndex == 1 && ItemManager.Instance.HasVacuum())
         {
             VacuumObject.SetActive(true);
             CameraObject.SetActive(false);
         }
-        if (selectedIndex == 2)
+        if (selectedIndex == 2 && ItemManager.Instance.HasCamera())
         {
             CameraObject.SetActive(true);
             VacuumObject.SetActive(false);
