@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // ApplyGravity();
+            ApplyGravity();
             HandleMovement();
             HandleJump();
             MoveCharacter();
