@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     private CharacterController characterController;
     public static PlayerController Instance;
+    private bool isMissionUIVisible = false;
+
 
 
     private void Awake()
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleLook();
+        HandleMission();
         if (isDiving)
         {
             HandleDivingMovement();
@@ -115,6 +118,25 @@ public class PlayerController : MonoBehaviour
                 // AudioManager.Instance.PlayClikUI();
                 velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
             }
+        }
+    }
+
+    private void HandleMission()
+    {
+        if (InputManager.Instance.Mission)
+        {
+            Debug.Log("Mission : " + isMissionUIVisible);
+            if (isMissionUIVisible)
+            {
+                MissionUIManager.Instance.HideMissionUI();
+                InventoryUIManager.Instance.ShowInventoryCanvas();
+            }
+            else
+            {
+                MissionUIManager.Instance.ShowMissionUI();
+                InventoryUIManager.Instance.HideInventoryCanvas();
+            }
+            isMissionUIVisible = !isMissionUIVisible;
         }
     }
 

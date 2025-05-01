@@ -26,9 +26,10 @@ public class InputManager : MonoBehaviour
     public Vector2 LookInput => playerInput.actions["Look"].ReadValue<Vector2>();
     public bool JumpPressed => playerInput.actions["Jump"].WasPressedThisFrame();
     public bool IsSprinting => playerInput.actions["Sprint"].IsPressed();
-    public bool Interact => playerInput.actions["Interact"].IsPressed();
+    public bool Interact => playerInput.actions["Interact"].WasPressedThisFrame();
     public bool Action => playerInput.actions["Action"].WasPressedThisFrame();
     public bool GetCapturePhotoInput => playerInput.actions["CapturePhoto"].WasPressedThisFrame();
+    public bool Mission => playerInput.actions["Mission"].WasPressedThisFrame();
 
 
     public int GetSelectedItemByKey()

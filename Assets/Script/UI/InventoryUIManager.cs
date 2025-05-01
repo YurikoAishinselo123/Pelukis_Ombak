@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class InventoryUIManager : MonoBehaviour
 {
     public static InventoryUIManager Instance;
+    public GameObject InventoryUICanvas;
     public InventorySlotUI slotPrefab;
     public Transform inventoryPanel;
     public int slotCount = 4;
@@ -91,5 +92,15 @@ public class InventoryUIManager : MonoBehaviour
         {
             slot.SetBackgroundColor(Color.white);
         }
+    }
+
+    public void ShowInventoryCanvas()
+    {
+        InventoryUICanvas.SetActive(true);
+    }
+
+    public void HideInventoryCanvas()
+    {
+        InventoryUICanvas.SetActive(false);
     }
 }
