@@ -38,9 +38,17 @@ public class DoorManager : MonoBehaviour
                 break;
         }
         if (inOffice)
+        {
             PlayerController.Instance.OfficeEnvirontment();
+            AudioManager.Instance.PlayMainThemeBacksound();
+        }
         else
+        {
             PlayerController.Instance.OceanEnvirontment();
+            AudioManager.Instance.PlayExplorationBacksound();
+        }
+
+
 
 
         PhotoCaptureUI.Instance.HideDetectDoor();

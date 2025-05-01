@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        PlayExplorationBacksound();
+        PlayMainThemeBacksound();
     }
 
     public void PlayBacksound(string name)
@@ -66,7 +66,11 @@ public class AudioManager : MonoBehaviour
     // Play BackSound
     public void PlayExplorationBacksound() => PlayBacksound("Exploration");
     public void PlayMainThemeBacksound() => PlayBacksound("Main Theme");
-
+    // public void PlayExplorationBacksound()
+    // {
+    //     Debug.Log("Playing exploration backsound");
+    //     PlayBacksound("Exploration");
+    // }
 
     // Play SFX
     // public void PlayClikUI() => PlayBacksound("Click UI");
