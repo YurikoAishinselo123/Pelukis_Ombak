@@ -1787,11 +1787,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a250a3722b4aa5542acf5f8f25c80415, type: 3}
       propertyPath: m_LocalScale.x
-      value: 48.4
+      value: 38.29565
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a250a3722b4aa5542acf5f8f25c80415, type: 3}
       propertyPath: m_LocalScale.y
-      value: 39.129
+      value: 38.29565
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a250a3722b4aa5542acf5f8f25c80415, type: 3}
       propertyPath: m_LocalScale.z
@@ -1799,7 +1799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a250a3722b4aa5542acf5f8f25c80415, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6881
+      value: -4.0264
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a250a3722b4aa5542acf5f8f25c80415, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1807,7 +1807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a250a3722b4aa5542acf5f8f25c80415, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6281
+      value: 0.7957
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a250a3722b4aa5542acf5f8f25c80415, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2015,6 +2015,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &402111555 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 36ebb9a9e2bbff843b92cc95e0cdc972, type: 3}
+  m_PrefabInstance: {fileID: 900667678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &436420337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5850379632408866980, guid: 6e79b5f72e0d349c780a443680a6e696, type: 3}
@@ -3690,7 +3695,7 @@ PrefabInstance:
     - target: {fileID: 114087225151513282, guid: 36ebb9a9e2bbff843b92cc95e0cdc972, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 543450651853650432}
+      objectReference: {fileID: 402111555}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
