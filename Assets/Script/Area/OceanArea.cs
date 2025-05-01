@@ -3,12 +3,12 @@ using UnityEngine;
 public class OceanArea : MonoBehaviour
 {
     [Header("Half-Sphere Bounds")]
-    public float minY = 1.43f;
-    public float maxY = 3.9f;
-    public float minX = -19f;
-    public float maxX = 12f;
-    public float minZ = -8.7f;
-    public float maxZ = 8.9f;
+    private float minY = 1.43f;
+    private float maxY = 3.9f;
+    private float minX = -15f;
+    private float maxX = 12f;
+    private float minZ = -8.7f;
+    private float maxZ = 8.9f;
 
     private Vector3 center;
     private float radius;
