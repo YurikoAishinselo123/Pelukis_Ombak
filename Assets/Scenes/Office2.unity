@@ -1450,7 +1450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c2708054e5683114688f7b9ca2f7ed9a, type: 3}
       propertyPath: m_TagString
-      value: Office1
+      value: Office2ToOffice1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5306,7 +5306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c2708054e5683114688f7b9ca2f7ed9a, type: 3}
       propertyPath: m_TagString
-      value: Office1
+      value: Office2ToOffice1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

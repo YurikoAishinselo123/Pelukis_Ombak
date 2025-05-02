@@ -2396,7 +2396,7 @@ GameObject:
   - component: {fileID: 3469287837073846632}
   m_Layer: 0
   m_Name: Pintu_RuanganBoss
-  m_TagString: Office1
+  m_TagString: Office3ToOffice1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
