@@ -20,7 +20,6 @@ public class DoorManager : MonoBehaviour
         {
             case "Office1":
                 Debug.Log("move to: " + tag);
-                AudioManager.Instance.PlayMainThemeBacksound();
                 SceneLoader.Instance.LoadOffice1();
                 break;
             case "Office2":
