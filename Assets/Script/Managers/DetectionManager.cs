@@ -34,7 +34,8 @@ public class DetectionManager : MonoBehaviour
 
     void Update()
     {
-        DetectObject();
+        if (UIManager.Instance.detectManagerActive)
+            DetectObject();
 
         if (InputManager.Instance.Interact)
         {
@@ -114,8 +115,8 @@ public class DetectionManager : MonoBehaviour
                             detectedItem = null;
 
                             // Show door UI
-                            PhotoCaptureUI.Instance.ShowDetectDoor();
-                            DetectItemUI.Instance.HideItemUI();
+                            DetectDoorUI.Instance.ShowDetectDoor();
+                            DetectItemUI.Instance.HideDetectItemUI();
                             break;
                         }
                         else if (validItemTypes.Contains(item.itemType))
@@ -124,8 +125,8 @@ public class DetectionManager : MonoBehaviour
                             detectedDoorTag = null;
 
                             // Show item UI
-                            DetectItemUI.Instance.ShowItemUI(item.itemType.ToString());
-                            PhotoCaptureUI.Instance.HideDetectDoor();
+                            DetectItemUI.Instance.ShowDetectItemUI(item.itemType.ToString());
+                            DetectDoorUI.Instance.HideDetectDoor();
                             break;
                         }
                     }
@@ -139,8 +140,8 @@ public class DetectionManager : MonoBehaviour
         // Hide both UIs if nothing detected
         if (detectedItem == null && !doorDetected)
         {
-            DetectItemUI.Instance.HideItemUI();
-            PhotoCaptureUI.Instance.HideDetectDoor();
+            DetectItemUI.Instance.HideDetectItemUI();
+            DetectDoorUI.Instance.HideDetectDoor();
         }
     }
 

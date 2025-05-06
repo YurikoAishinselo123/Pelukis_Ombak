@@ -22,11 +22,20 @@ public class PhotoCapture : MonoBehaviour
         {
             if (InputManager.Instance.GetCapturePhotoInput && PhotoCaptureUI.Instance.CameraActive())
             {
-                Debug.Log("Capture");
+                UIManager.Instance.detectManagerActive = false;
+
                 if (!viewingPhoto)
+                {
+                    UIManager.Instance.HideAllUI();
                     StartCoroutine(CapturePhoto());
+                }
                 else
+                {
+                    InventoryUIManager.Instance.HideInventoryCanvas();
                     RemovePhoto();
+                    InventoryUIManager.Instance.ShowInventoryCanvas();
+                    UIManager.Instance.detectManagerActive = true;
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.H) && !viewingPhoto)
@@ -38,12 +47,11 @@ public class PhotoCapture : MonoBehaviour
 
     IEnumerator CapturePhoto()
     {
-
         viewingPhoto = true;
-        PhotoCaptureUI.Instance.SetCameraFrameActive(false);
         yield return new WaitForEndOfFrame();
 
         Rect region = new Rect(0, 0, Screen.width, Screen.height);
+        Debug.Log("Capture");
         screenCapture.ReadPixels(region, 0, 0);
         screenCapture.Apply();
 
@@ -51,7 +59,9 @@ public class PhotoCapture : MonoBehaviour
         Debug.Log($"Photo saved to: {photoPath}");
 
         yield return StartCoroutine(PhotoCaptureUI.Instance.FlashEffect());
+        PhotoCaptureUI.Instance.SetCameraFrameActive(true);
         PhotoCaptureUI.Instance.DisplayPhoto(screenCapture);
+
     }
 
     void LoadAndShowSavedPhoto()

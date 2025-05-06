@@ -16,7 +16,6 @@ public class PhotoCaptureUI : MonoBehaviour
     [Header("Temp Settings")]
     [SerializeField] private GameObject CameraObject;
     [SerializeField] private GameObject VacuumObject;
-    [SerializeField] private GameObject detectDoorCanvas;
     private int currentSelectedIndex = -1;
     private bool cameraActive = false;
 
@@ -44,8 +43,6 @@ public class PhotoCaptureUI : MonoBehaviour
         //Temp
         CameraObject.SetActive(false);
         VacuumObject.SetActive(false);
-        detectDoorCanvas.SetActive(false);
-
 
         cameraFrame.SetActive(true);
         showPhoto.SetActive(false);
@@ -54,7 +51,9 @@ public class PhotoCaptureUI : MonoBehaviour
 
     public void SetCameraFrameActive(bool active)
     {
+        CameraObject.SetActive(active);
         cameraFrame.SetActive(active);
+        Debug.Log("Active : " + active);
     }
 
     public void DisplayPhoto(Texture2D texture)
@@ -121,16 +120,5 @@ public class PhotoCaptureUI : MonoBehaviour
             currentSelectedIndex = 2;
             cameraActive = true;
         }
-    }
-
-    // Temp script
-    public void ShowDetectDoor()
-    {
-        detectDoorCanvas.SetActive(true);
-    }
-
-    public void HideDetectDoor()
-    {
-        detectDoorCanvas.SetActive(false);
     }
 }

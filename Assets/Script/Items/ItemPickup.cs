@@ -24,7 +24,7 @@ public class ItemPickup : MonoBehaviour
                 break;
             case ItemType.Door:
                 item = false;
-                PhotoCaptureUI.Instance.ShowDetectDoor();
+                DetectDoorUI.Instance.ShowDetectDoor();
                 break;
                 // case ItemType.Coin:
                 //     ItemManager.Instance.AddCoin(amount);
