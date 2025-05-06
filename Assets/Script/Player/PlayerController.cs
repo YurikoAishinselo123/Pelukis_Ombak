@@ -86,12 +86,13 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = (transform.forward * vertical + transform.right * horizontal).normalized;
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        // Temp Control
+        if (Input.GetKey(KeyCode.Q))
         {
             move += Vector3.up;
         }
 
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.E))
         {
             move += Vector3.down;
         }
