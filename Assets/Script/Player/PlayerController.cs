@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
     {
         HandleLook();
         HandleMission();
-        // HandleBackToMainmenu();
         if (isDiving)
         {
             HandleDivingMovement();
@@ -83,7 +82,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 moveInput = InputManager.Instance.MoveInput;
         float horizontal = moveInput.x;
-        float vertical = Mathf.Max(0f, moveInput.y);
+        float vertical = moveInput.y;
 
         Vector3 move = (transform.forward * vertical + transform.right * horizontal).normalized;
 
@@ -163,14 +162,6 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, horizontalRotation, 0);
         }
     }
-
-    // private void HandleBackToMainmenu()
-    // {
-    //     if (InputManager.Instance.Back)
-    //     {
-    //         SceneLoader.Instance.LoadMainMenu();
-    //     }
-    // }
 
     private void ApplyGravity()
     {
