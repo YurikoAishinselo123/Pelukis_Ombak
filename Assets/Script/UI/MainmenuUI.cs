@@ -22,6 +22,7 @@ public class MainmenuUI : MonoBehaviour
     public void StartGame()
     {
         SceneLoader.Instance.LoadOffice1();
+        CursorManager.Instance.HideCursor();
     }
 
     public void QuitGame()

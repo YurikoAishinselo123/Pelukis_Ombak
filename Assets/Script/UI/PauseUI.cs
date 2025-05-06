@@ -48,6 +48,7 @@ public class PauseUI : MonoBehaviour
     {
         isPaused = true;
         PauseCanvas.SetActive(true);
+        CursorManager.Instance.ShowCursor();
         Time.timeScale = 0;
     }
 
@@ -55,11 +56,13 @@ public class PauseUI : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1;
+        CursorManager.Instance.HideCursor();
         PauseCanvas.SetActive(false);
     }
 
     public void QuitGame()
     {
+        PauseCanvas.SetActive(false);
         SceneLoader.Instance.LoadMainMenu();
     }
 }
