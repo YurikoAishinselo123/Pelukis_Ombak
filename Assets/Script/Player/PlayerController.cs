@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
         characterController = GetComponent<CharacterController>();
+
     }
 
     private void Update()

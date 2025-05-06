@@ -19,10 +19,10 @@ public class DetectItemUI : MonoBehaviour
             Destroy(gameObject);
         }
 
-        HideItemUI();
+        HideDetectItemUI();
     }
 
-    public void ShowItemUI(string itemName)
+    public void ShowDetectItemUI(string itemName)
     {
         if (DetecItemCanvas != null && itemInfoText != null)
         {
@@ -31,7 +31,7 @@ public class DetectItemUI : MonoBehaviour
         }
     }
 
-    public void HideItemUI()
+    public void HideDetectItemUI()
     {
         if (DetecItemCanvas != null)
         {
