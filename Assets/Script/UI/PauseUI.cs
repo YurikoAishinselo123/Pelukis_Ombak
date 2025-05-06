@@ -48,11 +48,13 @@ public class PauseUI : MonoBehaviour
     {
         isPaused = true;
         PauseCanvas.SetActive(true);
+        Time.timeScale = 0;
     }
 
     private void ResumeGame()
     {
         isPaused = false;
+        Time.timeScale = 1;
         PauseCanvas.SetActive(false);
     }
 
