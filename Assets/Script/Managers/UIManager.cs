@@ -19,7 +19,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
+    void Start()
+    {
+        InventoryUIManager.Instance.ShowInventoryCanvas();
+    }
 
     public void HideAllUI()
     {
