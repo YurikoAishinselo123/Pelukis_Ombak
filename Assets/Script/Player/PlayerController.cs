@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleLook();
         HandleMission();
-        HandleBackToMainmenu();
+        // HandleBackToMainmenu();
         if (isDiving)
         {
             HandleDivingMovement();
@@ -164,13 +164,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleBackToMainmenu()
-    {
-        if (InputManager.Instance.Back)
-        {
-            SceneLoader.Instance.LoadMainMenu();
-        }
-    }
+    // private void HandleBackToMainmenu()
+    // {
+    //     if (InputManager.Instance.Back)
+    //     {
+    //         SceneLoader.Instance.LoadMainMenu();
+    //     }
+    // }
 
     private void ApplyGravity()
     {
