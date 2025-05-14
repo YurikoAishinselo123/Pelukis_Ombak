@@ -67,10 +67,17 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         Vector2 moveInput = InputManager.Instance.MoveInput;
-        bool isSprinting = InputManager.Instance.IsSprinting;
 
-        float currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
+        float currentSpeed = GetCurrentSpeed();
         moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y) * currentSpeed;
+
+        characterController.Move(moveDirection * Time.deltaTime);
+    }
+
+
+    private float GetCurrentSpeed()
+    {
+        return InputManager.Instance.IsSprinting ? sprintSpeed : walkSpeed;
     }
 
     private void MoveCharacter()
@@ -88,7 +95,6 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = (transform.forward * vertical + transform.right * horizontal).normalized;
 
-        // Temp Control
         if (Input.GetKey(KeyCode.Q))
         {
             move += Vector3.up;
@@ -99,8 +105,10 @@ public class PlayerController : MonoBehaviour
             move += Vector3.down;
         }
 
-        characterController.Move(move * divingSpeed * Time.deltaTime);
+        float currentSpeed = GetCurrentSpeed();
+        characterController.Move(move * currentSpeed * Time.deltaTime);
     }
+
 
     public void OceanEnvirontment()
     {
