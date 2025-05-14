@@ -106,14 +106,14 @@ public class PhotoCaptureUI : MonoBehaviour
         }
 
         // Turn ON selected item, and turn OFF others
-        if (selectedIndex == 1 && ItemManager.Instance.HasVacuum())
+        if (selectedIndex == 1 && ItemManager.Instance.HasItem(ItemType.Vacuum))
         {
             VacuumObject.SetActive(true);
             CameraObject.SetActive(false);
             currentSelectedIndex = 1;
             cameraActive = false;
         }
-        else if (selectedIndex == 2 && ItemManager.Instance.HasCamera())
+        else if (selectedIndex == 2 && ItemManager.Instance.HasItem(ItemType.Camera))
         {
             CameraObject.SetActive(true);
             VacuumObject.SetActive(false);

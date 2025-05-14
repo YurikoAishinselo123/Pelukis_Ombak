@@ -18,7 +18,7 @@ public class PhotoCapture : MonoBehaviour
 
     void Update()
     {
-        if (ItemManager.Instance.HasCamera())
+        if (ItemManager.Instance.HasItem(ItemType.Camera))
         {
             if (InputManager.Instance.GetCapturePhotoInput && PhotoCaptureUI.Instance.CameraActive())
             {

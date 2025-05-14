@@ -15,12 +15,12 @@ public class DetectionManager : MonoBehaviour
     private bool interactionTriggered = false;
 
 
-    private HashSet<ItemPickup.ItemType> validItemTypes = new HashSet<ItemPickup.ItemType>
+    private HashSet<ItemType> validItemTypes = new HashSet<ItemType>
     {
-        ItemPickup.ItemType.Camera,
-        ItemPickup.ItemType.Vacuum,
-        ItemPickup.ItemType.Coin,
-        ItemPickup.ItemType.Oxygen
+        ItemType.Camera,
+        ItemType.Vacuum,
+        ItemType.Coin,
+        ItemType.Oxygen
     };
 
 
@@ -108,7 +108,7 @@ public class DetectionManager : MonoBehaviour
                     ItemPickup item = hit.collider.GetComponent<ItemPickup>();
                     if (item != null)
                     {
-                        if (item.itemType == ItemPickup.ItemType.Door)
+                        if (item.itemType == ItemType.Door)
                         {
                             detectedDoorTag = hit.collider.tag;
                             doorDetected = true;

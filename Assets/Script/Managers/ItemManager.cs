@@ -1,11 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager Instance;
 
-    private bool hasCamera = false;
-    private bool hasVacuum = false;
+    private HashSet<ItemType> collectedItems = new HashSet<ItemType>();
     private int coinCount = 0;
 
     private void Awake()
@@ -16,39 +16,34 @@ public class ItemManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void CollectCamera()
+    public void CollectItem(ItemType itemType)
     {
-        if (!hasCamera)
+        if (itemType == ItemType.Coin)
         {
-            hasCamera = true;
-            Debug.Log("Camera Collected!");
+            AddCoin(1);
+            return;
+        }
+
+        if (!collectedItems.Contains(itemType))
+        {
+            collectedItems.Add(itemType);
+            Debug.Log(itemType + " Collected!");
         }
     }
 
-    // public void AddCoin(int amount)
-    // {
-    //     coinCount += amount;
-    //     Debug.Log("Coin Collected: " + coinCount);
-    // }
-
-    public void CollectVacuum()
+    public bool HasItem(ItemType itemType)
     {
-        if (!hasVacuum)
-        {
-            hasVacuum = true;
-            Debug.Log("Vacuum Collected!");
-        }
-
+        return collectedItems.Contains(itemType);
     }
 
-    public bool HasCamera()
+    public void AddCoin(int amount)
     {
-        return hasCamera;
+        coinCount += amount;
+        Debug.Log("Coin Collected: " + coinCount);
     }
 
-    public bool HasVacuum()
+    public int GetCoinCount()
     {
-        return hasVacuum;
+        return coinCount;
     }
 }
-
