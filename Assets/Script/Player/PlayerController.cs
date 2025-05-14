@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
     {
         if (InputManager.Instance.ShowCursor)
             CursorManager.Instance.ShowCursor();
-        else
+        else if (!InputManager.Instance.ShowCursor && !PauseUI.Instance.isPaused)
             CursorManager.Instance.HideCursor();
     }
 
