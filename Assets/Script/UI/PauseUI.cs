@@ -8,7 +8,7 @@ public class PauseUI : MonoBehaviour
     public GameObject PauseCanvas;
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button quitButton;
-    private bool isPaused = false;
+    public bool isPaused = false;
 
     private void Awake()
     {
