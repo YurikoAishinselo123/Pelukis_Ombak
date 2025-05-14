@@ -58,6 +58,7 @@ public class PhotoCaptureUI : MonoBehaviour
 
     public void DisplayPhoto(Texture2D texture)
     {
+        Time.timeScale = 0;
         Sprite photoSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
         photoDisplayArea.sprite = photoSprite;
         cameraFrame.SetActive(false);
@@ -66,6 +67,7 @@ public class PhotoCaptureUI : MonoBehaviour
 
     public void HidePhoto()
     {
+        Time.timeScale = 1;
         photoDisplayArea.sprite = null;
         cameraFrame.SetActive(true);
         showPhoto.SetActive(false);
