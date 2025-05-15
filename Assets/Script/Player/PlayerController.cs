@@ -4,8 +4,8 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float walkSpeed = 3f;
-    [SerializeField] private float sprintSpeed = 6f;
+    private float walkSpeed = 2f;
+    private float sprintSpeed = 3f;
     private Vector3 moveDirection;
 
     [Header("Camera Settings")]
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleLook();
         HandleMission();
-        HandleCursor();
+        // HandleCursor();
 
         if (isDiving)
         {

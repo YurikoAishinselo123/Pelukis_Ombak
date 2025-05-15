@@ -35,7 +35,7 @@ public class PhotoCaptureUI : MonoBehaviour
     // Temp
     void Update()
     {
-        CheckSelectedItem();
+        // CheckSelectedItem();
     }
 
     void Start()
@@ -92,7 +92,6 @@ public class PhotoCaptureUI : MonoBehaviour
 
         if (selectedIndex == currentSelectedIndex)
         {
-            // Pressed the same key again — toggle OFF
             if (selectedIndex == 1)
             {
                 VacuumObject.SetActive(false);

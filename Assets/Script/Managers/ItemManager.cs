@@ -5,7 +5,7 @@ public class ItemManager : MonoBehaviour
 {
     public static ItemManager Instance;
 
-    private HashSet<ItemType> collectedItems = new HashSet<ItemType>();
+    private List<ItemType> collectedItems = new List<ItemType>();
     private int coinCount = 0;
 
     private void Awake()
@@ -34,6 +34,11 @@ public class ItemManager : MonoBehaviour
     public bool HasItem(ItemType itemType)
     {
         return collectedItems.Contains(itemType);
+    }
+
+    public List<ItemType> GetCollectedItems()
+    {
+        return collectedItems;
     }
 
     public void AddCoin(int amount)
