@@ -6,6 +6,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public bool hideUIWhenCameraActive;
     public bool detectManagerActive = true;
+    private bool isMissionUIVisible = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -33,5 +35,31 @@ public class UIManager : MonoBehaviour
         DetectDoorUI.Instance.HideDetectDoor();
         InventoryUIManager.Instance.HideInventoryCanvas();
         PhotoCaptureUI.Instance.HidePhoto();
+    }
+
+
+    void Update()
+    {
+        HandleMission();
+    }
+
+
+    private void HandleMission()
+    {
+        if (InputManager.Instance.Mission && GameplayManager.Instance.onGameplay)
+        {
+            Debug.Log("Mission : " + isMissionUIVisible);
+            if (isMissionUIVisible)
+            {
+                MissionUIManager.Instance.HideMissionUI();
+                InventoryUIManager.Instance.ShowInventoryCanvas();
+            }
+            else
+            {
+                MissionUIManager.Instance.ShowMissionUI();
+                InventoryUIManager.Instance.HideInventoryCanvas();
+            }
+            isMissionUIVisible = !isMissionUIVisible;
+        }
     }
 }

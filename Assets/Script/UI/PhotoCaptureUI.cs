@@ -15,8 +15,6 @@ public class PhotoCaptureUI : MonoBehaviour
 
     [Header("Temp Settings")]
     [SerializeField] private GameObject CameraObject;
-    [SerializeField] private GameObject VacuumObject;
-    private int currentSelectedIndex = -1;
 
     void Awake()
     {
@@ -35,7 +33,6 @@ public class PhotoCaptureUI : MonoBehaviour
     {
         //Temp
         CameraObject.SetActive(false);
-        VacuumObject.SetActive(false);
 
         cameraFrame.SetActive(true);
         showPhoto.SetActive(false);
@@ -72,41 +69,4 @@ public class PhotoCaptureUI : MonoBehaviour
         yield return new WaitForSeconds(flashTime);
         cameraFlash.SetActive(false);
     }
-
-    // public void CheckSelectedItem()
-    // {
-    //     int selectedIndex = InputManager.Instance.GetSelectedItemByKey();
-
-    //     if (selectedIndex == currentSelectedIndex)
-    //     {
-    //         if (selectedIndex == 1)
-    //         {
-    //             VacuumObject.SetActive(false);
-    //         }
-    //         else if (selectedIndex == 2)
-    //         {
-    //             CameraObject.SetActive(false);
-    //             cameraActive = false;
-    //         }
-
-    //         currentSelectedIndex = -1; // Reset
-    //         return;
-    //     }
-
-    // Turn ON selected item, and turn OFF others
-    // if (selectedIndex == 1 && ItemManager.Instance.HasItem(ItemType.Vacuum))
-    // {
-    //     VacuumObject.SetActive(true);
-    //     CameraObject.SetActive(false);
-    //     currentSelectedIndex = 1;
-    //     cameraActive = false;
-    // }
-    // else if (selectedIndex == 2 && ItemManager.Instance.HasItem(ItemType.Camera))
-    // {
-    //     CameraObject.SetActive(true);
-    //     VacuumObject.SetActive(false);
-    //     currentSelectedIndex = 2;
-    //     cameraActive = true;
-    // }
-    // }
 }
