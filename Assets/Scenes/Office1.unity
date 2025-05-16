@@ -14393,7 +14393,7 @@ MonoBehaviour:
   cameraFrame: {fileID: 1911934431587990596}
   flashTime: 0.1
   CameraObject: {fileID: 8018900246081276703}
-  VacuumObject: {fileID: 0}
+  VacuumObject: {fileID: 4720613084838764597}
 --- !u!114 &7513599147117362180
 MonoBehaviour:
   m_ObjectHideFlags: 0
