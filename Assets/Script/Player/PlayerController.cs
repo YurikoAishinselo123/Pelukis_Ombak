@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     private CharacterController characterController;
     public static PlayerController Instance;
-    private bool isMissionUIVisible = false;
 
 
 
@@ -48,7 +47,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleLook();
-        HandleMission();
         // HandleCursor();
 
         if (isDiving)
@@ -133,24 +131,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleMission()
-    {
-        if (InputManager.Instance.Mission)
-        {
-            Debug.Log("Mission : " + isMissionUIVisible);
-            if (isMissionUIVisible)
-            {
-                MissionUIManager.Instance.HideMissionUI();
-                InventoryUIManager.Instance.ShowInventoryCanvas();
-            }
-            else
-            {
-                MissionUIManager.Instance.ShowMissionUI();
-                InventoryUIManager.Instance.HideInventoryCanvas();
-            }
-            isMissionUIVisible = !isMissionUIVisible;
-        }
-    }
+
 
     private void HandleLook()
     {
@@ -173,15 +154,13 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, horizontalRotation, 0);
         }
     }
-
-    private void HandleCursor()
-    {
-        if (InputManager.Instance.ShowCursor)
-            CursorManager.Instance.ShowCursor();
-        else if (!InputManager.Instance.ShowCursor && !PauseUI.Instance.isPaused)
-            CursorManager.Instance.HideCursor();
-    }
-
+    // private void HandleCursor()
+    // {
+    //     if (InputManager.Instance.ShowCursor)
+    //         CursorManager.Instance.ShowCursor();
+    //     else if (!InputManager.Instance.ShowCursor && !PauseUI.Instance.isPaused)
+    //         CursorManager.Instance.HideCursor();
+    // }
     private void ApplyGravity()
     {
         if (characterController.isGrounded && velocity.y < 0)

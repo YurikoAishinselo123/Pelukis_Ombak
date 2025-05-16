@@ -21,6 +21,7 @@ public class MainmenuUI : MonoBehaviour
 
     public void StartGame()
     {
+        GameplayManager.Instance.onGameplay = true;
         SceneLoader.Instance.LoadOffice1();
         CursorManager.Instance.HideCursor();
     }
