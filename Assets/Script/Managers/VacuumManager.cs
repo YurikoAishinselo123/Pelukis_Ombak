@@ -24,7 +24,7 @@ public class VacuumManager : MonoBehaviour
 
     private void ActiveVacuum()
     {
-        if (InputManager.Instance.Action)
+        if (InputManager.Instance.Action && ItemSelectorManager.Instance.SelectedVacuum)
         {
             // vacuumObject.transform.localRotation = Quaternion.Euler(activeRotation);
             ScanForGarbage();

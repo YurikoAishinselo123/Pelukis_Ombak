@@ -68,7 +68,6 @@ public class InventoryUIManager : MonoBehaviour
 
         if (selectedIndex > 0 && selectedIndex <= inventorySlots.Count)
         {
-            Debug.Log("SelectedIndex");
             SelectItem(inventorySlots[selectedIndex - 1]);
         }
     }

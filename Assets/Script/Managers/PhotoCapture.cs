@@ -20,7 +20,7 @@ public class PhotoCapture : MonoBehaviour
     {
         if (ItemManager.Instance.HasItem(ItemType.Camera))
         {
-            if (InputManager.Instance.GetCapturePhotoInput && PhotoCaptureUI.Instance.CameraActive())
+            if (InputManager.Instance.GetCapturePhotoInput && ItemSelectorManager.Instance.SelectedCamera)
             {
                 UIManager.Instance.detectManagerActive = false;
 

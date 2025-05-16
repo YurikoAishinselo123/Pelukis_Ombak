@@ -17,7 +17,6 @@ public class PhotoCaptureUI : MonoBehaviour
     [SerializeField] private GameObject CameraObject;
     [SerializeField] private GameObject VacuumObject;
     private int currentSelectedIndex = -1;
-    private bool cameraActive = false;
 
     void Awake()
     {
@@ -30,12 +29,6 @@ public class PhotoCaptureUI : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    // Temp
-    void Update()
-    {
-        // CheckSelectedItem();
     }
 
     void Start()
@@ -80,46 +73,40 @@ public class PhotoCaptureUI : MonoBehaviour
         cameraFlash.SetActive(false);
     }
 
-    public bool CameraActive()
-    {
-        return cameraActive;
-    }
+    // public void CheckSelectedItem()
+    // {
+    //     int selectedIndex = InputManager.Instance.GetSelectedItemByKey();
 
-    // Temp Script
-    public void CheckSelectedItem()
-    {
-        int selectedIndex = InputManager.Instance.GetSelectedItemByKey();
+    //     if (selectedIndex == currentSelectedIndex)
+    //     {
+    //         if (selectedIndex == 1)
+    //         {
+    //             VacuumObject.SetActive(false);
+    //         }
+    //         else if (selectedIndex == 2)
+    //         {
+    //             CameraObject.SetActive(false);
+    //             cameraActive = false;
+    //         }
 
-        if (selectedIndex == currentSelectedIndex)
-        {
-            if (selectedIndex == 1)
-            {
-                VacuumObject.SetActive(false);
-            }
-            else if (selectedIndex == 2)
-            {
-                CameraObject.SetActive(false);
-                cameraActive = false;
-            }
+    //         currentSelectedIndex = -1; // Reset
+    //         return;
+    //     }
 
-            currentSelectedIndex = -1; // Reset
-            return;
-        }
-
-        // Turn ON selected item, and turn OFF others
-        if (selectedIndex == 1 && ItemManager.Instance.HasItem(ItemType.Vacuum))
-        {
-            VacuumObject.SetActive(true);
-            CameraObject.SetActive(false);
-            currentSelectedIndex = 1;
-            cameraActive = false;
-        }
-        else if (selectedIndex == 2 && ItemManager.Instance.HasItem(ItemType.Camera))
-        {
-            CameraObject.SetActive(true);
-            VacuumObject.SetActive(false);
-            currentSelectedIndex = 2;
-            cameraActive = true;
-        }
-    }
+    // Turn ON selected item, and turn OFF others
+    // if (selectedIndex == 1 && ItemManager.Instance.HasItem(ItemType.Vacuum))
+    // {
+    //     VacuumObject.SetActive(true);
+    //     CameraObject.SetActive(false);
+    //     currentSelectedIndex = 1;
+    //     cameraActive = false;
+    // }
+    // else if (selectedIndex == 2 && ItemManager.Instance.HasItem(ItemType.Camera))
+    // {
+    //     CameraObject.SetActive(true);
+    //     VacuumObject.SetActive(false);
+    //     currentSelectedIndex = 2;
+    //     cameraActive = true;
+    // }
+    // }
 }
