@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionData:
+    chapterId: 0
+    chapterTitle: 
+    chapterDescription: 
     missions: []
 --- !u!1 &2945342063271775480
 GameObject:
@@ -721,7 +724,7 @@ Transform:
   m_GameObject: {fileID: 6187469516189942752}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.93, z: 1.74}
+  m_LocalPosition: {x: 2.42, y: 0.93, z: 1.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -821,11 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd92245d2921040849ccac4f7cf12fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 3
-  sprintSpeed: 6
   cameraTransform: {fileID: 133194320319420632}
-  isDiving: 0
-  divingSpeed: 3
 --- !u!114 &6951944215999088585
 MonoBehaviour:
   m_ObjectHideFlags: 0
