@@ -78,6 +78,7 @@ public class VacuumManager : MonoBehaviour
             if (distance <= 3f)
             {
                 Destroy(obj.gameObject);
+                MissionManager.Instance.OnGarbageCollected();
                 grabbedObjects.RemoveAt(i);
             }
         }

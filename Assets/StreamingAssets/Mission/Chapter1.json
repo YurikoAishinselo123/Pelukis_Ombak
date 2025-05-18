@@ -1,20 +1,28 @@
 {
   "chapterId": 1,
-  "chapterTitle": "Clean the Coast",
-  "chapterDescription": "Begin your journey by cleaning up the coastline and helping sea creatures nearby.",
+  "chapterTitle": "Starting Out",
+  "chapterDescription": "Your first tasks",
   "missions": [
     {
       "id": 1,
-      "title": "Collect Rubbish",
-      "description": "Help clean the ocean by collecting 8 pieces of rubbish.",
-      "qty": 8
+      "title": "Collect Tools",
+      "description": "Pick up the camera and vacuum.",
+      "qty": 2,
+      "condition": ""
     },
     {
       "id": 2,
-      "title": "Documentation",
-      "description": "Take a photo of the sea after completing the rubbish collection.",
-      "qty": null,
-      "condition": "afterMissionId:1"
+      "title": "Collect Garbage",
+      "description": "Destroy 5 pieces of garbage.",
+      "qty": 5,
+      "condition": "1"
+    },
+    {
+      "id": 3,
+      "title": "Take a Picture",
+      "description": "Use the camera to take 1 picture.",
+      "qty": 1,
+      "condition": "2"
     }
   ]
 }

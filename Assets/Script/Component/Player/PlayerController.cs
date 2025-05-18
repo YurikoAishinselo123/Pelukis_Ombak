@@ -20,14 +20,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
 
     [Header("Diving Settings")]
-    [SerializeField] public bool isDiving = false;
-    [SerializeField] private float divingSpeed = 3f;
+    private bool isDiving = false;
+    private float divingSpeed = 3f;
 
     [Header("References")]
     private CharacterController characterController;
     public static PlayerController Instance;
-
-
 
     private void Awake()
     {
@@ -111,6 +109,7 @@ public class PlayerController : MonoBehaviour
     public void OceanEnvirontment()
     {
         isDiving = true;
+        Debug.Log("is Diving : " + isDiving);
     }
 
     public void OfficeEnvirontment()
