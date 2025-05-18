@@ -28,6 +28,10 @@ public class ItemManager : MonoBehaviour
         {
             collectedItems.Add(itemType);
             Debug.Log(itemType + " Collected!");
+            if (itemType == ItemType.Camera || itemType == ItemType.Vacuum)
+            {
+                MissionManager.Instance?.OnItemCollected(itemType);
+            }
         }
     }
 

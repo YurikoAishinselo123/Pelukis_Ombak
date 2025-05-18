@@ -57,6 +57,7 @@ public class PhotoCapture : MonoBehaviour
 
         File.WriteAllBytes(photoPath, screenCapture.EncodeToPNG());
         Debug.Log($"Photo saved to: {photoPath}");
+        MissionManager.Instance.OnPhotoTaken();
 
         yield return StartCoroutine(PhotoCaptureUI.Instance.FlashEffect());
         PhotoCaptureUI.Instance.SetCameraFrameActive(true);

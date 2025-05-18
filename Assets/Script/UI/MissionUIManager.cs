@@ -9,7 +9,9 @@ public class MissionUIManager : MonoBehaviour
     public GameObject MissionUICanvas;
     public static MissionUIManager Instance;
 
-    void Awake()
+    private Dictionary<int, MissionUI> missionUIMap = new Dictionary<int, MissionUI>();
+
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -25,6 +27,7 @@ public class MissionUIManager : MonoBehaviour
     private void Start()
     {
         HideMissionUI();
+
         if (missionManager == null || missionManager.missionData == null || missionManager.missionData.missions == null)
         {
             Debug.LogWarning("MissionManager or mission data is missing!");
@@ -38,7 +41,10 @@ public class MissionUIManager : MonoBehaviour
 
             if (missionUI != null)
             {
-                missionUI.Init(mission, 0);
+                int progress = missionManager.GetMissionProgress(mission.id);
+                // qty is now a non-nullable int, so just use it directly
+                missionUI.Init(mission, progress, mission.qty);
+                missionUIMap[mission.id] = missionUI;
             }
             else
             {
@@ -55,5 +61,21 @@ public class MissionUIManager : MonoBehaviour
     public void HideMissionUI()
     {
         MissionUICanvas.SetActive(false);
+    }
+
+    public void UpdateMissionProgressUI(int missionId, int progress, int maxProgress)
+    {
+        if (missionUIMap.TryGetValue(missionId, out MissionUI missionUI))
+        {
+            Mission mission = missionManager.GetMissionById(missionId);
+            if (mission != null)
+            {
+                missionUI.Init(mission, progress, maxProgress);
+            }
+            else
+            {
+                Debug.LogWarning($"Mission with ID {missionId} not found!");
+            }
+        }
     }
 }
