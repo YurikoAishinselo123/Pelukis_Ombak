@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [Header("Diving Settings")]
     private bool isDiving = false;
     private float divingSpeed = 3f;
+    private float divingSprintSpeed = 4f;
 
     [Header("References")]
     private CharacterController characterController;
@@ -71,7 +72,14 @@ public class PlayerController : MonoBehaviour
 
     private float GetCurrentSpeed()
     {
-        return InputManager.Instance.IsSprinting ? sprintSpeed : walkSpeed;
+        if (isDiving)
+        {
+            return InputManager.Instance.IsSprinting ? divingSprintSpeed : divingSpeed;
+        }
+        else
+        {
+            return InputManager.Instance.IsSprinting ? sprintSpeed : walkSpeed;
+        }
     }
 
     private void MoveCharacter()
