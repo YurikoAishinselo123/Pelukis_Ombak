@@ -10,10 +10,14 @@ public class DetectionManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Camera detectionCamera;
+
     private ItemPickup detectedItem = null;
     private string detectedDoorTag = null;
+    private GameObject detectedNPC = null;
+
     private bool interactionTriggered = false;
 
+    private const string npcTag = "Dayat";
 
     private HashSet<ItemType> validItemTypes = new HashSet<ItemType>
     {
@@ -23,7 +27,6 @@ public class DetectionManager : MonoBehaviour
         ItemType.Oxygen
     };
 
-
     private void Awake()
     {
         if (detectionCamera == null)
@@ -32,7 +35,7 @@ public class DetectionManager : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (UIManager.Instance.detectManagerActive)
             DetectObject();
@@ -41,6 +44,8 @@ public class DetectionManager : MonoBehaviour
         {
             if (!interactionTriggered)
             {
+                interactionTriggered = true;
+
                 if (detectedItem != null)
                 {
                     detectedItem.Collect();
@@ -51,13 +56,26 @@ public class DetectionManager : MonoBehaviour
                     DoorManager.Instance.OpenDoor(detectedDoorTag);
                     detectedDoorTag = null;
                 }
+                else if (detectedNPC != null)
+                {
+                    NPCInteraction npcInteraction = detectedNPC.GetComponent<NPCInteraction>();
 
-                interactionTriggered = true;
+                    if (npcInteraction != null)
+                    {
+                        DialogueManager.Instance.StartDialogue(npcInteraction.dialogues);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Detected NPC does not have an NPCInteraction component attached.");
+                    }
+
+                    detectedNPC = null;
+                }
             }
         }
         else
         {
-            interactionTriggered = false; // Reset when key is released
+            interactionTriggered = false; // Reset when interaction input is released
         }
     }
 
@@ -83,12 +101,12 @@ public class DetectionManager : MonoBehaviour
         }
     }
 
-
     private void DetectObject()
     {
         detectedItem = null;
         detectedDoorTag = null;
-        bool doorDetected = false; // Track if any door was detected
+        detectedNPC = null;
+        bool doorDetected = false;
 
         if (detectionCamera == null)
             return;
@@ -114,7 +132,6 @@ public class DetectionManager : MonoBehaviour
                             doorDetected = true;
                             detectedItem = null;
 
-                            // Show door UI
                             DetectDoorUI.Instance.ShowDetectDoor();
                             DetectItemUI.Instance.HideDetectItemUI();
                             break;
@@ -124,25 +141,31 @@ public class DetectionManager : MonoBehaviour
                             detectedItem = item;
                             detectedDoorTag = null;
 
-                            // Show item UI
                             DetectItemUI.Instance.ShowDetectItemUI(item.itemType.ToString());
                             DetectDoorUI.Instance.HideDetectDoor();
                             break;
                         }
                     }
+                    else if (hit.collider.CompareTag(npcTag))
+                    {
+                        detectedNPC = hit.collider.gameObject;
+                        detectedItem = null;
+                        detectedDoorTag = null;
+
+                        DetectItemUI.Instance.ShowDetectItemUI("Talk");
+                        DetectDoorUI.Instance.HideDetectDoor();
+                        break;
+                    }
                 }
             }
-
-            if (detectedItem != null || doorDetected)
+            if (detectedItem != null || doorDetected || detectedNPC != null)
                 break;
         }
 
-        // Hide both UIs if nothing detected
-        if (detectedItem == null && !doorDetected)
+        if (!doorDetected && detectedItem == null && detectedNPC == null)
         {
             DetectItemUI.Instance.HideDetectItemUI();
             DetectDoorUI.Instance.HideDetectDoor();
         }
     }
-
 }
