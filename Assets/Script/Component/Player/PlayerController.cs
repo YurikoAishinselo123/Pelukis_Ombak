@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump Settings")]
     private float gravity = -9.81f;
-    private float jumpForce = 0.5f;
+    private float jumpForce = 0.3f;
     private Vector3 velocity;
 
     [Header("Diving Settings")]
@@ -66,8 +66,6 @@ public class PlayerController : MonoBehaviour
 
         float currentSpeed = GetCurrentSpeed();
         moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y) * currentSpeed;
-
-        characterController.Move(moveDirection * Time.deltaTime);
     }
 
 
@@ -105,21 +103,9 @@ public class PlayerController : MonoBehaviour
         characterController.Move(move * currentSpeed * Time.deltaTime);
     }
 
-
-    public void OceanEnvirontment()
-    {
-        isDiving = true;
-        Debug.Log("is Diving : " + isDiving);
-    }
-
-    public void OfficeEnvirontment()
-    {
-        isDiving = false;
-    }
-
     private void HandleJump()
     {
-        if (InputManager.Instance.JumpPressed && !isDiving)
+        if (InputManager.Instance.JumpPressed && !isDiving && !GameplayManager.Instance.OnInteraction())
         {
             Debug.Log("Jump : " + characterController.isGrounded);
             if (characterController.isGrounded)
@@ -129,8 +115,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-
 
     private void HandleLook()
     {
@@ -153,13 +137,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, horizontalRotation, 0);
         }
     }
-    // private void HandleCursor()
-    // {
-    //     if (InputManager.Instance.ShowCursor)
-    //         CursorManager.Instance.ShowCursor();
-    //     else if (!InputManager.Instance.ShowCursor && !PauseUI.Instance.isPaused)
-    //         CursorManager.Instance.HideCursor();
-    // }
+
     private void ApplyGravity()
     {
         if (characterController.isGrounded && velocity.y < 0)
@@ -170,4 +148,23 @@ public class PlayerController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
+
+    public void OfficeEnvirontment()
+    {
+        isDiving = false;
+    }
+
+    public void OceanEnvirontment()
+    {
+        isDiving = true;
+        Debug.Log("is Diving : " + isDiving);
+    }
+
+    // private void HandleCursor()
+    // {
+    //     if (InputManager.Instance.ShowCursor)
+    //         CursorManager.Instance.ShowCursor();
+    //     else if (!InputManager.Instance.ShowCursor && !PauseUI.Instance.isPaused)
+    //         CursorManager.Instance.HideCursor();
+    // }
 }

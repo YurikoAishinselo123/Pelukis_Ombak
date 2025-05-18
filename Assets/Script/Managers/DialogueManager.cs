@@ -33,7 +33,7 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("No dialogue entries provided.");
             return;
         }
-
+        GameplayManager.Instance.TalkingWithNPC();
         currentDialogue = dialogues;
         currentLineIndex = 0;
         ShowCurrentLine();
@@ -64,5 +64,6 @@ public class DialogueManager : MonoBehaviour
         DialogueUI.Instance.Hide();
         currentDialogue = null;
         currentLineIndex = 0;
+        GameplayManager.Instance.FinishTalkingWithNPC();
     }
 }

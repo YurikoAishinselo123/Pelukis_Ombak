@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameplayManager : MonoBehaviour
 {
     public bool onGameplay = false;
+    private bool onInteraction = false;
     public static GameplayManager Instance;
 
     void Awake()
@@ -22,4 +23,25 @@ public class GameplayManager : MonoBehaviour
     {
         onGameplay = false;
     }
+
+    void Update()
+    {
+        Debug.Log("interaction : " + onInteraction);
+    }
+
+    public void TalkingWithNPC()
+    {
+        onInteraction = true;
+    }
+
+    public void FinishTalkingWithNPC()
+    {
+        onInteraction = false;
+    }
+
+    public bool OnInteraction()
+    {
+        return onInteraction;
+    }
+
 }

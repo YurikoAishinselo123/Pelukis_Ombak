@@ -13877,8 +13877,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 4779539585799906082}
-  isDiving: 0
-  divingSpeed: 3
 --- !u!114 &4429396018206245420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14560,6 +14558,7 @@ MonoBehaviour:
     - id: 0
       title: 
       description: 
+      qty: 0
       condition: 
 --- !u!114 &6395693777202768563
 MonoBehaviour:
