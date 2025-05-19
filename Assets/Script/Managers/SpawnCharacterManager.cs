@@ -22,13 +22,6 @@ public class SpawnCharacterManager : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            MoveCharacterToPosition(new Vector3(2.53f, 3.514f, 1.74f));
-        }
-    }
     public void MoveCharacterToPosition(Vector3 spawnPosition)
     {
         if (character != null)
@@ -52,11 +45,13 @@ public class SpawnCharacterManager : MonoBehaviour
     public void SpawnPositionOnStart(Vector3 spawnStartPosition)
     {
         GameObject character2 = GameObject.FindGameObjectWithTag("Player");
-        if(character2 != null)
+        if (character2 != null)
         {
             MoveCharacterToPosition(spawnStartPosition);
         }
-        Instantiate(character, spawnStartPosition, Quaternion.identity);
-
+        else
+        {
+            Instantiate(character, spawnStartPosition, Quaternion.identity);
+        }
     }
 }
