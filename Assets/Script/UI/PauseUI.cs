@@ -10,7 +10,6 @@ public class PauseUI : MonoBehaviour
     [SerializeField] private Button quitButton;
     public bool isPaused = false;
 
-
     private void Awake()
     {
         if (Instance == null)
@@ -69,5 +68,15 @@ public class PauseUI : MonoBehaviour
         CursorManager.Instance.ShowCursor();
         GameplayManager.Instance.onGameplay = false;
         SceneLoader.Instance.LoadMainMenu();
+        //temp script
+        //if(Player == null)
+        //{
+        //    Player = GameObject.FindGameObjectWithTag("Player");
+        //    Destroy(Player);
+        //}
+        //else
+        //{
+        //    Destroy(Player);
+        //}
     }
 }

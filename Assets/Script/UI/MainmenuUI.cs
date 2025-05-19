@@ -24,6 +24,7 @@ public class MainmenuUI : MonoBehaviour
         GameplayManager.Instance.onGameplay = true;
         SceneLoader.Instance.LoadOffice1();
         CursorManager.Instance.HideCursor();
+        SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.53f, 1.075f, 1.74f));
     }
 
     public void QuitGame()
