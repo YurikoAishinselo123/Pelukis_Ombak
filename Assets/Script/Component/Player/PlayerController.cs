@@ -95,20 +95,11 @@ public class PlayerController : MonoBehaviour
         float horizontal = moveInput.x;
         float vertical = moveInput.y;
 
-        Vector3 move = (transform.forward * vertical + transform.right * horizontal).normalized;
-
-        if (Input.GetKey(KeyCode.Q))
-        {
-            move += Vector3.up;
-        }
-
-        if (Input.GetKey(KeyCode.E))
-        {
-            move += Vector3.down;
-        }
+        // Move direction based on camera orientation
+        Vector3 moveDirection = (cameraTransform.forward * vertical + cameraTransform.right * horizontal).normalized;
 
         float currentSpeed = GetCurrentSpeed();
-        characterController.Move(move * currentSpeed * Time.deltaTime);
+        characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
     }
 
     private void HandleJump()
