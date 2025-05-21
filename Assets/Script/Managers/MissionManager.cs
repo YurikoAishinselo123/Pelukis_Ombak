@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using System.IO;
 
@@ -149,11 +150,18 @@ public class MissionManager : MonoBehaviour
         {
             completedMissions.Add(missionId);
             Debug.Log($"Mission '{mission.title}' completed!");
-            // TODO: Trigger rewards or next mission here
+            StartCoroutine(PlayMissionCompleteSFXDelayed());
         }
 
         MissionUIManager.Instance?.UpdateMissionProgressUI(missionId, missionProgress[missionId], mission.qty);
         SaveMissionProgress();
+    }
+
+    // Temp Script
+    private IEnumerator PlayMissionCompleteSFXDelayed()
+    {
+        yield return new WaitForSeconds(0.5f);
+        AudioManager.Instance.SFXMissionCompleted();
     }
 
     public void ResetMissionProgress()

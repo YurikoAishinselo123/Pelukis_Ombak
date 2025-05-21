@@ -27,6 +27,7 @@ public class PhotoCapture : MonoBehaviour
                 if (!viewingPhoto)
                 {
                     UIManager.Instance.HideAllUI();
+                    AudioManager.Instance.SFXCameraShutter();
                     StartCoroutine(CapturePhoto());
                 }
                 else

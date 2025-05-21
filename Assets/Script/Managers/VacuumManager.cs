@@ -77,6 +77,7 @@ public class VacuumManager : MonoBehaviour
             // Destroy when it's close enough
             if (distance <= 3f)
             {
+                AudioManager.Instance.SFXCollectGarbage();
                 Destroy(obj.gameObject);
                 MissionManager.Instance.OnGarbageCollected();
                 grabbedObjects.RemoveAt(i);

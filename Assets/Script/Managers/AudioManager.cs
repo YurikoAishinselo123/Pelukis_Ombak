@@ -77,6 +77,10 @@ public class AudioManager : MonoBehaviour
     public void PlayWalk() => PlaySFX("Walk");
     public void PlayDiving() => PlaySFX("Diving");
     public void PlayRun() => PlaySFX("Run");
+    public void SFXCollectItem() => PlaySFX("Collect Item");
+    public void SFXMissionCompleted() => PlaySFX("Mission Completed");
+    public void SFXCollectGarbage() => PlaySFX("Collect Garbage");
+    public void SFXCameraShutter() => PlaySFX("Camera Shutter");
 
     public void PlayClikUI()
     {

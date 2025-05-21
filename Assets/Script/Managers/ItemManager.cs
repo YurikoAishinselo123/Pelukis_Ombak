@@ -27,6 +27,7 @@ public class ItemManager : MonoBehaviour
         if (!collectedItems.Contains(itemType))
         {
             collectedItems.Add(itemType);
+            AudioManager.Instance.SFXCollectItem();
             Debug.Log(itemType + " Collected!");
             if (itemType == ItemType.Camera || itemType == ItemType.Vacuum)
             {
