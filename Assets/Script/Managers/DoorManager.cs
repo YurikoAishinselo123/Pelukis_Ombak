@@ -31,39 +31,28 @@ public class DoorManager : MonoBehaviour
             case "Office3ToOffice1":
                 Debug.Log("move to: " + tag);
                 SceneLoader.Instance.LoadOffice1();
-                characterController.enabled = false;
-                transform.position = new Vector3(5.3f, 1.1f, 19f);
-                characterController.enabled = true;
+                SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(5.3f, 1.1f, 19f));
                 break;
             case "Office2ToOffice1":
                 Debug.Log("move to: " + tag);
                 SceneLoader.Instance.LoadOffice1();
-                characterController.enabled = false;
-                transform.position = new Vector3(6.5f, 1.1f, 8.8f);
-                characterController.enabled = true;
+                SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(6.5f, 1.1f, 8.8f));
                 break;
             case "Office2":
                 Debug.Log("move to: " + tag);
                 SceneLoader.Instance.LoadOffice2();
-                characterController.enabled = false;
-                transform.position = new Vector3(-2f, -0.6f, 0.7f);
-                characterController.enabled = true;
-                Debug.Log(transform.position);
+                SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(-2f, -0.6f, 0.7f));
                 break;
             case "Office3":
                 Debug.Log("move to: " + tag);
                 SceneLoader.Instance.LoadOffice3();
-                characterController.enabled = false;
-                transform.position = new Vector3(11f, 1f, 18f);
-                characterController.enabled = true;
+                SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(11f, 1f, 18f));
                 break;
             case "Ocean":
                 inOffice = false;
                 Debug.Log("move to: " + tag);
                 SceneLoader.Instance.LoadOcean();
-                characterController.enabled = false;
-                transform.position = new Vector3(2.9f, 1f, -0.07f);
-                characterController.enabled = true;
+                SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.9f, 1f, -0.07f));
                 break;
         }
         if (inOffice)
