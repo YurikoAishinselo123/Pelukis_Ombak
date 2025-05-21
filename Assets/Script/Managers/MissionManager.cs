@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using System.IO;
 
@@ -21,6 +22,14 @@ public class Mission
     public string condition; // e.g., "1" means this mission only starts after mission 1 is completed
 }
 
+[System.Serializable]
+public class SerializableDictionary
+{
+    public List<string> keys = new List<string>();
+    public List<int> values = new List<int>();
+}
+
+
 public class MissionManager : MonoBehaviour
 {
     public static MissionManager Instance { get; private set; }
@@ -28,6 +37,9 @@ public class MissionManager : MonoBehaviour
 
     private Dictionary<int, int> missionProgress = new Dictionary<int, int>();
     private HashSet<int> completedMissions = new HashSet<int>();
+
+    private string progressSavePath;
+    private HashSet<ItemType> collectedTools = new HashSet<ItemType>(); // Track collected tools for uniqueness
 
     private void Awake()
     {
@@ -48,7 +60,13 @@ public class MissionManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        progressSavePath = Path.Combine(Application.persistentDataPath, "MissionProgress.json");
+
         LoadMissionData();
+        LoadMissionProgress();
     }
 
     private void LoadMissionData()
@@ -63,13 +81,57 @@ public class MissionManager : MonoBehaviour
 
             foreach (var mission in missionData.missions)
             {
-                missionProgress[mission.id] = 0;
+                if (!missionProgress.ContainsKey(mission.id))
+                    missionProgress[mission.id] = 0;
             }
         }
         else
         {
             Debug.LogError($"Mission JSON not found at path: {path}");
         }
+    }
+
+    private void LoadMissionProgress()
+    {
+        if (File.Exists(progressSavePath))
+        {
+            string json = File.ReadAllText(progressSavePath);
+            SerializableDictionary loadedProgress = JsonUtility.FromJson<SerializableDictionary>(json);
+
+            for (int i = 0; i < loadedProgress.keys.Count && i < loadedProgress.values.Count; i++)
+            {
+                if (int.TryParse(loadedProgress.keys[i], out int missionId))
+                {
+                    missionProgress[missionId] = loadedProgress.values[i];
+
+                    Mission mission = GetMissionById(missionId);
+                    if (mission != null && missionProgress[missionId] >= mission.qty)
+                    {
+                        completedMissions.Add(missionId);
+                    }
+                }
+            }
+
+            Debug.Log("Mission progress loaded.");
+        }
+        else
+        {
+            Debug.Log("No saved mission progress found, starting fresh.");
+        }
+    }
+
+    private void SaveMissionProgress()
+    {
+        SerializableDictionary serializableDict = new SerializableDictionary();
+        foreach (var kvp in missionProgress)
+        {
+            serializableDict.keys.Add(kvp.Key.ToString());
+            serializableDict.values.Add(kvp.Value);
+        }
+
+        string json = JsonUtility.ToJson(serializableDict, true);
+        File.WriteAllText(progressSavePath, json);
+        Debug.Log("Mission progress saved.");
     }
 
     public void UpdateMissionProgress(int missionId, int amount = 1)
@@ -87,40 +149,71 @@ public class MissionManager : MonoBehaviour
             return;
         }
 
-        // Skip progress update if prerequisites not completed
         if (!IsMissionAvailable(mission))
         {
             Debug.Log($"Mission '{mission.title}' not yet available. Prerequisite not completed.");
             return;
         }
 
-        // Clamp progress to max
         missionProgress[missionId] = Mathf.Min(missionProgress[missionId] + amount, mission.qty);
-
         Debug.Log($"Mission '{mission.title}' progress: {missionProgress[missionId]}/{mission.qty}");
 
         if (missionProgress[missionId] >= mission.qty && !completedMissions.Contains(missionId))
         {
             completedMissions.Add(missionId);
             Debug.Log($"Mission '{mission.title}' completed!");
-            // TODO: Trigger rewards or next mission here
+            StartCoroutine(PlayMissionCompleteSFXDelayed());
         }
 
         MissionUIManager.Instance?.UpdateMissionProgressUI(missionId, missionProgress[missionId], mission.qty);
+        SaveMissionProgress();
     }
+
+    // Temp Script
+    private IEnumerator PlayMissionCompleteSFXDelayed()
+    {
+        yield return new WaitForSeconds(0.5f);
+        AudioManager.Instance.SFXMissionCompleted();
+    }
+
+    public void ResetMissionProgress()
+    {
+        missionProgress.Clear();
+        completedMissions.Clear();
+
+        if (File.Exists(progressSavePath))
+        {
+            File.Delete(progressSavePath);
+            Debug.Log("Mission progress reset and save file deleted.");
+        }
+
+        // Reinitialize mission progress with zeros
+        if (missionData != null)
+        {
+            foreach (var mission in missionData.missions)
+            {
+                missionProgress[mission.id] = 0;
+            }
+        }
+
+        // Optionally refresh UI
+        foreach (var mission in missionData.missions)
+        {
+            MissionUIManager.Instance?.UpdateMissionProgressUI(mission.id, 0, mission.qty);
+        }
+    }
+
 
     public bool IsMissionAvailable(Mission mission)
     {
         if (string.IsNullOrEmpty(mission.condition))
             return true;
 
-        // If condition is a single mission ID
         if (int.TryParse(mission.condition, out int requiredMissionId))
         {
             return IsMissionCompleted(requiredMissionId);
         }
 
-        // Extend here to support more complex conditions if needed
         return true;
     }
 
@@ -147,7 +240,7 @@ public class MissionManager : MonoBehaviour
         UpdateToolCollectionProgress(item);
     }
 
-    // Mission 1.1
+    // Mission 1.1 – Collect tools
     private void UpdateToolCollectionProgress(ItemType item)
     {
         const int toolMissionId = 1;
@@ -155,15 +248,16 @@ public class MissionManager : MonoBehaviour
         Mission mission = GetMissionById(toolMissionId);
         if (mission == null) return;
 
-        int progress = GetMissionProgress(toolMissionId);
+        if (collectedTools.Contains(item)) return;
 
-        if ((item == ItemType.Camera || item == ItemType.Vacuum) && progress < mission.qty)
+        if (item == ItemType.Camera || item == ItemType.Vacuum)
         {
+            collectedTools.Add(item);
             UpdateMissionProgress(toolMissionId, 1);
         }
     }
 
-    // Mission 1.2
+    // Mission 1.2 – Collect garbage
     public void OnGarbageCollected()
     {
         const int garbageMissionId = 2;
@@ -179,7 +273,7 @@ public class MissionManager : MonoBehaviour
         }
     }
 
-    // Mission 1.3
+    // Mission 1.3 – Take photos
     public void OnPhotoTaken()
     {
         const int photoMissionId = 3;

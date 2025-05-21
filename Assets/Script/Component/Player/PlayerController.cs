@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [Header("Diving Settings")]
     private bool isDiving = false;
     private float divingSpeed = 3f;
+    private float divingSprintSpeed = 4f;
 
     [Header("References")]
     private CharacterController characterController;
@@ -71,7 +72,14 @@ public class PlayerController : MonoBehaviour
 
     private float GetCurrentSpeed()
     {
-        return InputManager.Instance.IsSprinting ? sprintSpeed : walkSpeed;
+        if (isDiving)
+        {
+            return InputManager.Instance.IsSprinting ? divingSprintSpeed : divingSpeed;
+        }
+        else
+        {
+            return InputManager.Instance.IsSprinting ? sprintSpeed : walkSpeed;
+        }
     }
 
     private void MoveCharacter()
@@ -87,20 +95,11 @@ public class PlayerController : MonoBehaviour
         float horizontal = moveInput.x;
         float vertical = moveInput.y;
 
-        Vector3 move = (transform.forward * vertical + transform.right * horizontal).normalized;
-
-        if (Input.GetKey(KeyCode.Q))
-        {
-            move += Vector3.up;
-        }
-
-        if (Input.GetKey(KeyCode.E))
-        {
-            move += Vector3.down;
-        }
+        // Move direction based on camera orientation
+        Vector3 moveDirection = (cameraTransform.forward * vertical + cameraTransform.right * horizontal).normalized;
 
         float currentSpeed = GetCurrentSpeed();
-        characterController.Move(move * currentSpeed * Time.deltaTime);
+        characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
     }
 
     private void HandleJump()
