@@ -15,11 +15,6 @@ public class InventoryManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    // public void AddItem(string itemName)
-    // {
-    //     collectedItems.Add(itemName);
-    //     Debug.Log("Item Added: " + itemName);
-    // }
 
     public List<string> GetCollectedItems()
     {

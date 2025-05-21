@@ -13,7 +13,6 @@ public class PhotoCapture : MonoBehaviour
     {
         screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         photoPath = Path.Combine(Application.persistentDataPath, "photo.png");
-        PhotoCaptureUI.Instance.HidePhoto();
     }
 
     void Update()

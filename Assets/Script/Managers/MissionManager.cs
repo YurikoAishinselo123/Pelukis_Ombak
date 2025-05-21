@@ -187,7 +187,6 @@ public class MissionManager : MonoBehaviour
             Debug.Log("Mission progress reset and save file deleted.");
         }
 
-        // Reinitialize mission progress with zeros
         if (missionData != null)
         {
             foreach (var mission in missionData.missions)
@@ -196,7 +195,6 @@ public class MissionManager : MonoBehaviour
             }
         }
 
-        // Optionally refresh UI
         foreach (var mission in missionData.missions)
         {
             MissionUIManager.Instance?.UpdateMissionProgressUI(mission.id, 0, mission.qty);
