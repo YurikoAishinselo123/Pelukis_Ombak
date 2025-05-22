@@ -7,6 +7,7 @@ public class MissionUIManager : MonoBehaviour
     public GameObject missionPanelPrefab;
     public Transform contentParent;
     public GameObject MissionUICanvas;
+    public GameObject WrapedMissionUICanvas;
     public static MissionUIManager Instance;
 
     private Dictionary<int, MissionUI> missionUIMap = new Dictionary<int, MissionUI>();
@@ -56,11 +57,13 @@ public class MissionUIManager : MonoBehaviour
     public void ShowMissionUI()
     {
         MissionUICanvas.SetActive(true);
+        WrapedMissionUICanvas.SetActive(false);
     }
 
     public void HideMissionUI()
     {
         MissionUICanvas.SetActive(false);
+        WrapedMissionUICanvas.SetActive(true);
     }
 
     public void UpdateMissionProgressUI(int missionId, int progress, int maxProgress)
