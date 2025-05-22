@@ -36,7 +36,7 @@ public class PhotoCaptureUI : MonoBehaviour
 
         cameraFrame.SetActive(true);
         showPhoto.SetActive(false);
-        cameraFlash.SetActive(false);
+        // cameraFlash.SetActive(false);
     }
 
     public void SetCameraFrameActive(bool active)
