@@ -25,6 +25,7 @@ public class ItemSelectorManager : MonoBehaviour
 
     private void Start()
     {
+        CameraObject.SetActive(false);
         itemObjects[ItemType.Vacuum] = VacuumObject;
         itemObjects[ItemType.Camera] = CameraObject;
     }

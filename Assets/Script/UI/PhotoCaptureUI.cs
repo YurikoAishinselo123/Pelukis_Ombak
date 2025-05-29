@@ -9,7 +9,7 @@ public class PhotoCaptureUI : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Image photoDisplayArea;
     [SerializeField] private GameObject showPhoto;
-    [SerializeField] private GameObject cameraFlash;
+    // [SerializeField] private GameObject cameraFlash;
     [SerializeField] private GameObject cameraFrame;
     [SerializeField] private float flashTime = 0.3f;
 
@@ -63,10 +63,10 @@ public class PhotoCaptureUI : MonoBehaviour
         showPhoto.SetActive(false);
     }
 
-    public IEnumerator FlashEffect()
-    {
-        cameraFlash.SetActive(true);
-        yield return new WaitForSeconds(flashTime);
-        cameraFlash.SetActive(false);
-    }
+    // public IEnumerator FlashEffect()
+    // {
+    //     cameraFlash.SetActive(true);
+    //     yield return new WaitForSeconds(flashTime);
+    //     cameraFlash.SetActive(false);
+    // }
 }
