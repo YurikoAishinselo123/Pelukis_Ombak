@@ -68,6 +68,8 @@ public class MissionUIManager : MonoBehaviour
 
     public void UpdateMissionProgressUI(int missionId, int progress, int maxProgress)
     {
+        Debug.Log($"Updating Mission UI: ID={missionId}, Progress={progress}/{maxProgress}");
+
         if (missionUIMap.TryGetValue(missionId, out MissionUI missionUI))
         {
             Mission mission = missionManager.GetMissionById(missionId);
@@ -80,5 +82,19 @@ public class MissionUIManager : MonoBehaviour
                 Debug.LogWarning($"Mission with ID {missionId} not found!");
             }
         }
+        else
+        {
+            Debug.LogWarning($"No MissionUI found for Mission ID {missionId}.");
+        }
     }
+
+    public void RefreshAllMissionsUI()
+    {
+        foreach (var mission in MissionManager.Instance.missionData.missions)
+        {
+            UpdateMissionProgressUI(mission.id, 0, mission.qty);
+        }
+    }
+
+
 }
