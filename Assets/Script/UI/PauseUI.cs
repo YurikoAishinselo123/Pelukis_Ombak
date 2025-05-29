@@ -7,7 +7,7 @@ public class PauseUI : MonoBehaviour
     public static PauseUI Instance;
     public GameObject PauseCanvas;
     [SerializeField] private Button resumeButton;
-    [SerializeField] private Button resetButton;
+    // [SerializeField] private Button resetButton;
     [SerializeField] private Button quitButton;
     public bool isPaused = false;
 
@@ -28,7 +28,6 @@ public class PauseUI : MonoBehaviour
     {
         resumeButton.onClick.AddListener(ResumeGame);
         quitButton.onClick.AddListener(QuitGame);
-        resetButton.onClick.AddListener(ResetGame);
     }
 
     void Update()
@@ -57,15 +56,6 @@ public class PauseUI : MonoBehaviour
     private void ResumeGame()
     {
         isPaused = false;
-        Time.timeScale = 1;
-        CursorManager.Instance.HideCursor();
-        PauseCanvas.SetActive(false);
-    }
-
-    private void ResetGame()
-    {
-        isPaused = false;
-        MissionManager.Instance.ResetMissionProgress();
         Time.timeScale = 1;
         CursorManager.Instance.HideCursor();
         PauseCanvas.SetActive(false);

@@ -6,12 +6,14 @@ public class MainmenuUI : MonoBehaviour
 {
 
     [SerializeField] private Button startButton;
+    [SerializeField] private Button newGameButton;
     [SerializeField] private Button quitButton;
 
     void Awake()
     {
         startButton.onClick.AddListener(StartGame);
         quitButton.onClick.AddListener(QuitGame);
+        newGameButton.onClick.AddListener(NewGame);
     }
 
     void Start()
@@ -25,6 +27,16 @@ public class MainmenuUI : MonoBehaviour
         SceneLoader.Instance.LoadOffice1();
         CursorManager.Instance.HideCursor();
         SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.53f, 1.075f, 1.74f));
+    }
+
+    public void NewGame()
+    {
+        SaveSystemManager.Instance.ResetMissionProgress();
+        GameplayManager.Instance.onGameplay = true;
+        SceneLoader.Instance.LoadOffice1();
+        CursorManager.Instance.HideCursor();
+        SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.53f, 1.075f, 1.74f));
+
     }
 
     public void QuitGame()
