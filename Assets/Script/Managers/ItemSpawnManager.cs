@@ -32,7 +32,7 @@ public class ItemSpawnManager : MonoBehaviour
                     Quaternion rotation = Quaternion.Euler(tool.toolsSpawnRotation);
                     GameObject instance = Instantiate(tool.toolsPrefab, tool.toolsSpawnPosition, rotation);
                     tool.spawnedObject = instance;
-                    Debug.Log($"Spawned {tool.toolsName} at {tool.toolsSpawnPosition} with rotation {tool.toolsSpawnRotation}");
+                    // Debug.Log($"Spawned {tool.toolsName} at {tool.toolsSpawnPosition} with rotation {tool.toolsSpawnRotation}");
                 }
             }
             else

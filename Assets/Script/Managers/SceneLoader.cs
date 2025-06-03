@@ -23,6 +23,22 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+
+    public void LoadSceneWithVideo(string targetSceneName, Vector3 spawnPosition)
+    {
+        VideoTransitionManager.NextSceneName = targetSceneName;
+        VideoTransitionManager.TargetSpawnPosition = spawnPosition;
+        Debug.Log("position : " + spawnPosition);
+        SceneManager.LoadScene("VideoTransition");
+    }
+
+    public void LoadMainMenuWithVideo() => LoadSceneWithVideo("MainMenu", Vector3.zero);
+    public void LoadOffice1WithVideo() => LoadSceneWithVideo("Office1", new Vector3(0, 0, 0)); // default, override in DoorManager
+    public void LoadOffice2WithVideo() => LoadSceneWithVideo("Office2", new Vector3(0, 0, 0));
+    public void LoadOffice3WithVideo() => LoadSceneWithVideo("Office3", new Vector3(0, 0, 0));
+    public void LoadOceanWithVideo() => LoadSceneWithVideo("Ocean", new Vector3(0, 0, 0));
+
+
     public void LoadMainMenu() => LoadScene("MainMenu");
     public void LoadOffice1() => LoadScene("Office1");
     public void LoadOffice2() => LoadScene("Office2");
