@@ -26,35 +26,37 @@ public class DoorManager : MonoBehaviour
     public void OpenDoor(string tag)
     {
         inOffice = true;
+
         switch (tag)
         {
             case "Office3ToOffice1":
-                Debug.Log("move to: " + tag);
-                SceneLoader.Instance.LoadOffice1();
-                SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(5.3f, 1.1f, 19f));
+                Debug.Log("Move to: " + tag);
+                SceneLoader.Instance.LoadSceneWithVideo("Office1", new Vector3(5.3f, 1.1f, 19f));
                 break;
+
             case "Office2ToOffice1":
-                Debug.Log("move to: " + tag);
-                SceneLoader.Instance.LoadOffice1();
-                SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(6.5f, 1.1f, 8.8f));
+                Debug.Log("Move to: " + tag);
+                SceneLoader.Instance.LoadSceneWithVideo("Office1", new Vector3(6.5f, 1.1f, 8.8f));
                 break;
+
             case "Office2":
-                Debug.Log("move to: " + tag);
-                SceneLoader.Instance.LoadOffice2();
-                SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(-2f, -0.6f, 0.7f));
+                Debug.Log("Move to: " + tag);
+                SceneLoader.Instance.LoadSceneWithVideo("Office2", new Vector3(-2f, -0.6f, 0.7f));
                 break;
+
             case "Office3":
-                Debug.Log("move to: " + tag);
-                SceneLoader.Instance.LoadOffice3();
-                SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(11f, 1f, 18f));
+                Debug.Log("Move to: " + tag);
+                SceneLoader.Instance.LoadSceneWithVideo("Office3", new Vector3(11f, 1f, 18f));
                 break;
+
             case "Ocean":
                 inOffice = false;
-                Debug.Log("move to: " + tag);
-                SceneLoader.Instance.LoadOcean();
-                SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.9f, 1f, -0.07f));
+                Debug.Log("Move to: " + tag);
+                SceneLoader.Instance.LoadSceneWithVideo("Ocean", new Vector3(2.9f, 1f, -0.07f));
                 break;
         }
+
+        // Set environment and music based on destination
         if (inOffice)
         {
             PlayerController.Instance.OfficeEnvirontment();
@@ -66,6 +68,7 @@ public class DoorManager : MonoBehaviour
             AudioManager.Instance.PlayExplorationBacksound();
         }
 
+        // Hide door detection UI
         DetectDoorUI.Instance.HideDetectDoor();
     }
 }

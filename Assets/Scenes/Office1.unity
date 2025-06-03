@@ -12866,7 +12866,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photoDisplayArea: {fileID: 1687349880486530287}
   showPhoto: {fileID: 5283339244008904586}
-  cameraFlash: {fileID: 0}
   cameraFrame: {fileID: 8908992540690104214}
   flashTime: 0.1
   CameraObject: {fileID: 1905500596598545480}
