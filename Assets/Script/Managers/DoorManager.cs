@@ -60,7 +60,7 @@ public class DoorManager : MonoBehaviour
             case "Ocean":
                 inOffice = false;
                 Debug.Log("Move to: " + tag);
-                SceneLoader.Instance.LoadSceneWithVideo("Ocean", new Vector3(2.9f, 1f, -0.07f));
+                SceneLoader.Instance.LoadSceneWithVideo("OceanYA", new Vector3(2.9f, 1f, -0.07f));
                 break;
         }
 
