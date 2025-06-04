@@ -8,6 +8,14 @@ public class DoorManager : MonoBehaviour
     private CharacterController characterController;
     private string currentDoorTag = null;
 
+    [SerializeField] private Sprite icon;
+    [SerializeField] private KeyCode interactKey = KeyCode.E;
+
+    public KeyCode InteractionKey => interactKey;
+    public Sprite InteractionIcon => icon;
+    public string InteractionText => "Enter";
+
+
 
     private void Awake()
     {

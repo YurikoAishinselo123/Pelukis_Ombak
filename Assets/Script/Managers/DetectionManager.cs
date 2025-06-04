@@ -62,6 +62,9 @@ public class DetectionManager : MonoBehaviour
 
                     if (npcInteraction != null)
                     {
+                        // Hide interaction UI when starting dialogue
+                        InteractionUIManager.Instance.HideAllInteractions();
+
                         DialogueManager.Instance.StartDialogue(npcInteraction.dialogues);
                     }
                     else
@@ -75,7 +78,7 @@ public class DetectionManager : MonoBehaviour
         }
         else
         {
-            interactionTriggered = false; // Reset when interaction input is released
+            interactionTriggered = false;
         }
     }
 
@@ -106,10 +109,15 @@ public class DetectionManager : MonoBehaviour
         detectedItem = null;
         detectedDoorTag = null;
         detectedNPC = null;
-        bool doorDetected = false;
 
         if (detectionCamera == null)
             return;
+
+        if (UIManager.Instance.isTalkingWithNPC)
+        {
+            InteractionUIManager.Instance.HideAllInteractions();
+            return;
+        }
 
         Vector3 origin = detectionCamera.transform.position;
         Vector3 forward = detectionCamera.transform.forward;
@@ -123,49 +131,41 @@ public class DetectionManager : MonoBehaviour
 
                 if (Physics.Raycast(origin, direction, out RaycastHit hit, pickupRange))
                 {
-                    ItemPickup item = hit.collider.GetComponent<ItemPickup>();
-                    if (item != null)
+                    IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+
+                    if (interactable != null)
                     {
-                        if (item.itemType == ItemType.Door)
+                        InteractionUIManager.Instance.ShowInteraction(interactable);
+
+                        if (interactable is ItemPickup item)
                         {
-                            detectedDoorTag = hit.collider.tag;
-                            doorDetected = true;
-                            detectedItem = null;
-
-                            DetectDoorUI.Instance.ShowDetectDoor();
-                            DetectItemUI.Instance.HideDetectItemUI();
-                            break;
+                            if (item.itemType == ItemType.Door)
+                            {
+                                detectedDoorTag = hit.collider.tag;
+                            }
+                            else if (validItemTypes.Contains(item.itemType))
+                            {
+                                detectedItem = item;
+                            }
                         }
-                        else if (validItemTypes.Contains(item.itemType))
+                        else if (hit.collider.CompareTag(npcTag))
                         {
-                            detectedItem = item;
-                            detectedDoorTag = null;
-
-                            DetectItemUI.Instance.ShowDetectItemUI(item.itemType.ToString());
-                            DetectDoorUI.Instance.HideDetectDoor();
-                            break;
+                            detectedNPC = hit.collider.gameObject;
                         }
-                    }
-                    else if (hit.collider.CompareTag(npcTag))
-                    {
-                        detectedNPC = hit.collider.gameObject;
-                        detectedItem = null;
-                        detectedDoorTag = null;
 
-                        DetectItemUI.Instance.ShowDetectItemUI("Talk");
-                        DetectDoorUI.Instance.HideDetectDoor();
                         break;
                     }
                 }
             }
-            if (detectedItem != null || doorDetected || detectedNPC != null)
+
+            if (detectedItem != null || detectedDoorTag != null || detectedNPC != null)
                 break;
         }
 
-        if (!doorDetected && detectedItem == null && detectedNPC == null)
+        // No detection
+        if (detectedItem == null && detectedDoorTag == null && detectedNPC == null)
         {
-            DetectItemUI.Instance.HideDetectItemUI();
-            DetectDoorUI.Instance.HideDetectDoor();
+            InteractionUIManager.Instance.HideAllInteractions();
         }
     }
 }
