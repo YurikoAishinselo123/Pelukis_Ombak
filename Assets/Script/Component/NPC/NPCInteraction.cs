@@ -1,8 +1,16 @@
 using UnityEngine;
 using System.IO;
 
-public class NPCInteraction : MonoBehaviour
+public class NPCInteraction : MonoBehaviour, IInteractable
 {
+    public Sprite icon;
+    private KeyCode interactKey = KeyCode.E;
+
+    public KeyCode InteractionKey => interactKey;
+    public Sprite InteractionIcon => icon;
+    public string InteractionText => "Talk";
+
+
     private string jsonFileName = "Dialog/dialogue_1.json";
 
     public DialogueEntry[] dialogues { get; private set; }

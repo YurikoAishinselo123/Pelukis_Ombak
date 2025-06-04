@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public bool hideUIWhenCameraActive;
     public bool detectManagerActive = true;
     private bool isMissionUIVisible = false;
+    public bool isTalkingWithNPC = false;
 
     private void Awake()
     {

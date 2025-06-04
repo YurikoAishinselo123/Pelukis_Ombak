@@ -1,8 +1,15 @@
 using UnityEngine;
 
 
-public class ItemPickup : MonoBehaviour
+public class ItemPickup : MonoBehaviour, IInteractable
 {
+    public Sprite icon;
+    private KeyCode interactKey = KeyCode.E;
+    public KeyCode InteractionKey => interactKey;
+    public Sprite InteractionIcon => icon;
+    public string InteractionText => itemType.ToString();
+
+
     public ItemType itemType;
     [SerializeField] private Sprite itemIcon;
     [SerializeField] private int amount = 1;
@@ -22,10 +29,6 @@ public class ItemPickup : MonoBehaviour
                 ItemManager.Instance.CollectItem(itemType);
                 InventoryUIManager.Instance.AddItemToInventory(itemIcon, itemType.ToString());
                 break;
-
-            case ItemType.Door:
-                DetectDoorUI.Instance.ShowDetectDoor();
-                return;
         }
 
         Destroy(gameObject);
