@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Office3.unity
     guid: fab1273e327757d439708cda9f7138b9
   - enabled: 1
-    path: Assets/Scenes/OceanEnvironment/OceanYA.unity
+    path: Assets/Scenes/Temp/OceanYA.unity
     guid: a39e5397caadc41b2a33233d5b0a1fd6
   - enabled: 1
     path: Assets/Scenes/Ocean.unity
