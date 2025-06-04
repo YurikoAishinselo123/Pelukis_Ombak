@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // ApplyGravity();
+            ApplyGravity();
             HandleMovement();
             HandleJump();
             MoveCharacter();
@@ -63,6 +63,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (GameplayManager.Instance.OnInteractionWithNPC())
+            return;
+
         Vector2 moveInput = InputManager.Instance.MoveInput;
 
         float currentSpeed = GetCurrentSpeed();
@@ -104,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
-        if (InputManager.Instance.JumpPressed && !isDiving && !GameplayManager.Instance.OnInteraction())
+        if (InputManager.Instance.JumpPressed && !isDiving && !GameplayManager.Instance.OnInteractionWithNPC())
         {
             Debug.Log("Jump : " + characterController.isGrounded);
             if (characterController.isGrounded)
@@ -117,6 +120,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleLook()
     {
+        if (GameplayManager.Instance.OnInteractionWithNPC())
+            return;
+
         Vector2 lookInput = InputManager.Instance.LookInput;
         float mouseX = lookInput.x * lookSensitivity * Time.deltaTime;
         float mouseY = lookInput.y * lookSensitivity * Time.deltaTime;

@@ -37,7 +37,6 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = dialogues;
         currentLineIndex = 0;
         ShowCurrentLine();
-        UIManager.Instance.isTalkingWithNPC = true;
     }
 
     public void NextLine()
@@ -66,6 +65,5 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = null;
         currentLineIndex = 0;
         GameplayManager.Instance.FinishTalkingWithNPC();
-        UIManager.Instance.isTalkingWithNPC = false;
     }
 }

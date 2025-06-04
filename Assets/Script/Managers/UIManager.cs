@@ -7,7 +7,6 @@ public class UIManager : MonoBehaviour
     public bool hideUIWhenCameraActive;
     public bool detectManagerActive = true;
     private bool isMissionUIVisible = false;
-    public bool isTalkingWithNPC = false;
 
     private void Awake()
     {
@@ -32,8 +31,6 @@ public class UIManager : MonoBehaviour
         Debug.Log("Hide");
         PhotoCaptureUI.Instance.SetCameraFrameActive(false);
         MissionUIManager.Instance.HideMissionUI();
-        DetectItemUI.Instance.HideDetectItemUI();
-        DetectDoorUI.Instance.HideDetectDoor();
         InventoryUIManager.Instance.HideInventoryCanvas();
         PhotoCaptureUI.Instance.HidePhoto();
     }
