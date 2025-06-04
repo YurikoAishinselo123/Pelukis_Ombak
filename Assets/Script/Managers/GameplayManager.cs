@@ -3,8 +3,8 @@ using UnityEngine;
 public class GameplayManager : MonoBehaviour
 {
     public bool onGameplay = false;
-    private bool onInteraction = false;
     public static GameplayManager Instance;
+    private bool isTalkingWithNPC = false;
 
     void Awake()
     {
@@ -24,24 +24,19 @@ public class GameplayManager : MonoBehaviour
         onGameplay = false;
     }
 
-    void Update()
-    {
-        Debug.Log("interaction : " + onInteraction);
-    }
-
     public void TalkingWithNPC()
     {
-        onInteraction = true;
+        isTalkingWithNPC = true;
     }
 
     public void FinishTalkingWithNPC()
     {
-        onInteraction = false;
+        isTalkingWithNPC = false;
     }
 
-    public bool OnInteraction()
+    public bool OnInteractionWithNPC()
     {
-        return onInteraction;
+        return isTalkingWithNPC;
     }
 
 }

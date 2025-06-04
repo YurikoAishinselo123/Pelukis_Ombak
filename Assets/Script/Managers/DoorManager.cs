@@ -76,7 +76,5 @@ public class DoorManager : MonoBehaviour
             AudioManager.Instance.PlayExplorationBacksound();
         }
 
-        // Hide door detection UI
-        DetectDoorUI.Instance.HideDetectDoor();
     }
 }

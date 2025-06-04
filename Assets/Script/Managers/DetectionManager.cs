@@ -113,7 +113,7 @@ public class DetectionManager : MonoBehaviour
         if (detectionCamera == null)
             return;
 
-        if (UIManager.Instance.isTalkingWithNPC)
+        if (GameplayManager.Instance.OnInteractionWithNPC())
         {
             InteractionUIManager.Instance.HideAllInteractions();
             return;
