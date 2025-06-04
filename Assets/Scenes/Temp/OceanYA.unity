@@ -13852,7 +13852,7 @@ GameObject:
   - component: {fileID: 5717082472135963895}
   - component: {fileID: 4277461131888137556}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Ocean Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18688,7 +18688,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3458767701164589841}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.46760413, g: 0.5572465, b: 0.6981132, a: 0}
