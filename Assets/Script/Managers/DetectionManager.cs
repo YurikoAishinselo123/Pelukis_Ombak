@@ -12,11 +12,10 @@ public class DetectionManager : MonoBehaviour
     [SerializeField] private Camera detectionCamera;
 
     private ItemPickup detectedItem = null;
-    private string detectedDoorTag = null;
+    private DoorInteractable detectedDoor = null;
     private GameObject detectedNPC = null;
 
     private bool interactionTriggered = false;
-
     private const string npcTag = "Dayat";
 
     private HashSet<ItemType> validItemTypes = new HashSet<ItemType>
@@ -30,94 +29,59 @@ public class DetectionManager : MonoBehaviour
     private void Awake()
     {
         if (detectionCamera == null)
-        {
-            Debug.LogWarning("Detection camera not assigned! Please assign it in the inspector.");
-        }
+            Debug.LogWarning("Detection camera not assigned!");
     }
 
     private void Update()
     {
+        if (GameplayManager.Instance.OnInteractionWithNPC())
+        {
+            InteractionUIManager.Instance.HideAllInteractions();
+            return;
+        }
+
         if (UIManager.Instance.detectManagerActive)
             DetectObject();
 
-        if (InputManager.Instance.Interact)
+        if (InputManager.Instance.Interact && !interactionTriggered)
         {
-            if (!interactionTriggered)
+            interactionTriggered = true;
+
+            if (detectedItem != null)
             {
-                interactionTriggered = true;
-
-                if (detectedItem != null)
+                detectedItem.Collect();
+                detectedItem = null;
+            }
+            else if (detectedDoor != null)
+            {
+                DoorManager.Instance.OpenDoor(detectedDoor.DoorTag);
+                detectedDoor = null;
+            }
+            else if (detectedNPC != null)
+            {
+                NPCInteraction npcInteraction = detectedNPC.GetComponent<NPCInteraction>();
+                if (npcInteraction != null)
                 {
-                    detectedItem.Collect();
-                    detectedItem = null;
+                    InteractionUIManager.Instance.HideAllInteractions();
+                    DialogueManager.Instance.StartDialogue(npcInteraction.dialogues);
                 }
-                else if (detectedDoorTag != null)
-                {
-                    DoorManager.Instance.OpenDoor(detectedDoorTag);
-                    detectedDoorTag = null;
-                }
-                else if (detectedNPC != null)
-                {
-                    NPCInteraction npcInteraction = detectedNPC.GetComponent<NPCInteraction>();
-
-                    if (npcInteraction != null)
-                    {
-                        // Hide interaction UI when starting dialogue
-                        InteractionUIManager.Instance.HideAllInteractions();
-
-                        DialogueManager.Instance.StartDialogue(npcInteraction.dialogues);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Detected NPC does not have an NPCInteraction component attached.");
-                    }
-
-                    detectedNPC = null;
-                }
+                detectedNPC = null;
             }
         }
-        else
+        else if (!InputManager.Instance.Interact)
         {
             interactionTriggered = false;
-        }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (detectionCamera == null)
-            return;
-
-        Gizmos.color = Color.yellow;
-
-        Vector3 origin = detectionCamera.transform.position;
-        Vector3 forward = detectionCamera.transform.forward;
-
-        for (float h = -pickupAngle; h <= pickupAngle; h += angleStep)
-        {
-            for (float v = -pickupAngle; v <= pickupAngle; v += angleStep)
-            {
-                Quaternion rotation = Quaternion.Euler(v, h, 0);
-                Vector3 direction = rotation * forward;
-
-                Gizmos.DrawRay(origin, direction * pickupRange);
-            }
         }
     }
 
     private void DetectObject()
     {
         detectedItem = null;
-        detectedDoorTag = null;
+        detectedDoor = null;
         detectedNPC = null;
 
         if (detectionCamera == null)
             return;
-
-        if (GameplayManager.Instance.OnInteractionWithNPC())
-        {
-            InteractionUIManager.Instance.HideAllInteractions();
-            return;
-        }
 
         Vector3 origin = detectionCamera.transform.position;
         Vector3 forward = detectionCamera.transform.forward;
@@ -131,26 +95,27 @@ public class DetectionManager : MonoBehaviour
 
                 if (Physics.Raycast(origin, direction, out RaycastHit hit, pickupRange))
                 {
+                    // Prioritize NPC detection via tag
+                    if (hit.collider.CompareTag(npcTag))
+                    {
+                        detectedNPC = hit.collider.gameObject;
+                        break;
+                    }
+
                     IInteractable interactable = hit.collider.GetComponent<IInteractable>();
 
                     if (interactable != null)
                     {
                         InteractionUIManager.Instance.ShowInteraction(interactable);
 
-                        if (interactable is ItemPickup item)
+                        if (interactable is ItemPickup item && validItemTypes.Contains(item.itemType))
                         {
-                            if (item.itemType == ItemType.Door)
-                            {
-                                detectedDoorTag = hit.collider.tag;
-                            }
-                            else if (validItemTypes.Contains(item.itemType))
-                            {
-                                detectedItem = item;
-                            }
+                            detectedItem = item;
                         }
-                        else if (hit.collider.CompareTag(npcTag))
+                        else if (interactable is DoorInteractable door)
                         {
-                            detectedNPC = hit.collider.gameObject;
+                            detectedDoor = door;
+                            Debug.Log("detected door : " + detectedDoor);
                         }
 
                         break;
@@ -158,12 +123,12 @@ public class DetectionManager : MonoBehaviour
                 }
             }
 
-            if (detectedItem != null || detectedDoorTag != null || detectedNPC != null)
+            if (detectedItem != null || detectedDoor != null || detectedNPC != null)
                 break;
         }
 
-        // No detection
-        if (detectedItem == null && detectedDoorTag == null && detectedNPC == null)
+        // Nothing detected
+        if (detectedItem == null && detectedDoor == null && detectedNPC == null)
         {
             InteractionUIManager.Instance.HideAllInteractions();
         }
