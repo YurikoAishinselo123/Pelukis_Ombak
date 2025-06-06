@@ -12215,7 +12215,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1696518075267796690}
-  - component: {fileID: 3136791611993198044}
   - component: {fileID: 8553278070052531144}
   - component: {fileID: 3622884463829244228}
   - component: {fileID: 5441843781396724673}
@@ -12885,23 +12884,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3136791611993198044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530602026275777432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7621fcecddaa04d5ebda573f752ac7fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  photoDisplayArea: {fileID: 1687349880486530287}
-  showPhoto: {fileID: 5283339244008904586}
-  cameraFrame: {fileID: 8908992540690104214}
-  flashTime: 0.1
-  CameraObject: {fileID: 1905500596598545480}
 --- !u!1 &3289738976331178415
 GameObject:
   m_ObjectHideFlags: 0
@@ -13614,7 +13596,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hideUIWhenCameraActive: 0
   detectManagerActive: 1
-  isTalkingWithNPC: 0
 --- !u!222 &4456116442592777226
 CanvasRenderer:
   m_ObjectHideFlags: 0
