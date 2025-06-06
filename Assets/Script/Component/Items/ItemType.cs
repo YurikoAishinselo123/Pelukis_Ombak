@@ -1,1 +1,1 @@
-public enum ItemType { Coin, Oxygen, Camera, Vacuum, Door }
+public enum ItemType { Coin, Oxygen, Camera, Vacuum }

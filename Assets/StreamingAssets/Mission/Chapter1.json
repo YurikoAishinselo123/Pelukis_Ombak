@@ -20,7 +20,7 @@
     {
       "id": 3,
       "title": "Take a Picture",
-      "description": "Use the camera to take 1 picture.",
+      "description": "Use the camera to take a picture.",
       "qty": 1,
       "condition": "2"
     }
