@@ -62,6 +62,7 @@ public class DetectionManager : MonoBehaviour
                 NPCInteraction npcInteraction = detectedNPC.GetComponent<NPCInteraction>();
                 if (npcInteraction != null)
                 {
+                    Debug.Log("Npc detected");
                     InteractionUIManager.Instance.HideAllInteractions();
                     DialogueManager.Instance.StartDialogue(npcInteraction.dialogues);
                 }
@@ -99,6 +100,12 @@ public class DetectionManager : MonoBehaviour
                     if (hit.collider.CompareTag(npcTag))
                     {
                         detectedNPC = hit.collider.gameObject;
+                        IInteractable npcInteractable = hit.collider.GetComponent<IInteractable>();
+                        if (npcInteractable != null)
+                        {
+                            InteractionUIManager.Instance.ShowInteraction(npcInteractable);
+                        }
+
                         break;
                     }
 
@@ -117,8 +124,6 @@ public class DetectionManager : MonoBehaviour
                             detectedDoor = door;
                             Debug.Log("detected door : " + detectedDoor);
                         }
-
-                        break;
                     }
                 }
             }
