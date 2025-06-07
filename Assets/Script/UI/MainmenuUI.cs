@@ -7,6 +7,7 @@ public class MainmenuUI : MonoBehaviour
 
     [SerializeField] private Button startButton;
     [SerializeField] private Button newGameButton;
+    [SerializeField] private Button cutsceneButton;
     [SerializeField] private Button quitButton;
 
     void Awake()
@@ -14,6 +15,7 @@ public class MainmenuUI : MonoBehaviour
         startButton.onClick.AddListener(StartGame);
         quitButton.onClick.AddListener(QuitGame);
         newGameButton.onClick.AddListener(NewGame);
+        cutsceneButton.onClick.AddListener(CutScene);
     }
 
     void Start()
@@ -21,7 +23,7 @@ public class MainmenuUI : MonoBehaviour
         AudioManager.Instance.PlayMainThemeBacksound();
     }
 
-    public void StartGame()
+    private void StartGame()
     {
         GameplayManager.Instance.onGameplay = true;
         SceneLoader.Instance.LoadOffice1();
@@ -29,7 +31,7 @@ public class MainmenuUI : MonoBehaviour
         SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.53f, 1.075f, 1.74f));
     }
 
-    public void NewGame()
+    private void NewGame()
     {
         SaveSystemManager.Instance.ResetMissionProgress();
         GameplayManager.Instance.onGameplay = true;
@@ -39,7 +41,12 @@ public class MainmenuUI : MonoBehaviour
 
     }
 
-    public void QuitGame()
+    private void CutScene()
+    {
+        SceneLoader.Instance.LoadCutscene();
+    }
+
+    private void QuitGame()
     {
         SceneLoader.Instance.QuitGame();
     }
