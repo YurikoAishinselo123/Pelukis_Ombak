@@ -42,6 +42,7 @@ public class SceneLoader : MonoBehaviour
 
 
     public void LoadMainMenu() => LoadScene("MainMenu");
+    public void LoadCutscene() => LoadScene("Cutscene");
     public void LoadOffice1() => LoadScene("Office1");
     public void LoadOffice2() => LoadScene("Office2");
     public void LoadOffice3() => LoadScene("Office3");
