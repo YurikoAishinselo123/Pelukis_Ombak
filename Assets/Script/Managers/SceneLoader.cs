@@ -26,8 +26,10 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadSceneWithVideo(string targetSceneName, Vector3 spawnPosition)
     {
-        VideoTransitionManager.NextSceneName = targetSceneName;
-        VideoTransitionManager.TargetSpawnPosition = spawnPosition;
+        TransitionData.NextSceneName = targetSceneName;
+        TransitionData.TargetSpawnPosition = spawnPosition;
+
+        Debug.Log("scenename : " + targetSceneName);
         Debug.Log("position : " + spawnPosition);
         SceneManager.LoadScene("VideoTransition");
     }

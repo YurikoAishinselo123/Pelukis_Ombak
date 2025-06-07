@@ -1,13 +1,11 @@
-using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SpawnCharacterManager : MonoBehaviour
 {
     public static SpawnCharacterManager Instance;
 
-    [SerializeField] private GameObject character; // Reference to the existing character in the scene
+    [SerializeField] private GameObject playerPrefab; // Assign your Player prefab here (used if not found in scene)
+
     private void Awake()
     {
         if (Instance == null)
@@ -21,37 +19,51 @@ public class SpawnCharacterManager : MonoBehaviour
         }
     }
 
-
     public void MoveCharacterToPosition(Vector3 spawnPosition)
     {
-        if (character != null)
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
         {
-            GameObject character2 = GameObject.FindGameObjectWithTag("Player");
-            var controller = character2.GetComponent<CharacterController>();
-            controller.enabled = false;
+            var controller = player.GetComponent<CharacterController>();
+            if (controller != null)
+            {
+                controller.enabled = false;
+                player.transform.position = spawnPosition;
+                controller.enabled = true;
 
-            character2.transform.position = spawnPosition;
-
-            controller.enabled = true;
-
-            Debug.Log("Character moved to: " + character.transform.position);
+                Debug.Log("Player moved to: " + spawnPosition);
+            }
+            else
+            {
+                Debug.LogWarning("CharacterController not found on Player.");
+            }
         }
-        else if(character == null)
+        else
         {
-            Debug.LogWarning("Character not assigned!");
+            Debug.LogWarning("Player with tag 'Player' not found in the scene.");
         }
     }
 
     public void SpawnPositionOnStart(Vector3 spawnStartPosition)
     {
-        GameObject character2 = GameObject.FindGameObjectWithTag("Player");
-        if (character2 != null)
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
         {
             MoveCharacterToPosition(spawnStartPosition);
         }
         else
         {
-            Instantiate(character, spawnStartPosition, Quaternion.identity);
+            if (playerPrefab != null)
+            {
+                Instantiate(playerPrefab, spawnStartPosition, Quaternion.identity);
+                Debug.Log("Player instantiated at: " + spawnStartPosition);
+            }
+            else
+            {
+                Debug.LogError("Player prefab is not assigned in SpawnCharacterManager.");
+            }
         }
     }
 }
