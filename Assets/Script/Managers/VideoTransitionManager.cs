@@ -1,19 +1,13 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
-using System.Collections;
 
 public class VideoTransitionManager : MonoBehaviour
 {
-    public static string NextSceneName;
-    public static Vector3? TargetSpawnPosition = null;
     public VideoPlayer videoPlayer;
-    private float transitionTime = 1f;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
+    private float transitionTime = 1f;
 
     private void Start()
     {
@@ -22,21 +16,38 @@ public class VideoTransitionManager : MonoBehaviour
 
     private IEnumerator PlayVideoAndLoadScene()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(NextSceneName);
+        string nextScene = TransitionData.NextSceneName;
+        if (string.IsNullOrEmpty(nextScene))
+        {
+            Debug.LogError("NextSceneName is null or empty!");
+            yield break;
+        }
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nextScene);
         asyncLoad.allowSceneActivation = false;
 
-        videoPlayer.Play();
-        yield return new WaitForSeconds(transitionTime);
+        if (videoPlayer != null)
+        {
+            videoPlayer.Play();
+        }
+        else
+        {
+            Debug.LogWarning("VideoPlayer not assigned!");
+        }
 
+        yield return new WaitForSeconds(transitionTime);
         asyncLoad.allowSceneActivation = true;
 
-        yield return null;
-        Debug.Log("spwn position : " + TargetSpawnPosition);
 
-        if (TargetSpawnPosition.HasValue)
+        if (TransitionData.TargetSpawnPosition.HasValue)
         {
-            Debug.Log("spwn position : " + TargetSpawnPosition.Value);
-            SpawnCharacterManager.Instance.SpawnPositionOnStart(TargetSpawnPosition.Value);
+            Vector3 pos = TransitionData.TargetSpawnPosition.Value;
+            Debug.Log("Spawning player at: " + pos);
+            SpawnCharacterManager.Instance.SpawnPositionOnStart(pos);
+        }
+        else
+        {
+            Debug.LogWarning("No TargetSpawnPosition set.");
         }
     }
 }
