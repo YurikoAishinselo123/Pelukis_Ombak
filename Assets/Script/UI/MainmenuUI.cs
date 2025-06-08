@@ -27,6 +27,7 @@ public class MainmenuUI : MonoBehaviour
     {
         GameplayManager.Instance.onGameplay = true;
         SceneLoader.Instance.LoadOffice1();
+        GameplayManager.Instance.ContinueGame();
         CursorManager.Instance.HideCursor();
         SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.53f, 1.075f, 1.74f));
     }
@@ -34,11 +35,12 @@ public class MainmenuUI : MonoBehaviour
     private void NewGame()
     {
         SaveSystemManager.Instance.ResetMissionProgress();
-        GameplayManager.Instance.onGameplay = true;
-        SceneLoader.Instance.LoadOffice1();
-        CursorManager.Instance.HideCursor();
-        SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.53f, 1.075f, 1.74f));
-
+        // GameplayManager.Instance.onGameplay = true;
+        // SceneLoader.Instance.LoadOffice1();
+        SceneLoader.Instance.LoadCutscene();
+        GameplayManager.Instance.NewGame();
+        // CursorManager.Instance.HideCursor();
+        // SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.53f, 1.075f, 1.74f));
     }
 
     private void CutScene()
