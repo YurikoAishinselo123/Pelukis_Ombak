@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             ApplyGravity();
             HandleMovement();
-            HandleJump();
+            // HandleJump();
             MoveCharacter();
         }
     }
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
-        if (InputManager.Instance.JumpPressed && !isDiving && !GameplayManager.Instance.OnInteractionWithNPC())
+        if (InputManager.Instance.SpaceKey && !isDiving && !GameplayManager.Instance.OnInteractionWithNPC())
         {
             Debug.Log("Jump : " + characterController.isGrounded);
             if (characterController.isGrounded)

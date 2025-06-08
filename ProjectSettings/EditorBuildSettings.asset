@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/VideoTransition.unity
     guid: c2049b3c31c38483292878886eac36ac
   - enabled: 1
+    path: Assets/Scenes/Office1YA.unity
+    guid: e0198d3ed4f4447978fe2348bc1bc135
+  - enabled: 1
     path: Assets/Scenes/Cutscene.unity
     guid: f4426fe44baa04b2295bdb847e98b463
   - enabled: 1
