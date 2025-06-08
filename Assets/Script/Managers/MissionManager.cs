@@ -12,6 +12,9 @@ public class MissionManager : MonoBehaviour
     private HashSet<int> completedMissions = new HashSet<int>();
     private HashSet<ItemType> collectedTools = new HashSet<ItemType>();
 
+    [Header("UI")]
+    public GameObject chapterCompletedUI; // Assign your ChapterCompletedUI GameObject here
+
     private void Awake()
     {
         if (Instance == null)
@@ -37,7 +40,7 @@ public class MissionManager : MonoBehaviour
             }
         }
 
-        InitializeCompletedMissions(); // Evaluate completion after everything is loaded
+        InitializeCompletedMissions();
     }
 
     private void LoadMissionData()
@@ -102,6 +105,11 @@ public class MissionManager : MonoBehaviour
 
         MissionUIManager.Instance?.UpdateMissionProgressUI(missionId, missionProgress[missionId], mission.qty);
         SaveSystemManager.Instance.SaveMissionProgress(missionProgress);
+
+        if (AreAllMissionsCompleted())
+        {
+            ChapterCompletedUI.Instance?.Show();
+        }
     }
 
     private IEnumerator PlayMissionCompleteSFXDelayed()
@@ -128,7 +136,6 @@ public class MissionManager : MonoBehaviour
         SaveSystemManager.Instance.SaveMissionProgress(missionProgress);
         MissionUIManager.Instance?.RefreshAllMissionsUI();
     }
-
 
     public bool IsMissionAvailable(Mission mission)
     {
@@ -195,4 +202,16 @@ public class MissionManager : MonoBehaviour
         }
     }
 
+    private bool AreAllMissionsCompleted()
+    {
+        if (missionData == null || missionData.missions == null) return false;
+
+        foreach (var mission in missionData.missions)
+        {
+            if (!completedMissions.Contains(mission.id))
+                return false;
+        }
+
+        return true;
+    }
 }

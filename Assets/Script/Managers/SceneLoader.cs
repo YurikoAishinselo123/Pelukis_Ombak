@@ -35,7 +35,7 @@ public class SceneLoader : MonoBehaviour
     }
 
     public void LoadMainMenuWithVideo() => LoadSceneWithVideo("MainMenu", Vector3.zero);
-    public void LoadOffice1WithVideo() => LoadSceneWithVideo("Office1YA", new Vector3(0, 0, 0)); // default, override in DoorManager
+    public void LoadOffice1WithVideo() => LoadSceneWithVideo("Office1YA", new Vector3(0, 0, 0));
     public void LoadOffice2WithVideo() => LoadSceneWithVideo("Office2", new Vector3(0, 0, 0));
     public void LoadOffice3WithVideo() => LoadSceneWithVideo("Office3", new Vector3(0, 0, 0));
     public void LoadOceanWithVideo() => LoadSceneWithVideo("Ocean", new Vector3(0, 0, 0));
