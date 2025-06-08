@@ -35,7 +35,7 @@ public class SceneLoader : MonoBehaviour
     }
 
     public void LoadMainMenuWithVideo() => LoadSceneWithVideo("MainMenu", Vector3.zero);
-    public void LoadOffice1WithVideo() => LoadSceneWithVideo("Office1", new Vector3(0, 0, 0)); // default, override in DoorManager
+    public void LoadOffice1WithVideo() => LoadSceneWithVideo("Office1YA", new Vector3(0, 0, 0)); // default, override in DoorManager
     public void LoadOffice2WithVideo() => LoadSceneWithVideo("Office2", new Vector3(0, 0, 0));
     public void LoadOffice3WithVideo() => LoadSceneWithVideo("Office3", new Vector3(0, 0, 0));
     public void LoadOceanWithVideo() => LoadSceneWithVideo("Ocean", new Vector3(0, 0, 0));
@@ -43,7 +43,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu() => LoadScene("MainMenu");
     public void LoadCutscene() => LoadScene("Cutscene");
-    public void LoadOffice1() => LoadScene("Office1");
+    public void LoadOffice1() => LoadScene("Office1YA");
     public void LoadOffice2() => LoadScene("Office2");
     public void LoadOffice3() => LoadScene("Office3");
     public void LoadOcean() => LoadScene("Ocean");
