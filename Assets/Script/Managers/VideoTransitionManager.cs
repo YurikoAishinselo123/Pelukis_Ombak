@@ -16,6 +16,7 @@ public class VideoTransitionManager : MonoBehaviour
 
     private IEnumerator PlayVideoAndLoadScene()
     {
+        UIManager.Instance.HideGameplayUI();
         string nextScene = TransitionData.NextSceneName;
         if (string.IsNullOrEmpty(nextScene))
         {
@@ -44,6 +45,7 @@ public class VideoTransitionManager : MonoBehaviour
             Vector3 pos = TransitionData.TargetSpawnPosition.Value;
             Debug.Log("Spawning player at: " + pos);
             SpawnCharacterManager.Instance.SpawnPositionOnStart(pos);
+            UIManager.Instance.ShowGameplayUI();
         }
         else
         {
