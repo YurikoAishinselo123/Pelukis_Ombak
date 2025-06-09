@@ -12,8 +12,7 @@ public class MissionManager : MonoBehaviour
     private HashSet<int> completedMissions = new HashSet<int>();
     private HashSet<ItemType> collectedTools = new HashSet<ItemType>();
 
-    [Header("UI")]
-    public GameObject chapterCompletedUI; // Assign your ChapterCompletedUI GameObject here
+    // public GameObject chapterCompletedUI; // Assign your ChapterCompletedUI GameObject here
 
     private void Awake()
     {

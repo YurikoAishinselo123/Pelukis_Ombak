@@ -1,28 +1,35 @@
 {
   "chapterId": 1,
-  "chapterTitle": "Starting Out",
-  "chapterDescription": "Your first tasks",
+  "chapterTitle": "Chapter 1",
+  "chapterDescription": "Titik Awal Penyelamatan",
   "missions": [
     {
       "id": 1,
-      "title": "Collect Tools",
-      "description": "Pick up the camera and vacuum.",
+      "title": "Ambil Alat",
+      "description": "Ambil kamera dan penyedot sampah",
       "qty": 2,
       "condition": ""
     },
     {
       "id": 2,
-      "title": "Collect Garbage",
-      "description": "Destroy 5 pieces of garbage.",
+      "title": "Bersihkan Sampah",
+      "description": "Bersihkan 5 sampah dengan alat penyedot.",
       "qty": 5,
       "condition": "1"
     },
     {
       "id": 3,
-      "title": "Take a Picture",
-      "description": "Use the camera to take a picture.",
+      "title": "Ambil Foto",
+      "description": "Gunakan kamera untuk mengambil foto.",
       "qty": 1,
       "condition": "2"
+    },
+    {
+      "id": 4,
+      "title": "Lapor ke Atasanmu",
+      "description": "Temui atasan dan berikan hasil fotomu.",
+      "qty": 1,
+      "condition": "3"
     }
   ]
 }
