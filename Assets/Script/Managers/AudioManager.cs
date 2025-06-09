@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 
 [System.Serializable]
@@ -16,6 +17,8 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] backsounds, sfxSounds;
     public AudioSource backsoundSource, sfxSource;
+    private float backsoundFadeDuration = 1.0f;
+
 
     void Awake()
     {
@@ -49,6 +52,30 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+
+    public void FadeOutBacksound(Action onFadeComplete = null)
+    {
+        StartCoroutine(FadeOutBacksoundCoroutine(onFadeComplete));
+    }
+
+    private IEnumerator FadeOutBacksoundCoroutine(Action onFadeComplete)
+    {
+        float startVolume = backsoundSource.volume;
+        float elapsed = 0f;
+
+        while (elapsed < backsoundFadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            backsoundSource.volume = Mathf.Lerp(startVolume, 0f, elapsed / backsoundFadeDuration);
+            yield return null;
+        }
+
+        backsoundSource.Stop();
+        backsoundSource.volume = startVolume;
+
+        onFadeComplete?.Invoke();
+    }
+
     public void PlaySFX(string name)
     {
         Sound sound = Array.Find(sfxSounds, x => x.name == name);
@@ -59,6 +86,14 @@ public class AudioManager : MonoBehaviour
         else
         {
             sfxSource.PlayOneShot(sound.clip);
+        }
+    }
+
+    public void StopBacksound()
+    {
+        if (backsoundSource.isPlaying)
+        {
+            backsoundSource.Stop();
         }
     }
 
@@ -79,6 +114,7 @@ public class AudioManager : MonoBehaviour
     public void PlayRun() => PlaySFX("Run");
     public void SFXCollectItem() => PlaySFX("Collect Item");
     public void SFXMissionCompleted() => PlaySFX("Mission Completed");
+    public void SFXChapterCompleted() => PlaySFX("Chapter Completed");
     public void SFXCollectGarbage() => PlaySFX("Collect Garbage");
     public void SFXCameraShutter() => PlaySFX("Camera Shutter");
 

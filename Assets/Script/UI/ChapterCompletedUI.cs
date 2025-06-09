@@ -33,14 +33,14 @@ public class ChapterCompletedUI : MonoBehaviour
         chapterCompletedCanvas.enabled = false;
     }
 
-    void Update()
-    {
-        if (InputManager.Instance.TestingButton)
-        {
-            Show();
-            Debug.Log("Testing");
-        }
-    }
+    // void Update()
+    // {
+    //     if (InputManager.Instance.TestingButton)
+    //     {
+    //         Show();
+    //         Debug.Log("Testing");
+    //     }
+    // }
 
     public void Show()
     {
@@ -50,6 +50,13 @@ public class ChapterCompletedUI : MonoBehaviour
 
     private IEnumerator FadeIn()
     {
+        AudioManager.Instance?.FadeOutBacksound();
+
+        AudioManager.Instance?.FadeOutBacksound(() =>
+        {
+            AudioManager.Instance?.SFXChapterCompleted();
+        });
+
         float elapsed = 0f;
         chapterCompletedContainer.alpha = 0f;
 
@@ -61,8 +68,5 @@ public class ChapterCompletedUI : MonoBehaviour
         }
 
         chapterCompletedContainer.alpha = 1f;
-
-        // Optional: Play sound effect
-        // AudioManager.Instance?.PlaySFX("ChapterComplete");
     }
 }
