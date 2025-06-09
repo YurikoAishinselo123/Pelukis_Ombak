@@ -14147,7 +14147,6 @@ MonoBehaviour:
     chapterTitle: 
     chapterDescription: 
     missions: []
-  chapterCompletedUI: {fileID: 0}
 --- !u!4 &1998951588
 Transform:
   m_ObjectHideFlags: 0
@@ -15231,7 +15230,6 @@ GameObject:
   - component: {fileID: 8957086537931854097}
   - component: {fileID: 8957086537931854098}
   - component: {fileID: 8957086537931854099}
-  - component: {fileID: 8957086537931854100}
   m_Layer: 0
   m_Name: Gameplay UI
   m_TagString: Untagged
@@ -17004,7 +17002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6141324178889338012
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17744,9 +17742,9 @@ RectTransform:
   - {fileID: 9081902589390018301}
   m_Father: {fileID: 8294584108694816698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8113584550030153449
@@ -17820,10 +17818,10 @@ RectTransform:
   - {fileID: 8526976848871024334}
   m_Father: {fileID: 1518762448187506537}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1540, y: -280}
-  m_SizeDelta: {x: 700, y: 500}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 700, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8396785829960725602
 CanvasRenderer:
@@ -17878,10 +17876,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8294584108694816698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -300}
-  m_SizeDelta: {x: 700, y: 400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 700, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8555557883779962552
 GameObject:
@@ -18189,22 +18187,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chapterCompletedCanvas: {fileID: 1905354590}
   fadeDuration: 1
---- !u!114 &8957086537931854100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530602026275777432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7efd089796e4b454889c6757bed72899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mergedText: {fileID: 0}
-  canvasGroup: {fileID: 0}
-  fadeDuration: 0.5
-  displayDuration: 2
 --- !u!222 &9037288697231988619
 CanvasRenderer:
   m_ObjectHideFlags: 0
