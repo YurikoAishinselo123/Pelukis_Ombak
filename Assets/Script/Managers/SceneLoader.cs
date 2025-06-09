@@ -31,7 +31,7 @@ public class SceneLoader : MonoBehaviour
 
         Debug.Log("scenename : " + targetSceneName);
         Debug.Log("position : " + spawnPosition);
-        SceneManager.LoadScene("VideoTransition");
+        // SceneManager.LoadScene("VideoTransition");
     }
 
     public void LoadMainMenuWithVideo() => LoadSceneWithVideo("MainMenu", Vector3.zero);

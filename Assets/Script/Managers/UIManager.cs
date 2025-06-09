@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+    public GameObject gameplayUI;
     public bool hideUIWhenCameraActive;
     public bool detectManagerActive = true;
     private bool isMissionUIVisible = false;
@@ -59,5 +60,16 @@ public class UIManager : MonoBehaviour
             }
             isMissionUIVisible = !isMissionUIVisible;
         }
+    }
+
+    public void HideGameplayUI()
+    {
+        Debug.Log("Hide UI");
+        gameplayUI.SetActive(false);
+    }
+
+    public void ShowGameplayUI()
+    {
+        gameplayUI.SetActive(true);
     }
 }
