@@ -4,10 +4,17 @@ using System.Collections.Generic;
 public class MissionUIManager : MonoBehaviour
 {
     public MissionManager missionManager;
+
+    [Header("Mission Panel UI")]
     public GameObject missionPanelPrefab;
     public Transform contentParent;
     public GameObject MissionUICanvas;
     public GameObject WrapedMissionUICanvas;
+
+    [Header("Popup Mission Progress UI")]
+    public GameObject missionProgressUIPrefab;     // Assign your MissionProgressUI prefab
+    public Transform missionPopupParent;           // Assign a parent UI panel for popup (e.g., top-right corner)
+
     public static MissionUIManager Instance;
 
     private Dictionary<int, MissionUI> missionUIMap = new Dictionary<int, MissionUI>();
@@ -43,7 +50,6 @@ public class MissionUIManager : MonoBehaviour
             if (missionUI != null)
             {
                 int progress = missionManager.GetMissionProgress(mission.id);
-                // qty is now a non-nullable int, so just use it directly
                 missionUI.Init(mission, progress, mission.qty);
                 missionUIMap[mission.id] = missionUI;
             }
@@ -86,6 +92,26 @@ public class MissionUIManager : MonoBehaviour
         {
             Debug.LogWarning($"No MissionUI found for Mission ID {missionId}.");
         }
+
+        // Show popup progress UI
+        ShowMissionProgressPopup(missionId, progress, maxProgress);
+    }
+
+    public void ShowMissionProgressPopup(int missionId, int current, int total)
+    {
+        Mission mission = missionManager.GetMissionById(missionId);
+        if (mission == null || missionProgressUIPrefab == null) return;
+
+        GameObject popup = Instantiate(missionProgressUIPrefab, missionPopupParent ?? transform);
+        MissionProgressUI popupUI = popup.GetComponent<MissionProgressUI>();
+        if (popupUI != null)
+        {
+            popupUI.Show($"{mission.title}", current, total); // Shows e.g., "Collect Item   1/2"
+        }
+        else
+        {
+            Debug.LogWarning("MissionProgressUI script not found on popup prefab.");
+        }
     }
 
     public void RefreshAllMissionsUI()
@@ -95,6 +121,4 @@ public class MissionUIManager : MonoBehaviour
             UpdateMissionProgressUI(mission.id, 0, mission.qty);
         }
     }
-
-
 }
