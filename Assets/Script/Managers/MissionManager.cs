@@ -12,7 +12,7 @@ public class MissionManager : MonoBehaviour
     private HashSet<int> completedMissions = new HashSet<int>();
     private HashSet<ItemType> collectedTools = new HashSet<ItemType>();
 
-    // public GameObject chapterCompletedUI; // Assign your ChapterCompletedUI GameObject here
+    public GameObject chapterCompletedUI; // Assign your ChapterCompletedUI GameObject here
 
     private void Awake()
     {
@@ -107,8 +107,15 @@ public class MissionManager : MonoBehaviour
 
         if (AreAllMissionsCompleted())
         {
-            ChapterCompletedUI.Instance?.Show();
+            Debug.Log("Check completed");
+            StartCoroutine(DelayedChapterCompleteUI());
         }
+    }
+
+    private IEnumerator DelayedChapterCompleteUI()
+    {
+        yield return new WaitForSeconds(1.5f);
+        ChapterCompletedUI.Instance?.Show();
     }
 
     private IEnumerator PlayMissionCompleteSFXDelayed()

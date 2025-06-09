@@ -24,6 +24,7 @@ public class InputManager : MonoBehaviour
 
     public Vector2 MoveInput => playerInput.actions["Move"].ReadValue<Vector2>();
     public Vector2 LookInput => playerInput.actions["Look"].ReadValue<Vector2>();
+    public bool TestingButton => playerInput.actions["Crouch"].WasPressedThisFrame();
     public bool SpaceKey => playerInput.actions["Jump"].WasPressedThisFrame();
     public bool IsSprinting => playerInput.actions["Sprint"].IsPressed();
     public bool Interact => playerInput.actions["Interact"].WasPressedThisFrame();
