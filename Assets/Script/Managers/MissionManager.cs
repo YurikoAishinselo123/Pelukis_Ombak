@@ -137,6 +137,27 @@ public class MissionManager : MonoBehaviour
         MissionUIManager.Instance?.RefreshAllMissionsUI();
     }
 
+    public void ReinitializeProgress()
+    {
+        missionProgress.Clear();
+        completedMissions.Clear();
+        collectedTools.Clear();
+
+        SaveSystemManager.Instance.ResetMissionProgress();
+
+        if (missionData != null)
+        {
+            foreach (var mission in missionData.missions)
+            {
+                missionProgress[mission.id] = 0;
+            }
+        }
+
+        SaveSystemManager.Instance.SaveMissionProgress(missionProgress);
+        MissionUIManager.Instance?.RefreshAllMissionsUI();
+    }
+
+
     public bool IsMissionAvailable(Mission mission)
     {
         if (string.IsNullOrEmpty(mission.condition))

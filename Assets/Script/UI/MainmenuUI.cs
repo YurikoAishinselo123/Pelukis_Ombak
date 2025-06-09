@@ -35,10 +35,11 @@ public class MainmenuUI : MonoBehaviour
     private void NewGame()
     {
         SaveSystemManager.Instance.ResetMissionProgress();
+        MissionManager.Instance?.ReinitializeProgress();
+        SceneLoader.Instance.LoadCutscene();
         // GameplayManager.Instance.onGameplay = true;
         // SceneLoader.Instance.LoadOffice1();
-        SceneLoader.Instance.LoadCutscene();
-        GameplayManager.Instance.NewGame();
+        // GameplayManager.Instance.NewGame();
         // CursorManager.Instance.HideCursor();
         // SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.53f, 1.075f, 1.74f));
     }
