@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 
@@ -9,6 +12,8 @@ public class MainmenuUI : MonoBehaviour
     [SerializeField] private Button newGameButton;
     [SerializeField] private Button cutsceneButton;
     [SerializeField] private Button quitButton;
+    // private Dictionary<int, int> missionProgress;
+
 
     void Awake()
     {
@@ -18,10 +23,29 @@ public class MainmenuUI : MonoBehaviour
         cutsceneButton.onClick.AddListener(CutScene);
     }
 
+    void Update()
+    {
+        // missionProgress = SaveSystemManager.Instance.LoadMissionProgress();
+        // Debug.Log("Tes mission progress : " + missionProgress.Count);
+        // if (missionProgress == null || missionProgress.Count <= 3)
+        // {
+        //     startButton.gameObject.SetActive(false);
+        // }
+
+        bool hasPlayedCutscene = PlayerPrefs.GetInt("HasPlayedCutscene", 0) == 1;
+        if (!hasPlayedCutscene)
+        {
+            startButton.gameObject.SetActive(false);
+        }
+
+    }
+
     void Start()
     {
         AudioManager.Instance.PlayMainThemeBacksound();
     }
+
+
 
     private void StartGame()
     {
@@ -47,6 +71,7 @@ public class MainmenuUI : MonoBehaviour
     private void CutScene()
     {
         SceneLoader.Instance.LoadCutscene();
+
     }
 
     private void QuitGame()
