@@ -4,17 +4,17 @@ using System.Collections;
 
 public class ChapterCompletedUI : MonoBehaviour
 {
-    public CanvasGroup chapterCompletedCanvas;
+    public Canvas chapterCompletedCanvas;
+    public CanvasGroup chapterCompletedContainer;
     public float fadeDuration = 1f;
     public static ChapterCompletedUI Instance;
 
     private void Awake()
     {
         // Start hidden
-        if (chapterCompletedCanvas != null)
+        if (chapterCompletedContainer != null)
         {
-            chapterCompletedCanvas.alpha = 0f;
-            // gameObject.SetActive(false);
+            chapterCompletedContainer.alpha = 0f;
         }
 
         if (Instance == null)
@@ -26,7 +26,20 @@ public class ChapterCompletedUI : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
         chapterCompletedCanvas.enabled = false;
+    }
+
+    void Update()
+    {
+        if (InputManager.Instance.TestingButton)
+        {
+            Show();
+            Debug.Log("Testing");
+        }
     }
 
     public void Show()
@@ -38,18 +51,18 @@ public class ChapterCompletedUI : MonoBehaviour
     private IEnumerator FadeIn()
     {
         float elapsed = 0f;
-        chapterCompletedCanvas.alpha = 0f;
+        chapterCompletedContainer.alpha = 0f;
 
         while (elapsed < fadeDuration)
         {
             elapsed += Time.deltaTime;
-            chapterCompletedCanvas.alpha = Mathf.Clamp01(elapsed / fadeDuration);
+            chapterCompletedContainer.alpha = Mathf.Clamp01(elapsed / fadeDuration);
             yield return null;
         }
 
-        chapterCompletedCanvas.alpha = 1f;
+        chapterCompletedContainer.alpha = 1f;
 
         // Optional: Play sound effect
-        AudioManager.Instance?.PlaySFX("ChapterComplete");
+        // AudioManager.Instance?.PlaySFX("ChapterComplete");
     }
 }
