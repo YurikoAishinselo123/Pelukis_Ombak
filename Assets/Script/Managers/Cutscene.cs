@@ -49,5 +49,7 @@ public class Cutscene : MonoBehaviour
     private void OnVideoFinished(VideoPlayer vp)
     {
         cutsceneCanvas.enabled = true;
+        PlayerPrefs.SetInt("HasPlayedCutscene", 1);
+        PlayerPrefs.Save();
     }
 }
