@@ -24,10 +24,10 @@ public class DoorManager : MonoBehaviour
         switch (tag)
         {
             case "Office3ToOffice1":
-                SceneLoader.Instance.LoadSceneWithVideo("Office1YA", new Vector3(5.3f, 1.1f, 19f));
+                SceneLoader.Instance.LoadSceneWithVideo("Office1", new Vector3(5.3f, 1.1f, 19f));
                 break;
             case "Office2ToOffice1":
-                SceneLoader.Instance.LoadSceneWithVideo("Office1YA", new Vector3(6.5f, 1.1f, 8.8f));
+                SceneLoader.Instance.LoadSceneWithVideo("Office1", new Vector3(6.5f, 1.1f, 8.8f));
                 break;
             case "Office2":
                 SceneLoader.Instance.LoadSceneWithVideo("Office2", new Vector3(-2f, -0.6f, 0.7f));
@@ -37,7 +37,7 @@ public class DoorManager : MonoBehaviour
                 break;
             case "Ocean":
                 inOffice = false;
-                SceneLoader.Instance.LoadSceneWithVideo("OceanYA", new Vector3(2.9f, 1f, -0.07f));
+                SceneLoader.Instance.LoadSceneWithVideo("Ocean", new Vector3(2.9f, 1f, -0.07f));
                 break;
         }
 
