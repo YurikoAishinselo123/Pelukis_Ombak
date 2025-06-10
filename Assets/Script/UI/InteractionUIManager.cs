@@ -8,6 +8,7 @@ public class InteractionUIManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject interactionUIPrefab;
     [SerializeField] private Transform interactionContainer;
+    public Canvas InteractionUI;
 
     private Dictionary<IInteractable, InteractionUI> activeUIMap = new();
 
@@ -54,5 +55,15 @@ public class InteractionUIManager : MonoBehaviour
         }
 
         activeUIMap.Clear();
+    }
+
+    public void ShowInteractionUI()
+    {
+        InteractionUI.enabled = true;
+    }
+
+    public void HideInteractionUI()
+    {
+        InteractionUI.enabled = false;
     }
 }
