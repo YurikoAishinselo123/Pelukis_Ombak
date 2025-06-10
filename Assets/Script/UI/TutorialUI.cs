@@ -86,4 +86,10 @@ public class TutorialUI : MonoBehaviour
     {
         tutorialCanvas.enabled = false;
     }
+
+    public void FinishTutorial()
+    {
+        finishTutorial = true;
+        HideTutorialUI();
+    }
 }
