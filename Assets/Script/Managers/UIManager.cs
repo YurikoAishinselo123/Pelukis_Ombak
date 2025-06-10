@@ -34,6 +34,8 @@ public class UIManager : MonoBehaviour
         MissionUIManager.Instance.HideMissionUI();
         InventoryUIManager.Instance.HideInventoryCanvas();
         PhotoCaptureUI.Instance.HidePhoto();
+        TutorialUI.Instance.HideTutorialUI();
+        InteractionUIManager.Instance.HideInteractionUI();
     }
 
 

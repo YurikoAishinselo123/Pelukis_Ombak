@@ -10,8 +10,22 @@ public class TutorialUI : MonoBehaviour
     public Image tutorialImage;
     public Button nextButton;
     public TMP_Text buttonText;
+    public static TutorialUI Instance;
+    private bool finishTutorial = false;
 
     private int currentIndex = 0;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -45,6 +59,7 @@ public class TutorialUI : MonoBehaviour
         }
         else
         {
+            finishTutorial = true;
             tutorialCanvas.enabled = false;
         }
     }
@@ -59,5 +74,16 @@ public class TutorialUI : MonoBehaviour
         {
             buttonText.text = "Ok [Space]";
         }
+    }
+
+    public void ShowTutorialUI()
+    {
+        if (!finishTutorial)
+            tutorialCanvas.enabled = true;
+    }
+
+    public void HideTutorialUI()
+    {
+        tutorialCanvas.enabled = false;
     }
 }

@@ -10392,6 +10392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionUIPrefab: {fileID: 6499453569387406550, guid: 82d6f419ca6a7475b95b3834aeedff1b, type: 3}
   interactionContainer: {fileID: 1171136887}
+  InteractionUI: {fileID: 46320463}
 --- !u!114 &1046297442
 MonoBehaviour:
   m_ObjectHideFlags: 0

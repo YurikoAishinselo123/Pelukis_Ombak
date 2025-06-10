@@ -34,6 +34,8 @@ public class PhotoCapture : MonoBehaviour
                     InventoryUIManager.Instance.HideInventoryCanvas();
                     RemovePhoto();
                     InventoryUIManager.Instance.ShowInventoryCanvas();
+                    TutorialUI.Instance.ShowTutorialUI();
+                    InteractionUIManager.Instance.ShowInteractionUI();
                     UIManager.Instance.detectManagerActive = true;
                 }
             }
