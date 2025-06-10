@@ -5754,7 +5754,7 @@ GameObject:
   - component: {fileID: 1242368812}
   - component: {fileID: 1242368815}
   m_Layer: 0
-  m_Name: WaterPlane
+  m_Name: Ocean area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

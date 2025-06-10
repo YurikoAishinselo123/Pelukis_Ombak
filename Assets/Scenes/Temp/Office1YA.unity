@@ -18168,7 +18168,7 @@ MonoBehaviour:
   tutorialSprites:
   - {fileID: 21300000, guid: aef1c2d91a3b74343aa14e39bf052994, type: 3}
   - {fileID: 21300000, guid: 7c2eea7a8ddfb4c6bae5964ed2c3d550, type: 3}
-  - {fileID: 21300000, guid: 6295e134027264353a0caaceb24a8170, type: 3}
+  - {fileID: 21300000, guid: 578fca29169ec45298abfc69b6129d7d, type: 3}
   - {fileID: 21300000, guid: c9569472dd99f4a67abb8ba9cc2d259b, type: 3}
   - {fileID: 21300000, guid: 65c99bff4538b489280d41beafddfd3a, type: 3}
   - {fileID: 21300000, guid: 7e35ae6619b374a43a99a50185fb23d7, type: 3}
