@@ -47,6 +47,8 @@ public class PauseUI : MonoBehaviour
 
     private void PauseGame()
     {
+        GameplayManager.Instance.pauseGame = true;
+        TutorialUI.Instance.HideTutorialUI();
         isPaused = true;
         PauseCanvas.SetActive(true);
         CursorManager.Instance.ShowCursor();
@@ -55,6 +57,7 @@ public class PauseUI : MonoBehaviour
 
     private void ResumeGame()
     {
+        GameplayManager.Instance.pauseGame = false;
         isPaused = false;
         Time.timeScale = 1;
         CursorManager.Instance.HideCursor();
@@ -63,6 +66,8 @@ public class PauseUI : MonoBehaviour
 
     private void QuitGame()
     {
+        GameplayManager.Instance.pauseGame = false;
+        TutorialUI.Instance.HideTutorialUI();
         Time.timeScale = 1;
         isPaused = false;
         PauseCanvas.SetActive(false);

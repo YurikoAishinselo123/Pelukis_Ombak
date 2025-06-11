@@ -61,6 +61,7 @@ public class MainmenuUI : MonoBehaviour
     {
         SaveSystemManager.Instance.ResetMissionProgress();
         MissionManager.Instance?.ReinitializeProgress();
+        SaveSystemManager.Instance.ResetCollectedItems();
         SceneLoader.Instance.LoadCutscene();
         // GameplayManager.Instance.onGameplay = true;
         // SceneLoader.Instance.LoadOffice1();

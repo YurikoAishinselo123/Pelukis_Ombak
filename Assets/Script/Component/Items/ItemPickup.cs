@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class ItemPickup : MonoBehaviour, IInteractable
 {
     public Sprite icon;
@@ -8,7 +7,6 @@ public class ItemPickup : MonoBehaviour, IInteractable
     public KeyCode InteractionKey => interactKey;
     public Sprite InteractionIcon => icon;
     public string InteractionText => itemType.ToString();
-
 
     public ItemType itemType;
     [SerializeField] private Sprite itemIcon;
@@ -18,19 +16,12 @@ public class ItemPickup : MonoBehaviour, IInteractable
     {
         Debug.Log("Item Collected: " + itemType);
 
-        switch (itemType)
+        if (!ItemManager.Instance.HasItem(itemType))
         {
-            case ItemType.Coin:
-                ItemManager.Instance.AddCoin(amount);
-                break;
-            case ItemType.Camera:
-            case ItemType.Vacuum:
-            case ItemType.Oxygen:
-                ItemManager.Instance.CollectItem(itemType);
-                InventoryUIManager.Instance.AddItemToInventory(itemIcon, itemType.ToString());
-                break;
+            ItemManager.Instance.CollectItem(itemType); // Save and track
+            InventoryUIManager.Instance.AddItemToInventory(itemIcon, itemType.ToString()); // Show in UI
         }
 
-        Destroy(gameObject);
+        Destroy(gameObject); // Remove from scene
     }
 }

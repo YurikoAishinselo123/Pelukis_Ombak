@@ -11,6 +11,7 @@ public class VacuumManager : MonoBehaviour
     private float absorbSpeed = 15f;
     // [SerializeField] private float absorbDistance = 1f;
     public LayerMask garbageLayerMask;
+    public GameObject vacuumEffect;
 
     [SerializeField] private GameObject vacuumObject;
     // [SerializeField] private Vector3 inactiveRotation = new Vector3(-25f, -7.8f, 2f);
@@ -24,7 +25,7 @@ public class VacuumManager : MonoBehaviour
 
     private void ActiveVacuum()
     {
-        if (InputManager.Instance.Action && ItemSelectorManager.Instance.SelectedVacuum)
+        if (InputManager.Instance.Action && ItemSelectorManager.Instance.SelectedVacuum && !GameplayManager.Instance.pauseGame)
         {
             // vacuumObject.transform.localRotation = Quaternion.Euler(activeRotation);
             ScanForGarbage();
@@ -32,6 +33,7 @@ public class VacuumManager : MonoBehaviour
         }
         else
         {
+            vacuumEffect.SetActive(false);
             // vacuumObject.transform.localRotation = Quaternion.Euler(inactiveRotation);
         }
     }
@@ -57,6 +59,8 @@ public class VacuumManager : MonoBehaviour
 
     private void PullObjects()
     {
+        vacuumEffect.SetActive(true);
+
         for (int i = grabbedObjects.Count - 1; i >= 0; i--)
         {
             Transform obj = grabbedObjects[i];

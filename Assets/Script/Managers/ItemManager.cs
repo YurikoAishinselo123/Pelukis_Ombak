@@ -1,32 +1,61 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+
+
+[System.Serializable]
+public class ItemVisual
+{
+    public ItemType itemType;
+    public Sprite sprite;
+}
 
 public class ItemManager : MonoBehaviour
 {
-    public static ItemManager Instance;
+    public static ItemManager Instance { get; private set; }
 
-    private List<ItemType> collectedItems = new List<ItemType>();
-    private int coinCount = 0;
+    [SerializeField] private List<ItemVisual> itemVisualList;
+
+    private HashSet<ItemType> collectedItems = new HashSet<ItemType>();
+    private Dictionary<ItemType, ItemVisual> itemVisualData = new Dictionary<ItemType, ItemVisual>();
 
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else
+        {
             Destroy(gameObject);
+            return;
+        }
+
+        BuildItemVisualDictionary();
+    }
+
+    private void Start()
+    {
+        LoadCollectedItemData();
+    }
+
+    private void BuildItemVisualDictionary()
+    {
+        foreach (ItemVisual visual in itemVisualList)
+        {
+            if (!itemVisualData.ContainsKey(visual.itemType))
+            {
+                itemVisualData.Add(visual.itemType, visual);
+            }
+        }
     }
 
     public void CollectItem(ItemType itemType)
     {
-        if (itemType == ItemType.Coin)
-        {
-            AddCoin(1);
-            return;
-        }
-
         if (!collectedItems.Contains(itemType))
         {
             collectedItems.Add(itemType);
+            SaveCollectedItemData();
             AudioManager.Instance.SFXCollectItem();
             Debug.Log(itemType + " Collected!");
             if (itemType == ItemType.Camera || itemType == ItemType.Vacuum)
@@ -43,17 +72,32 @@ public class ItemManager : MonoBehaviour
 
     public List<ItemType> GetCollectedItems()
     {
-        return collectedItems;
+        return new List<ItemType>(collectedItems);
     }
 
-    public void AddCoin(int amount)
+    public Sprite GetItemSprite(ItemType itemType)
     {
-        coinCount += amount;
-        Debug.Log("Coin Collected: " + coinCount);
+        if (itemVisualData.TryGetValue(itemType, out ItemVisual visual))
+        {
+            return visual.sprite;
+        }
+        return null;
     }
 
-    public int GetCoinCount()
+    private void SaveCollectedItemData()
     {
-        return coinCount;
+        SaveSystemManager.Instance.SaveCollectedItemData(new List<ItemType>(collectedItems), 0); // assuming no coins
+    }
+
+    private void LoadCollectedItemData()
+    {
+        var data = SaveSystemManager.Instance.LoadCollectedItemData();
+        collectedItems = new HashSet<ItemType>(data.collectedItems);
+    }
+
+    public void ResetCollectedItems()
+    {
+        collectedItems.Clear();
+        SaveCollectedItemData();
     }
 }

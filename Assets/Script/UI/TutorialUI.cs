@@ -84,6 +84,7 @@ public class TutorialUI : MonoBehaviour
 
     public void HideTutorialUI()
     {
+        Debug.Log("Hide UI");
         tutorialCanvas.enabled = false;
     }
 }
