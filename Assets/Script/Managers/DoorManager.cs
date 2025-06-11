@@ -45,7 +45,7 @@ public class DoorManager : MonoBehaviour
         if (inOffice)
         {
             PlayerController.Instance.OfficeEnvirontment();
-            AudioManager.Instance.PlayMainThemeBacksound();
+            AudioManager.Instance.PlayOfficeBacksound();
         }
         else
         {
