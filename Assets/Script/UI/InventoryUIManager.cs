@@ -29,6 +29,11 @@ public class InventoryUIManager : MonoBehaviour
         ClearInventoryUI();
     }
 
+    private void Start()
+    {
+        LoadCollectedItems();
+    }
+
     private void GenerateInventorySlots()
     {
         for (int i = 0; i < slotCount; i++)
@@ -101,5 +106,32 @@ public class InventoryUIManager : MonoBehaviour
     public void HideInventoryCanvas()
     {
         InventoryUICanvas.SetActive(false);
+    }
+
+    /// <summary>
+    /// Loads collected items from ItemManager and displays them in the UI.
+    /// </summary>
+    public void LoadCollectedItems()
+    {
+        if (ItemManager.Instance == null)
+        {
+            Debug.LogError("ItemManager.Instance is null.");
+            return;
+        }
+
+        List<ItemType> collectedItems = ItemManager.Instance.GetCollectedItems();
+
+        foreach (ItemType item in collectedItems)
+        {
+            Sprite sprite = ItemManager.Instance.GetItemSprite(item);
+            if (sprite != null)
+            {
+                AddItemToInventory(sprite, item.ToString());
+            }
+            else
+            {
+                Debug.LogWarning("No sprite found for item: " + item);
+            }
+        }
     }
 }

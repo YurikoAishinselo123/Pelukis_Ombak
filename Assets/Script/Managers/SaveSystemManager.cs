@@ -86,61 +86,61 @@ public class SaveSystemManager : MonoBehaviour
     // -----------------------------
     // Collected Item Save System
     // -----------------------------
-    // public void SaveCollectedItemData(List<ItemType> collectedItems, int coinCount)
-    // {
-    //     string path = GetCollectedItemFilePath();
+    public void SaveCollectedItemData(List<ItemType> collectedItems, int coinCount)
+    {
+        string path = GetCollectedItemFilePath();
 
-    //     if (!Directory.Exists(collectedItemDirectory))
-    //         Directory.CreateDirectory(collectedItemDirectory);
+        if (!Directory.Exists(collectedItemDirectory))
+            Directory.CreateDirectory(collectedItemDirectory);
 
-    //     CollectedItemSaveData data = new CollectedItemSaveData
-    //     {
-    //         collectedItems = collectedItems,
-    //         coinCount = coinCount
-    //     };
+        CollectedItemSaveData data = new CollectedItemSaveData
+        {
+            collectedItems = collectedItems,
+            coinCount = coinCount
+        };
 
-    //     string json = JsonUtility.ToJson(data, true);
-    //     File.WriteAllText(path, json);
-    //     Debug.Log($"[SaveSystem] Collected item data saved to: {path}");
-    // }
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(path, json);
+        Debug.Log($"[SaveSystem] Collected item data saved to: {path}");
+    }
 
-    // public CollectedItemSaveData LoadCollectedItemData()
-    // {
-    //     string path = GetCollectedItemFilePath();
+    public CollectedItemSaveData LoadCollectedItemData()
+    {
+        string path = GetCollectedItemFilePath();
 
-    //     if (File.Exists(path))
-    //     {
-    //         string json = File.ReadAllText(path);
-    //         return JsonUtility.FromJson<CollectedItemSaveData>(json);
-    //     }
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            return JsonUtility.FromJson<CollectedItemSaveData>(json);
+        }
 
-    //     Debug.Log("[SaveSystem] No saved collected items found. Starting fresh.");
-    //     return new CollectedItemSaveData();
-    // }
+        Debug.Log("[SaveSystem] No saved collected items found. Starting fresh.");
+        return new CollectedItemSaveData();
+    }
 
-    // private string GetCollectedItemFilePath()
-    // {
-    //     return Path.Combine(collectedItemDirectory, collectedItemFileName);
-    // }
+    private string GetCollectedItemFilePath()
+    {
+        return Path.Combine(collectedItemDirectory, collectedItemFileName);
+    }
 
-    // public void ResetCollectedItems()
-    // {
-    //     // Clear the saved file by overwriting it with an empty state
-    //     CollectedItemSaveData emptyData = new CollectedItemSaveData
-    //     {
-    //         collectedItems = new List<ItemType>(),
-    //         coinCount = 0 // optional, depending on whether you still use coins
-    //     };
+    public void ResetCollectedItems()
+    {
+        // Clear the saved file by overwriting it with an empty state
+        CollectedItemSaveData emptyData = new CollectedItemSaveData
+        {
+            collectedItems = new List<ItemType>(),
+            coinCount = 0 // optional, depending on whether you still use coins
+        };
 
-    //     string path = GetCollectedItemFilePath();
+        string path = GetCollectedItemFilePath();
 
-    //     if (!Directory.Exists(collectedItemDirectory))
-    //         Directory.CreateDirectory(collectedItemDirectory);
+        if (!Directory.Exists(collectedItemDirectory))
+            Directory.CreateDirectory(collectedItemDirectory);
 
-    //     string json = JsonUtility.ToJson(emptyData, true);
-    //     File.WriteAllText(path, json);
+        string json = JsonUtility.ToJson(emptyData, true);
+        File.WriteAllText(path, json);
 
-    //     Debug.Log("[SaveSystem] Collected items have been reset.");
-    // }
+        Debug.Log("[SaveSystem] Collected items have been reset.");
+    }
 }
 

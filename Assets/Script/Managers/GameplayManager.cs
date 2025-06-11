@@ -6,6 +6,7 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager Instance;
     private bool isTalkingWithNPC = false;
     private bool newGame = false;
+    public bool pauseGame = false;
 
     void Awake()
     {

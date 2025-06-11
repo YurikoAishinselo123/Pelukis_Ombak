@@ -15,9 +15,19 @@ public class InventoryManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-
     public List<string> GetCollectedItems()
     {
         return collectedItems;
+    }
+
+    public void AddItem(string itemName)
+    {
+        if (!collectedItems.Contains(itemName))
+            collectedItems.Add(itemName);
+    }
+
+    public void ClearInventory()
+    {
+        collectedItems.Clear();
     }
 }

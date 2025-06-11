@@ -10578,7 +10578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdadef595bf944a19c1ede2e89bc058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chapterCompletedCanvas: {fileID: 1570994541}
+  chapterCompletedCanvas: {fileID: 1570994537}
   chapterCompletedContainer: {fileID: 44595294}
   fadeDuration: 1
 --- !u!114 &1046297440
@@ -19228,7 +19228,6 @@ MonoBehaviour:
     chapterTitle: 
     chapterDescription: 
     missions: []
-  chapterCompletedUI: {fileID: 0}
 --- !u!4 &1998951588
 Transform:
   m_ObjectHideFlags: 0

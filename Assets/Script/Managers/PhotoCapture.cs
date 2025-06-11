@@ -19,7 +19,7 @@ public class PhotoCapture : MonoBehaviour
     {
         if (ItemManager.Instance.HasItem(ItemType.Camera))
         {
-            if (InputManager.Instance.Action && ItemSelectorManager.Instance.SelectedCamera)
+            if (InputManager.Instance.Action && ItemSelectorManager.Instance.SelectedCamera && !GameplayManager.Instance.pauseGame)
             {
                 UIManager.Instance.detectManagerActive = false;
 
@@ -34,7 +34,7 @@ public class PhotoCapture : MonoBehaviour
                     InventoryUIManager.Instance.HideInventoryCanvas();
                     RemovePhoto();
                     InventoryUIManager.Instance.ShowInventoryCanvas();
-                    TutorialUI.Instance.ShowTutorialUI();
+                    // TutorialUI.Instance.ShowTutorialUI();
                     InteractionUIManager.Instance.ShowInteractionUI();
                     UIManager.Instance.detectManagerActive = true;
                 }

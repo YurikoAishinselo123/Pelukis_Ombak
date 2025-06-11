@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ChapterCompletedUI : MonoBehaviour
 {
-    public Canvas chapterCompletedCanvas;
+    public GameObject chapterCompletedCanvas;
     public CanvasGroup chapterCompletedContainer;
     public float fadeDuration = 1f;
     public static ChapterCompletedUI Instance;
@@ -30,7 +30,7 @@ public class ChapterCompletedUI : MonoBehaviour
 
     void Start()
     {
-        chapterCompletedCanvas.enabled = false;
+        chapterCompletedCanvas.SetActive(false);
     }
 
     // void Update()
@@ -44,7 +44,8 @@ public class ChapterCompletedUI : MonoBehaviour
 
     public void Show()
     {
-        chapterCompletedCanvas.enabled = true;
+        Debug.Log("show UI chapter completed");
+        chapterCompletedCanvas.SetActive(true);
         StartCoroutine(FadeIn());
     }
 
