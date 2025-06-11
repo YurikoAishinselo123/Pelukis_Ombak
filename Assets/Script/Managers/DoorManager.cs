@@ -37,6 +37,7 @@ public class DoorManager : MonoBehaviour
                 break;
             case "Ocean":
                 inOffice = false;
+                TutorialUI.Instance.HideTutorialUI();
                 SceneLoader.Instance.LoadSceneWithVideo("Ocean", new Vector3(2.9f, 1f, -0.07f));
                 break;
         }

@@ -58,8 +58,11 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                MissionUIManager.Instance.ShowMissionUI();
-                InventoryUIManager.Instance.HideInventoryCanvas();
+                if (!GameplayManager.Instance.OnInteractionWithNPC())
+                {
+                    MissionUIManager.Instance.ShowMissionUI();
+                    InventoryUIManager.Instance.HideInventoryCanvas();
+                }
             }
             isMissionUIVisible = !isMissionUIVisible;
         }

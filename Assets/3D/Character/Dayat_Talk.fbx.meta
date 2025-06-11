@@ -3,7 +3,12 @@ guid: 0ce9a93d8423a453fa1616826dc99fc9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tak berjudul68_20250427183109
+    second: {fileID: 2800000, guid: 1699916ba01ec4377a346c65f51e95ad, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

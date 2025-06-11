@@ -6,6 +6,8 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueEntry[] currentDialogue;
     private int currentLineIndex = 0;
+    private System.Action _onDialogueEnd;
+
 
     private void Awake()
     {
@@ -26,18 +28,34 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(DialogueEntry[] dialogues)
+    public void StartDialogue(DialogueEntry[] dialogues, System.Action onEndCallback = null)
     {
         if (dialogues == null || dialogues.Length == 0)
         {
             Debug.LogWarning("No dialogue entries provided.");
             return;
         }
+
         GameplayManager.Instance.TalkingWithNPC();
         currentDialogue = dialogues;
         currentLineIndex = 0;
         ShowCurrentLine();
+
+        _onDialogueEnd = onEndCallback; // store callback
     }
+
+
+    public void EndDialogue()
+    {
+        DialogueUI.Instance.Hide();
+        currentDialogue = null;
+        currentLineIndex = 0;
+        GameplayManager.Instance.FinishTalkingWithNPC();
+
+        _onDialogueEnd?.Invoke(); // call it if exists
+        _onDialogueEnd = null;
+    }
+
 
     public void NextLine()
     {
@@ -57,13 +75,5 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueEntry line = currentDialogue[currentLineIndex];
         DialogueUI.Instance.Show(line.speaker, line.text);
-    }
-
-    public void EndDialogue()
-    {
-        DialogueUI.Instance.Hide();
-        currentDialogue = null;
-        currentLineIndex = 0;
-        GameplayManager.Instance.FinishTalkingWithNPC();
     }
 }
