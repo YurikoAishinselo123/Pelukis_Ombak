@@ -101,6 +101,7 @@ public class AudioManager : MonoBehaviour
     // Play BackSound
     public void PlayExplorationBacksound() => PlayBacksound("Exploration");
     public void PlayMainThemeBacksound() => PlayBacksound("Main Theme");
+    public void PlayOfficeBacksound() => PlayBacksound("Office");
     // public void PlayExplorationBacksound()
     // {
     //     Debug.Log("Playing exploration backsound");

@@ -53,6 +53,7 @@ public class MainmenuUI : MonoBehaviour
         SceneLoader.Instance.LoadOffice1();
         GameplayManager.Instance.ContinueGame();
         CursorManager.Instance.HideCursor();
+        AudioManager.Instance.PlayOfficeBacksound();
         SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.53f, 1.075f, 1.74f));
     }
 

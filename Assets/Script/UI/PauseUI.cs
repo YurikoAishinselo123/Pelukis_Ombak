@@ -68,6 +68,8 @@ public class PauseUI : MonoBehaviour
         PauseCanvas.SetActive(false);
         CursorManager.Instance.ShowCursor();
         GameplayManager.Instance.onGameplay = false;
+        // AudioManager.Instance.StopBacksound();
+        AudioManager.Instance.PlayMainThemeBacksound();
         SceneLoader.Instance.LoadMainMenu();
         PlayerController.Instance.OfficeEnvirontment();
     }
