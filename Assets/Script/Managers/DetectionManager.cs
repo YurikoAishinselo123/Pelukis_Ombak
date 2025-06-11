@@ -64,7 +64,8 @@ public class DetectionManager : MonoBehaviour
                 {
                     Debug.Log("Npc detected");
                     InteractionUIManager.Instance.HideAllInteractions();
-                    DialogueManager.Instance.StartDialogue(npcInteraction.dialogues);
+                    npcInteraction.TriggerDialogue();
+                    // DialogueManager.Instance.StartDialogue(npcInteraction.dialogues);
                 }
                 detectedNPC = null;
             }

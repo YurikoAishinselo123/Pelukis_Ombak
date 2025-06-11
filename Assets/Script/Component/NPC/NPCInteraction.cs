@@ -10,7 +10,7 @@ public class NPCInteraction : MonoBehaviour, IInteractable
     public Sprite InteractionIcon => icon;
     public string InteractionText => "Talk";
 
-
+    [SerializeField] private Animator npcAnimator;
     private string jsonFileName = "Dialog/dialogue_1.json";
 
     public DialogueEntry[] dialogues { get; private set; }
@@ -40,13 +40,24 @@ public class NPCInteraction : MonoBehaviour, IInteractable
 
     public void TriggerDialogue()
     {
+        TutorialUI.Instance.HideTutorialUI();
+        MissionUIManager.Instance.HideMissionUI();
+        InventoryUIManager.Instance.HideInventoryCanvas();
         if (dialogues != null && dialogues.Length > 0)
         {
-            DialogueManager.Instance.StartDialogue(dialogues);
+            DialogueManager.Instance.StartDialogue(dialogues, () =>
+            {
+                npcAnimator.SetBool("Talk", false);
+                npcAnimator.SetBool("Idle", true);
+            });
+
+            npcAnimator.SetBool("Talk", true);
+            npcAnimator.SetBool("Idle", false);
         }
         else
         {
             Debug.LogWarning("No dialogues loaded for NPC " + gameObject.name);
         }
     }
+
 }
