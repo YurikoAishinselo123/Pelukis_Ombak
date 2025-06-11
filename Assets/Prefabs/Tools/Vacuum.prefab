@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b6f6c3814840142ba86f69fc17488a63, type: 3}
       propertyPath: m_Name
-      value: Penyedot Sampah Fix
+      value: Vacuum
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -96,8 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbcfd297d82e4e1ebe24d52a9be6179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 0}
   itemType: 3
-  itemIcon: {fileID: 21300000, guid: 11ccf66e2f6ab41f6af0e689802a9dfd, type: 3}
+  itemIcon: {fileID: 21300000, guid: 899621e6d70884d688051500177d7c91, type: 3}
   amount: 1
 --- !u!64 &-1529755015864641296
 MeshCollider:
