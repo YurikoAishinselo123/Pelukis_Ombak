@@ -49,6 +49,7 @@ public class NPCInteraction : MonoBehaviour, IInteractable
             {
                 npcAnimator.SetBool("Talk", false);
                 npcAnimator.SetBool("Idle", true);
+                InventoryUIManager.Instance.ShowInventoryCanvas();
             });
 
             npcAnimator.SetBool("Talk", true);
