@@ -46,10 +46,12 @@ public class VideoTransitionManager : MonoBehaviour
             Debug.Log("Spawning player at: " + pos);
             SpawnCharacterManager.Instance.SpawnPositionOnStart(pos);
             UIManager.Instance.ShowGameplayUI();
+
         }
         else
         {
             Debug.LogWarning("No TargetSpawnPosition set.");
         }
     }
+
 }

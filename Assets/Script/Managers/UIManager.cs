@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -73,5 +74,16 @@ public class UIManager : MonoBehaviour
     public void ShowGameplayUI()
     {
         gameplayUI.SetActive(true);
+
+        // Cnt works because the transition manager already destroy before show the ui
+        // ShowGameplayUIDelayed(0.5f);
     }
+
+
+    // private IEnumerator ShowGameplayUIDelayed(float delay)
+    // {
+    //     Debug.Log("tes");
+    //     yield return new WaitForSeconds(delay);
+    //     gameplayUI.SetActive(true);
+    // }
 }
