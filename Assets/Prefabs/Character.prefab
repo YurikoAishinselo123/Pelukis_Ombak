@@ -139,6 +139,7 @@ MonoBehaviour:
     chapterTitle: 
     chapterDescription: 
     missions: []
+  chapterCompletedUI: {fileID: 0}
 --- !u!1 &2221868679249230735
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +590,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55856e3b4a01452f90b2f313bf9f63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemVisualList:
+  - itemType: 2
+    sprite: {fileID: 21300000, guid: f464e6179e3854de196a50a1e5dff0b6, type: 3}
+  - itemType: 3
+    sprite: {fileID: 21300000, guid: 899621e6d70884d688051500177d7c91, type: 3}
 --- !u!1 &3832062980652248905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,8 +1222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53caa8855d1fb473e9483de4e2fd7e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: c4cf4d8def52c43848d164a23f289f03, type: 3}
-  interactKey: 101
 --- !u!114 &8382717687266808874
 MonoBehaviour:
   m_ObjectHideFlags: 0
