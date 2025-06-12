@@ -9,5 +9,5 @@ public class DoorInteractable : MonoBehaviour, IInteractable
 
     public KeyCode InteractionKey => interactKey;
     public Sprite InteractionIcon => icon;
-    public string InteractionText => "Enter";
+    public string InteractionText => "Move";
 }
