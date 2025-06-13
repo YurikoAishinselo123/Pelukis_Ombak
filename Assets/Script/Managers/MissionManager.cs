@@ -115,6 +115,7 @@ public class MissionManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         Debug.Log("Show complete chapter ui");
+        GameplayManager.Instance.onGameplay = false;
         ChapterCompletedUI.Instance.Show();
     }
 
