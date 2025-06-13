@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Video;
-using TMPro; // For TextMeshProUGUI
+using TMPro;
+using UnityEngine.UI; // Required for Button
 
 public class Cutscene : MonoBehaviour
 {
@@ -9,12 +10,14 @@ public class Cutscene : MonoBehaviour
     public VideoPlayer videoPlayer;
     public Canvas cutsceneCanvas;
     public TextMeshProUGUI pressAnyKeyText;
+    public Button skipButton;
 
     private bool canStart = false;
+    private bool cutsceneSkipped = false;
 
     private void Start()
     {
-        if (videoPlayer == null || cutsceneCanvas == null || pressAnyKeyText == null)
+        if (videoPlayer == null || cutsceneCanvas == null || pressAnyKeyText == null || skipButton == null)
         {
             Debug.LogError("Missing references in Cutscene script.");
             return;
@@ -22,6 +25,9 @@ public class Cutscene : MonoBehaviour
 
         cutsceneCanvas.enabled = false;
         pressAnyKeyText.gameObject.SetActive(false);
+
+        skipButton.gameObject.SetActive(true); // Show the skip button
+        skipButton.onClick.AddListener(SkipCutscene);
 
         videoPlayer.loopPointReached += OnVideoFinished;
 
@@ -31,17 +37,27 @@ public class Cutscene : MonoBehaviour
 
     private void Update()
     {
-        if (canStart && Input.anyKeyDown)
+        if (!cutsceneSkipped && Input.anyKeyDown)
         {
-            StartGame();
-            canStart = false;
+            if (canStart)
+            {
+                StartGame();
+            }
+            else
+            {
+                SkipCutscene();
+            }
         }
     }
 
     private void StartGame()
     {
+        cutsceneSkipped = true;
         StopAllCoroutines();
         pressAnyKeyText.gameObject.SetActive(false);
+        skipButton.gameObject.SetActive(false);
+        videoPlayer.Stop();
+
         AudioManager.Instance.PlayOfficeBacksound();
         SceneLoader.Instance.LoadOffice1();
         GameplayManager.Instance.onGameplay = true;
@@ -49,22 +65,28 @@ public class Cutscene : MonoBehaviour
         SpawnCharacterManager.Instance.SpawnPositionOnStart(new Vector3(2.53f, 1.075f, 1.74f));
     }
 
+    public void SkipCutscene()
+    {
+        if (cutsceneSkipped) return;
+
+        videoPlayer.Stop();
+        OnVideoFinished(videoPlayer); // Reuse finish logic
+    }
+
     private IEnumerator PlayCutsceneSequence()
     {
-        // Play background audio
         AudioManager.Instance.PlayMainThemeBacksound();
-
-        // Optional delay
         yield return new WaitForSeconds(1f);
-
-        // Start the video
         videoPlayer.Play();
     }
 
     private void OnVideoFinished(VideoPlayer vp)
     {
+        if (cutsceneSkipped) return;
+
         cutsceneCanvas.enabled = true;
         pressAnyKeyText.gameObject.SetActive(true);
+        skipButton.gameObject.SetActive(false); // Hide skip button after video
         StartCoroutine(TwinkleText());
 
         canStart = true;
@@ -80,7 +102,6 @@ public class Cutscene : MonoBehaviour
 
         while (true)
         {
-            // Fade out
             for (float t = 0f; t < duration; t += Time.deltaTime)
             {
                 alpha = Mathf.Lerp(1f, 0f, t / duration);
@@ -88,7 +109,6 @@ public class Cutscene : MonoBehaviour
                 yield return null;
             }
 
-            // Fade in
             for (float t = 0f; t < duration; t += Time.deltaTime)
             {
                 alpha = Mathf.Lerp(0f, 1f, t / duration);

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     private CharacterController characterController;
     public static PlayerController Instance;
+
 
     private void Awake()
     {
@@ -142,6 +144,14 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, horizontalRotation, 0);
         }
     }
+
+    // private void HandleLookTemp()
+    // {
+    //     rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+    //     rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+    //     playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+    //     transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+    // }
 
     private void ApplyGravity()
     {
