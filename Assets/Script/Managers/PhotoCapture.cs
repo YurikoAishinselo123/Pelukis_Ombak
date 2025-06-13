@@ -19,7 +19,7 @@ public class PhotoCapture : MonoBehaviour
     {
         if (ItemManager.Instance.HasItem(ItemType.Camera))
         {
-            if (InputManager.Instance.Action && ItemSelectorManager.Instance.SelectedCamera && !GameplayManager.Instance.pauseGame)
+            if (InputManager.Instance.Action && ItemSelectorManager.Instance.SelectedCamera && !GameplayManager.Instance.pauseGame && GameplayManager.Instance.onGameplay)
             {
                 UIManager.Instance.detectManagerActive = false;
 
