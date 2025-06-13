@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
 
     private void HandleMission()
     {
-        if (InputManager.Instance.Mission && GameplayManager.Instance.onGameplay)
+        if (InputManager.Instance.Mission && GameplayManager.Instance.onGameplay && !GameplayManager.Instance.pauseGame)
         {
             // Debug.Log("Mission : " + isMissionUIVisible);
             if (isMissionUIVisible)
