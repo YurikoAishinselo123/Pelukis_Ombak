@@ -10582,6 +10582,8 @@ MonoBehaviour:
   chapterCompletedCanvas: {fileID: 1570994537}
   chapterCompletedContainer: {fileID: 44595294}
   fadeDuration: 1
+  pressAnyKeyText: {fileID: 1917807789}
+  twinkleSpeed: 1
 --- !u!114 &1046297440
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,6 +38,11 @@ public class MainmenuUI : MonoBehaviour
             startButton.gameObject.SetActive(false);
         }
 
+        if (GameplayManager.Instance.NewGameStatus())
+        {
+            startButton.gameObject.SetActive(false);
+        }
+
     }
 
     void Start()

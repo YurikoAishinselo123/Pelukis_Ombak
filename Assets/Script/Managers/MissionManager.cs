@@ -41,6 +41,15 @@ public class MissionManager : MonoBehaviour
         InitializeCompletedMissions();
     }
 
+    void Update()
+    {
+        if (InputManager.Instance.TestingButton)
+        {
+            Debug.Log("Tes chapter");
+            StartCoroutine(DelayedChapterCompleteUI());
+        }
+    }
+
     private void LoadMissionData()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "Mission/Chapter1.json");
