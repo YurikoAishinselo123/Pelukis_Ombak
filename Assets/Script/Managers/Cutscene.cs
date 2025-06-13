@@ -69,7 +69,7 @@ public class Cutscene : MonoBehaviour
 
         canStart = true;
 
-        PlayerPrefs.SetInt("HasPlayedCutscene", 1);
+        PlayerPrefs.SetInt("HasNewGame", 1);
         PlayerPrefs.Save();
     }
 

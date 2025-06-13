@@ -38,6 +38,7 @@ public class GameplayManager : MonoBehaviour
 
     public void NewGame()
     {
+        PlayerPrefs.SetInt("HasNewGame", 1);
         newGame = true;
     }
 

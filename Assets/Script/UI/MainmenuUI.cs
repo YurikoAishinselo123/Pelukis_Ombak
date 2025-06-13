@@ -32,7 +32,7 @@ public class MainmenuUI : MonoBehaviour
         //     startButton.gameObject.SetActive(false);
         // }
 
-        bool hasPlayedCutscene = PlayerPrefs.GetInt("HasPlayedCutscene", 0) == 1;
+        bool hasPlayedCutscene = PlayerPrefs.GetInt("HasNewGame", 0) == 1;
         if (!hasPlayedCutscene)
         {
             startButton.gameObject.SetActive(false);
